@@ -35,7 +35,7 @@ var beijingScatteroption = {
     title: {
         text: '各区外卖成交情况',
         x: 'center',
-        y:'5%',
+        y:'0%',
         textStyle: {
                 color: '#fff',
                 fontSize: '16'
@@ -87,8 +87,8 @@ var beijingScatteroption = {
     grid: {
       top:"18%",
       left: '0%',
-      right: '9%',
-      bottom: '17%',
+      right: '10%',
+      bottom: '20%',
       containLabel: true
     },
     xAxis: {

@@ -57,7 +57,7 @@ var storeBarOption = {
     "grid": {
         "borderWidth": 0,
         "top": "10%",
-        "bottom": "10%",
+        "bottom": "9%",
         "right":"30%",
         textStyle: {
             color: "#fff"
@@ -121,7 +121,7 @@ var storeBarOption = {
     // "dataZoom": [{
     //     "show": true,
     //     //"height": 30,
-    //     "xAxisIndex": [
+    //     "yAxisIndex": [
     //         0
     //     ],
     //     bottom: 30,
@@ -135,10 +135,9 @@ var storeBarOption = {
     //     },
     //        textStyle:{
     //         color:"#fff"},
-    //        borderColor:"#90979c"
+    //        borderColor:"#90979c" 
         
-        
-    // }, {
+    //     }, {
     //     "type": "inside",
     //     "show": true,
     //     "height": 15,
