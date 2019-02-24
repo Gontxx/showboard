@@ -58,32 +58,73 @@
       function autoTip() {
         timer = setInterval(function() {
           console.log('hahaha', currRegion)
-          // chartBeijingMap.dispatchAction({
-          //     type: 'geoSelect',
-          //     // 可选，系列 index，可以是一个数组指定多个系列
-          //     seriesIndex: 0,
-          //     // 可选，数据的 index
-          //     dataIndex: currRegion % mapdata.length
-          // })
-          chartBeijingMap.dispatchAction({
-              type: 'showTip',
+          typePieChart.dispatchAction({
+              type: 'pieUnSelect',
               seriesIndex: 0,
-              // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
+              dataIndex: currRegion % typePieData.length
+          })
+          chartBeijingMap.dispatchAction({
+              type: 'downplay',
+              seriesIndex: 1,
               dataIndex: currRegion % mapdata.length,
           })
           beijingScatterChart.dispatchAction({
-              type: 'showTip',
+              type: 'downplay',
+              seriesIndex: currRegion % beijingdata.length,
+              dataIndex: 0,
+          })
+          storeBarChart.dispatchAction({
+              type: 'downplay',
+              seriesIndex: 1,
+              dataIndex: currRegion % nameData.length,
+          })
+
+          currRegion += 1;
+
+
+          typePieChart.dispatchAction({
+              type: 'pieSelect',
               seriesIndex: 0,
-              // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
-              dataIndex: currRegion % beijingLegend.length,
+              dataIndex: currRegion % typePieData.length
+          })
+          typePieChart.dispatchAction({
+              type: 'highlight',
+              seriesIndex: 0,
+              dataIndex: currRegion % typePieData.length
+          })
+
+          chartBeijingMap.dispatchAction({
+              type: 'highlight',
+              seriesIndex: 1,
+              dataIndex: currRegion % mapdata.length,
+          })
+          chartBeijingMap.dispatchAction({
+              type: 'showTip',
+              seriesIndex: 1,
+              dataIndex: currRegion % mapdata.length,
+          })
+
+          beijingScatterChart.dispatchAction({
+              type: 'highlight',
+              seriesIndex: currRegion % beijingdata.length,
+              dataIndex: 0,
+          })
+          beijingScatterChart.dispatchAction({
+              type: 'showTip',
+              seriesIndex: currRegion % beijingdata.length,
+              dataIndex: 0,
+          })
+
+          storeBarChart.dispatchAction({
+              type: 'highlight',
+              seriesIndex: 1,
+              dataIndex: currRegion % nameData.length,
           })
           storeBarChart.dispatchAction({
               type: 'showTip',
               seriesIndex: 0,
-              // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
               dataIndex: currRegion % nameData.length,
           })
-          currRegion += 1;
         }, 5000)
       }
       autoTip();
