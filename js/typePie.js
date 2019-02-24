@@ -124,13 +124,18 @@ var typePieOption = {
     series: [{
         name: '外卖标签分类',
         type: 'pie',
+        center:['50%','50%'],
         //roseType : 'radius',
         radius: ['47%', '75%'],
         hoverAnimation: true,
-        minAngle: 7,
-        startAngle: 0,
+        minAngle: 4,
+        startAngle: 200,
         color: ['#c487ee', '#deb140', '#49dff0', '#034079', '#6f81da', '#00ffb4'],
         label: {
+            normal: {
+                //lineHeight:10000,
+                fontSize:12,
+            },
             emphasis: {
                 formatter: function(params, ticket, callback) {
                     var total = 0; //总数量
@@ -147,13 +152,6 @@ var typePieOption = {
         },
         labelLine: {
             show:true,
-            emphasis: {
-                length: 18,
-                length2: 80,
-                lineStyle: {
-                    color: '#0b5263'
-                }
-            },
             normal: {
                 length: 5 * scalePie,
                 //length2: 0,
@@ -161,6 +159,14 @@ var typePieOption = {
                     color: '#0b5263'
                 }
             },
+            emphasis: {
+                length: 50 * scalePie,
+                length2: 80,
+                lineStyle: {
+                    color: '#0b5263'
+                }
+            },
+            
             
         },
 

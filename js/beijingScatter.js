@@ -87,7 +87,7 @@ var beijingScatteroption = {
     grid: {
       top:"18%",
       left: '0%',
-      right: '10%',
+      right: '9.5%',
       bottom: '20%',
       containLabel: true
     },

@@ -58,7 +58,7 @@ var storeBarOption = {
         "borderWidth": 0,
         "top": "10%",
         "bottom": "9%",
-        "right":"30%",
+        "right":"28%",
         textStyle: {
             color: "#fff"
         }
