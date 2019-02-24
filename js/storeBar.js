@@ -36,7 +36,7 @@ var storeBarOption = {
         "text": "单门店成交额前15名",
         x: 'center',
         //x: "4%",  
-        y: "10%",
+        y: "0%",
         textStyle: {
             color: '#fff',
             fontSize: '16'
@@ -52,12 +52,12 @@ var storeBarOption = {
             },
         
         },
-        formatter: "{a} <br/>{b} : {c}元"
+        //formatter: "{a} <br/>{b} : {c}元"
     },
     "grid": {
         "borderWidth": 0,
-        "top": "20%",
-        //"bottom": 95,
+        "top": "10%",
+        "bottom": "10%",
         "right":"30%",
         textStyle: {
             color: "#fff"

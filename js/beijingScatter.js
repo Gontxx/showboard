@@ -33,8 +33,9 @@ var beijingLegend = ['东城','西城','朝阳','丰台','石景山','海淀','�
 var beijingScatteroption = {
     // backgroundColor: '#031f2d',
     title: {
-        text: '北京市各区外卖成交情况',
+        text: '各区外卖成交情况',
         x: 'center',
+        y:'5%',
         textStyle: {
                 color: '#fff',
                 fontSize: '16'
@@ -67,14 +68,14 @@ var beijingScatteroption = {
         formatter: function (params) {
             return params.value[3]+'<br/>外卖商家数：'+params.value[0]
                     +'<br/>订单数：'+params.value[1]
-                    +'<br/>成交额：'+params.value[2];
+                    +'<br/>成交额：'+params.value[2]+'元';
             //return params.value[0];// + ' : ' + params.value[2];
           
         }
     },
     legend: {
       icon: 'circle',
-      bottom: '20px',
+      bottom: '0%',
       itemWidth: 12,
       itemHeight: 12,
       data: beijingLegend,
@@ -84,9 +85,10 @@ var beijingScatteroption = {
       },
     },
     grid: {
-      left: '1%',
-      right: '2%',
-      // bottom: '20px',
+      top:"18%",
+      left: '0%',
+      right: '9%',
+      bottom: '17%',
       containLabel: true
     },
     xAxis: {

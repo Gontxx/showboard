@@ -98,9 +98,9 @@ $.getJSON(uploadedDataURL, function(geoJson) {
         // backgroundColor: '#000000',
         title: {
             //top:20,
-            text: '北京市各区外卖成交情况',
+            text: '北京市外卖热度地图',
             x: 'center',
-            y: '5%',
+            y: '3%',
             textStyle: {
                 color: '#fff',
                 fontSize: '22'
@@ -115,7 +115,7 @@ $.getJSON(uploadedDataURL, function(geoJson) {
                 if (params.seriesType == "map")
                     return params.data.name+'<br/>外卖商家数：'+params.data.value[0]
                     +'<br/>订单数：'+params.data.value[1]
-                    +'<br/>成交额：'+params.data.value[2];
+                    +'<br/>成交额：'+params.data.value[2]+'元';
                     
             }
         },

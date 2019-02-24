@@ -86,7 +86,7 @@ var typePieOption = {
     title: {
         text:'外卖标签分类',
         left:'center',
-        top: '48%',
+        top: '47%',
         right: '10%',
         padding:[24,0],
         textStyle:{
@@ -95,10 +95,10 @@ var typePieOption = {
             align:'center'
         }
     },
-    tooltip: {
-    trigger: 'item',
-    formatter: "{b}<br/>{c},{d}%"
-    },
+    // tooltip: {
+    // trigger: 'item',
+    // //formatter: "{b}<br/>{c},{d}%"
+    // },
 
     legend: {
         selectedMode:false,
@@ -112,7 +112,7 @@ var typePieOption = {
         },
         data: [typePieData[0].name],
         left: 'center',
-        top: '47%',
+        top: '43%',
         icon: 'none',
         align:'center',
         textStyle: {
@@ -125,10 +125,10 @@ var typePieOption = {
         name: '外卖标签分类',
         type: 'pie',
         //roseType : 'radius',
-        radius: ['27%', '45%'],
+        radius: ['47%', '75%'],
         hoverAnimation: true,
         minAngle: 7,
-        //startAngle: 0,
+        startAngle: 0,
         color: ['#c487ee', '#deb140', '#49dff0', '#034079', '#6f81da', '#00ffb4'],
         label: {
             emphasis: {
@@ -148,19 +148,19 @@ var typePieOption = {
         labelLine: {
             show:true,
             emphasis: {
-                length: 180,
+                length: 18,
                 length2: 80,
                 lineStyle: {
                     color: '#0b5263'
                 }
             },
-            // normal: {
-            //     length: 35 * scalePie,
-            //     //length2: 0,
-            //     lineStyle: {
-            //         color: '#0b5263'
-            //     }
-            // },
+            normal: {
+                length: 5 * scalePie,
+                //length2: 0,
+                lineStyle: {
+                    color: '#0b5263'
+                }
+            },
             
         },
 
