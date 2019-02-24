@@ -1,0 +1,184 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0; 
+    padding: 0;
+}
+
+.container {
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    zoom: 1;
+    background-color: #E4E4E8;
+}
+
+.menu {
+    overflow: hidden;
+    zoom: 1;
+    font-size: 20px;
+    position: fixed;
+    z-index: 999;
+    color: #fff;
+    width: 20%;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    background: #6f5499;
+    text-align: center;
+}
+
+.menu-2nd {
+    width: 75%;
+    float: right;
+}
+
+.menu-head {
+    margin-top: 25%;
+    color: #fff;
+    text-align: center;
+}
+
+.hs-content {
+    position: absolute;
+    top: calc(3% + 80px);
+    left: 4%;
+    right: 52%;
+    bottom: 3%;
+    overflow: hidden;
+    /*height: calc(95% - 80px);*/
+    background: #FFFFFF;
+    -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.menu-right {
+    overflow: hidden;
+    zoom: 1;
+    /*font-size: 20px;*/
+    position: fixed;
+    z-index: 999;
+    color: #fff;
+    /*width: 15%;*/
+    left: 52%;
+    right: 4%;
+    top: calc(3% + 80px);
+    bottom: 14%;
+    /*padding: 0px 0px 10px 10px;*/
+    /*margin: 0px 0px 0px 20px;*/
+    text-align: center;
+    text-shadow: none;
+    background: #FFF;
+    -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.style-inner {
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.style-container {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    /*overflow: auto;*/
+    white-space: nowrap;
+    width: 3600px;
+    height: calc(100% - 70px);
+    color: #000;
+    text-align: left;
+}
+
+.style-wrap {
+    display: inline-block;
+    box-sizing: border-box;
+    overflow: auto;
+    /*float: left;*/
+    height: 100%;
+    width: 500px;
+    padding: 0px 10px;
+    margin: 0px 10px;
+/*    -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+    box-shadow:1px 1px 2px #aaaaaa;*/
+}
+
+.style-active {
+    border: 2px solid #6f5499;
+    /*border: 2px solid royalblue;*/
+}
+
+.style-card {
+    /*display: inline;*/
+    /*overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;*/
+    /*overflow: auto;*/
+    margin: 0px 0px 10px 0px;
+    /*height: 90%;*/
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #dddddd;
+    -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+    box-shadow:1px 1px 2px #aaaaaa;
+}
+
+.style-card img {
+    /*width: auto;
+    height: 100%;*/
+    width: 100%;
+    height: auto;
+    float: left;
+    margin-bottom: 10px;
+}
+
+/*.style-card img:hover,
+.style-card img:focus {
+    border: 2px solid #6f5499;
+}*/
+
+.style-card img:hover {
+    /*border: 2px solid #6f5499;*/
+    border: 2px solid royalblue;
+}
+
+#styles-preview nav {
+    margin-bottom: 10px;
+}
+
+.control-panal {
+    position: absolute;
+    top: 89%;
+    left: 50%;
+    right: 3%;
+    bottom: 3%;
+    overflow: hidden;
+    margin: 0px 0px 0px 20px;
+    /*height: calc(95% - 80px);*/
+    /*background: #FFF;*/
+}
+
+.list-right {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.result-list {
+    font-size: 16px;
+    overflow: auto;
+    height: 320px;
+}
+
+#li-back {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+}
