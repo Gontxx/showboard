@@ -53,25 +53,25 @@ var typePieData =[{ name: "简餐",  value: 8268,},
 var rich = {
     yellow: {
         color: "#ffc72b",
-        fontSize: 14 * scalePie,//30 * scalePie,
+        fontSize: 30 * scalePie,//30 * scalePie,
         padding: [2, 0],
         align: 'center'
     },
     total: {
         color: "#ffc72b",
-        fontSize: 40 * scalePie,
+        fontSize: 35 * scalePie,
         align: 'center'
     },
     white: {
         color: "#fff",
         align: 'center',
-        fontSize: 14 * scalePie,
+        fontSize: 30 * scalePie,
         //padding: [21, 0]
         padding: [2, 0]
     },
     blue: {
         color: '#49dff0',
-        fontSize: 14 * scalePie,
+        fontSize: 30 * scalePie,
         align: 'center'
     },
     hr: {
@@ -85,13 +85,13 @@ var typePieOption = {
     // backgroundColor: '#031f2d',
     title: {
         text:'外卖标签分类',
-        // left:'center',
-        top: '5%',
+        left:'center',
+        top: '48%',
         right: '10%',
         padding:[24,0],
         textStyle:{
             color:'#fff',
-            fontSize: 32 * scalePie,
+            fontSize: 30 * scalePie,
             align:'center'
         }
     },
@@ -112,7 +112,7 @@ var typePieOption = {
         },
         data: [typePieData[0].name],
         left: 'center',
-        top: 'center',
+        top: '47%',
         icon: 'none',
         align:'center',
         textStyle: {
@@ -124,13 +124,14 @@ var typePieOption = {
     series: [{
         name: '外卖标签分类',
         type: 'pie',
-        radius: ['22%', '40%'],
+        //roseType : 'radius',
+        radius: ['27%', '45%'],
         hoverAnimation: true,
         minAngle: 7,
         //startAngle: 0,
         color: ['#c487ee', '#deb140', '#49dff0', '#034079', '#6f81da', '#00ffb4'],
         label: {
-            normal: {
+            emphasis: {
                 formatter: function(params, ticket, callback) {
                     var total = 0; //总数量
                     var percent = 0; //占比
@@ -145,13 +146,22 @@ var typePieOption = {
             },
         },
         labelLine: {
-            normal: {
-                length: 20 * scalePie,
-                //length2: 0,
+            show:true,
+            emphasis: {
+                length: 180,
+                length2: 80,
                 lineStyle: {
                     color: '#0b5263'
                 }
-            }
+            },
+            // normal: {
+            //     length: 35 * scalePie,
+            //     //length2: 0,
+            //     lineStyle: {
+            //         color: '#0b5263'
+            //     }
+            // },
+            
         },
 
         data: typePieData

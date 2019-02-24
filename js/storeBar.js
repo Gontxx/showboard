@@ -13,18 +13,21 @@ var storeBarChart = echarts.init(storeBarContainer);
 
 var xdata = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 
-var lineData = [248160,231648,230622,227199,218720
-                ,214676,210824,210767,209792,207746
-                ,207042,206568,205615,202800,199680];
-var barData = [4600,5000,5500,6500,7500
-                ,8500,9900,12500,14000,21500
-                ,23200,24450,25250,33300,35800
-                ,45400,59810];
-var nameData = ['南城香(东铁营店)',"金百万烤鸭(清河老宅门店)","南城香(陶然亭店)"
-                ,"南城香(新街口店)","麦堡王炸鸡汉堡(青年路店)","南城香(富丰桥店)"
-                ,"千寿参鸡汤","麻辣拌(亚运村店","麻辣诱惑·小龙虾·大闸蟹","麻辣拌(亚运村店)"
-                ,"南城香(霍营店)","千寿参鸡汤","麻辣诱惑·小龙虾·大闸蟹","辣私房·小龙虾海鲜外卖"
-                ,"醉爱东北家常菜"];
+// var lineData = [248160,231648,230622,227199,218720
+//                 ,214676,210824,210767,209792,207746
+//                 ,207042,206568,205615,202800,199680];
+// var barData = [4600,5000,5500,6500,7500
+//                 ,8500,9900,12500,14000,21500
+//                 ,23200,24450,25250,33300,35800
+//                 ,45400,59810];
+// var nameData = ['南城香(东铁营店)',"金百万烤鸭(清河老宅门店)","南城香(陶然亭店)"
+//                 ,"南城香(新街口店)","麦堡王炸鸡汉堡(青年路店)","南城香(富丰桥店)"
+//                 ,"千寿参鸡汤","麻辣拌(亚运村店","麻辣诱惑·小龙虾·大闸蟹","麻辣拌(亚运村店)"
+//                 ,"南城香(霍营店)","千寿参鸡汤","麻辣诱惑·小龙虾·大闸蟹","辣私房·小龙虾海鲜外卖"
+//                 ,"醉爱东北家常菜"];
+
+var lineData = [199680, 202800, 205615, 206568, 207042, 207746, 209792, 210767, 210824, 214676, 218720, 227199, 230622, 231648, 248160];
+var nameData = ['醉爱东北家常菜', '辣私房·小龙虾海鲜外卖', '麻辣诱惑·小龙虾·大闸蟹', '千寿参鸡汤', '南城香(霍营店)', '麻辣拌(亚运村店)', '麻辣诱惑·小龙虾·大闸蟹', '麻辣拌(亚运村店', '千寿参鸡汤', '南城香(富丰桥店)', '麦堡王炸鸡汉堡(青年路店)', '南城香(新街口店)', '南城香(陶然亭店)', '金百万烤鸭(清河老宅门店)', '南城香(东铁营店)'];
                         
 
 var storeBarOption = {
@@ -53,8 +56,9 @@ var storeBarOption = {
     },
     "grid": {
         "borderWidth": 0,
-        "top": 110,
-        "bottom": 95,
+        "top": "20%",
+        //"bottom": 95,
+        "right":"30%",
         textStyle: {
             color: "#fff"
         }
@@ -65,6 +69,7 @@ var storeBarOption = {
     "yAxis": [{
         "type": "category",
         "position": 'right',
+        //"offset":-100,
         "axisLine": {
             lineStyle: {
                 color: '#90979c'
@@ -87,6 +92,7 @@ var storeBarOption = {
     //"yAxis": [{
     "xAxis": [{
         "type": "value",
+        "splitNumber":3,
         "splitLine": {
             "show": false
         },
@@ -107,6 +113,9 @@ var storeBarOption = {
         "splitArea": {
             "show": false
         },  
+        "min": function(value) {
+            return value.min - 100000;
+}
 
     }],
     // "dataZoom": [{
@@ -141,22 +150,55 @@ var storeBarOption = {
             "name": "成交额",
             "type": "bar",
             //"stack": "总量",
-            "itemStyle": {
-                "normal": {
-                    // "color": "rgba(0,191,183,1)",
-                    "color": "rgba(0,110,221,0.8)",
-                    "barBorderRadius": 0,
-                    "label": {
-                        "show": false,
-                        "position": "top",
-                        formatter: function(p) {
-                            return p.value > 0 ? (p.value) : '';
-                        }
-                    }
-                }
+            label:{
+                 "normal": {
+                    "position": "left",
+                 },
+
             },
+            itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [{
+                                colorStops: [{
+                                    offset: 0,
+                                    color: '#FFD119' // 0% 处的颜色
+                                }, {
+                                    offset: 1,
+                                    color: '#FFAC4C' // 100% 处的颜色
+                                }]
+                            },
+                            {
+                                colorStops: [{
+                                    offset: 0,
+                                    color: '#00C0FA' // 0% 处的颜色
+                                }, {
+                                    offset: 1,
+                                    color: '#2F95FA' // 100% 处的颜色
+                                }]
+                            }
+                        ];
+                        if (params.dataIndex >= 10) {
+                            return colorList[0]
+                        } else {
+                            return colorList[1]
+                        }
+                    },
+                    barBorderRadius: 15
+            }
+        },
+
+            // "itemStyle": {
+            //     "normal": {
+            //         // "color": "rgba(0,191,183,1)",
+            //         "color": "rgba(0,110,221,0.8)",
+            //         "barBorderRadius": 0,
+            //     }
+            // },
             "data": lineData
-        }, {
+        }, 
+        {
             "name": "成交额",
             "type": "line",
             //"stack": "总量",
@@ -168,13 +210,13 @@ var storeBarOption = {
                     "barBorderRadius": 0,
                     "label": {
                         "show": true,
-                        "position": "top",
+                        "position": "left",
                         formatter: function(p) {
                             return p.value > 0 ? (p.value) : '';
                         }
                     }
                     
-                }
+                },
             },
             "data": lineData
         },
