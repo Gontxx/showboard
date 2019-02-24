@@ -2,8 +2,8 @@ var beijingMapContainer = document.getElementById('beijing-map');
 
 //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 function resizeBeijingMapContainer () {
-    beijingMapContainer.style.width = (window.innerWidth * 0.6 - 10) + 'px';
-    beijingMapContainer.style.height = window.innerHeight + 'px';
+    beijingMapContainer.style.width = (window.innerWidth * 0.6 - 20) + 'px';
+    beijingMapContainer.style.height = (window.innerHeight - 24) + 'px';
 }
 //设置容器高宽
 resizeBeijingMapContainer();
