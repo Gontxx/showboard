@@ -2,7 +2,7 @@ var beijingMapContainer = document.getElementById('beijing-map');
 
 //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 function resizeBeijingMapContainer () {
-    beijingMapContainer.style.width = (window.innerWidth * 0.7 - 10) + 'px';
+    beijingMapContainer.style.width = (window.innerWidth * 0.6 - 10) + 'px';
     beijingMapContainer.style.height = window.innerHeight + 'px';
 }
 //设置容器高宽
@@ -133,7 +133,8 @@ $.getJSON(uploadedDataURL, function(geoJson) {
             show: true,
             min: 0,
             max: 10000000,
-            left: 'center',
+            // left: 'center',
+            right: '10%',
             bottom: '3%',
             // top: 'bottom',
             //text: ['高', '低'], // 文本，默认为数值文本
@@ -143,7 +144,7 @@ $.getJSON(uploadedDataURL, function(geoJson) {
             inRange: {
                 color: ['#e0ffff', '#006edd']
             },
-            orient:'horizontal',
+            // orient:'horizontal',
             textStyle:{color: "#fff"},
             // inRange: {
             //     // color: ['#3B5077', '#031525'] // 蓝黑

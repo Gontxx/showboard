@@ -2,8 +2,8 @@ var beijingScatterContainer = document.getElementById('beijing-scatter');
 
 //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 function resizeBeijingScatterContainer () {
-    beijingScatterContainer.style.width = (window.innerWidth * 0.34 - 10) + 'px';
-    beijingScatterContainer.style.height = window.innerHeight * 0.4 + 'px';
+    beijingScatterContainer.style.width = (window.innerWidth * 0.4 - 10) + 'px';
+    beijingScatterContainer.style.height = window.innerHeight * 0.3 + 'px';
 }
 //设置容器高宽
 resizeBeijingScatterContainer();
@@ -32,14 +32,14 @@ var beijingLegend = ['东城','西城','朝阳','丰台','石景山','海淀','�
 
 var beijingScatteroption = {
     // backgroundColor: '#031f2d',
-    // title: {
-    //     text: '北京市各区外卖成交情况',
-    //     x: 'center',
-    //     textStyle: {
-    //             color: '#fff',
-    //             fontSize: '22'
-    //         }
-    // },
+    title: {
+        text: '北京市各区外卖成交情况',
+        x: 'center',
+        textStyle: {
+                color: '#fff',
+                fontSize: '16'
+            }
+    },
     color: [
       '#0580F2',
       '#FAA732',

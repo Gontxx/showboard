@@ -2,8 +2,8 @@ var storeBarContainer = document.getElementById('store-bar');
 
 //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 function resizeStoreBarContainer () {
-    storeBarContainer.style.width = (window.innerWidth * 0.255 - 10) +'px';
-    storeBarContainer.style.height = window.innerHeight * 0.6 + 'px';
+    storeBarContainer.style.width = (window.innerWidth * 0.4 - 10) +'px';
+    storeBarContainer.style.height = window.innerHeight * 0.3 + 'px';
 }
 //设置容器高宽
 resizeStoreBarContainer();
