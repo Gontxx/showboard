@@ -40,7 +40,7 @@ var mapdata1 = [
     {name: '顺义区', value: [993,427649, 10936043]},
     {name: '平谷区', value: [392,74573, 2350885]},
     {name: '通州区', value: [1246, 1067944,22908014]},
-    {name: '朝阳区', value: [14, 4133050,77784505]},
+    {name: '朝阳区', value: [3014, 4133050,77784505]},
     {name: '海淀区', value: [2135, 3439662,60958200]},
     {name: '丰台区', value: [1226, 1509606,29048190]},
     {name: '石景山区', value: [429, 454812,9311392]},
@@ -201,7 +201,9 @@ $.getJSON(uploadedDataURL, function(geoJson) {
                     normal: {
                         formatter: '{b}',
                         position: 'right',
-                        show: true
+                        show: true,
+                        textBorderColor:'#CD8500',
+                        textBorderWidth:1,
                     },
                     emphasis: {
                         show: true
@@ -264,6 +266,8 @@ $.getJSON(uploadedDataURL, function(geoJson) {
                     normal: {
                         formatter: '{b}',
                         position: 'right',
+                        textBorderColor:'#CD8500',
+                        textBorderWidth:1,
                         show: true
                     }
                 },
