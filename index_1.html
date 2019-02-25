@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>数睿应用</title>
+
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <!-- <link href="./css/cover.css" rel="stylesheet"> -->
+    <link href="./css/font-awesome.min.css" rel="stylesheet">
+    <!-- <link href="./css/style.css" rel="stylesheet"> -->
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.js"></script>
+
+  </head>
+
+  <body style="width: 100%; height: 100%; background-color: #000000;">
+
+    <div id="type-pie-container" style="width: 60%; float: left;">
+      <div id="beijing-map" style="margin: 8px; padding: 8px;"></div>
+    </div>
+    <div style="width: 40%; position: relative; height: 100%; float: left;">
+      <!-- <div id="type-pie" style="margin: 8px; padding: 8px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px;"></div> -->
+      <div id="rate-bar" style="margin: 8px; padding: 8px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px;"></div>
+      <div id="rate-scatter" style="margin: 8px; padding: 8px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px;"></div>
+    </div>
+
+
+    <!-- <div id="type-pie-container" style="width: 60%; float: left;">
+      <div id="beijing-map" style="margin: 8px; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 10px;"></div>
+    </div>
+    <div style="width: 40%; position: relative; height: 100%; float: left;">
+      <div id="type-pie" style="margin: 8px; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 10px;"></div>
+      <div id="store-bar" style="margin: 8px; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 10px;"></div>
+      <div id="beijing-scatter" style="margin: 8px; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 10px;"></div>
+    </div> -->
+
+    <!-- <script src="./js/vue.min.js"></script> -->
+    <script type="text/javascript" src="./js/echarts.js"></script>
+    <script type="text/javascript" src="./js/beijingMap.js"></script>
+    <!-- <script type="text/javascript" src="./js/typePie.js"></script> -->
+    <script type="text/javascript" src="./js/rateScatter.js"></script>
+    <script type="text/javascript" src="./js/rateBar.js"></script>
+    <!-- <script type="text/javascript" src="./js/main.js"></script> -->
+    <script type="text/javascript">
+      window.onresize = function () {
+          //重置容器高宽
+          resizeBeijingMapContainer();
+          chartBrijingMap.resize();
+          // resizeTypePieContainer();
+          // typePieChart.resize();
+          // resizeBeijingScatterContainer();
+          // beijingScatterChart.resize();
+          resizeRateBarContainer();
+          rateBarChart.resize();
+          resizeRateScatterContainer();
+          rateScatterChart.resize();
+      };
+      var currRegion1 = 0, currRegion2 = 0, currRegion3 = 0;
+      var timer1 = null, timer2 = null, timer3 = null;
+      function autoTip() {
+        // timer1 = setInterval(function() {
+        //   typePieChart.dispatchAction({
+        //       type: 'pieUnSelect',
+        //       seriesIndex: 0,
+        //       dataIndex: currRegion1 % typePieData.length
+        //   })
+        //   currRegion1 += 1;
+        //   typePieChart.dispatchAction({
+        //       type: 'pieSelect',
+        //       seriesIndex: 0,
+        //       dataIndex: currRegion1 % typePieData.length
+        //   })
+        //   typePieChart.dispatchAction({
+        //       type: 'highlight',
+        //       seriesIndex: 0,
+        //       dataIndex: currRegion1 % typePieData.length
+        //   })
+        // }, 5000)
+
+        timer2 = setInterval(function() {
+          chartBeijingMap.dispatchAction({
+              type: 'downplay',
+              seriesIndex: 1,
+              dataIndex: currRegion2 % mapdata.length,
+          })
+          currRegion2 += 1;
+          chartBeijingMap.dispatchAction({
+              type: 'highlight',
+              seriesIndex: 1,
+              dataIndex: currRegion2 % mapdata.length,
+          })
+          chartBeijingMap.dispatchAction({
+              type: 'showTip',
+              seriesIndex: 1,
+              dataIndex: currRegion2 % mapdata.length,
+          })
+        }, 8000)
+
+        timer3 = setInterval(function() {
+          rateScatterChart.dispatchAction({
+              type: 'downplay',
+              seriesIndex: currRegion3 % ratedata.length,
+              dataIndex: 0,
+          })
+          currRegion3 += 1;
+          rateScatterChart.dispatchAction({
+              type: 'highlight',
+              seriesIndex: currRegion3 % ratedata.length,
+              dataIndex: 0,
+          })
+          rateScatterChart.dispatchAction({
+              type: 'showTip',
+              seriesIndex: currRegion3 % ratedata.length,
+              dataIndex: 0,
+          })
+        }, 10000)
+      }
+      autoTip();
+    </script>
+
+  </body>
+</html>
