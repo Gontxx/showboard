@@ -108,7 +108,7 @@ var rateScatteroption = {
         data: ratedata[i],
         type: 'scatter',
         symbolSize: function(data) {
-          return Math.sqrt(data[2]) / 200
+          return Math.sqrt(data[2]) / 150
         },
         label: {
           normal: {
