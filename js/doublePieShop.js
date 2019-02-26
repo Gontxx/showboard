@@ -1,12 +1,12 @@
-var doublePieShopContainer = document.getElementById('double-pie-shop');
+var doublePieShopContainer = document.getElementById('rate-bar');
 
 //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
-function resizeDoublePieShopContainer () {
-    doublePieShopContainer.style.width = Math.floor((window.innerWidth * 0.5 - 20 - 16) / 3.0) +'px';
+function resizeRateBarContainer () {
+    doublePieShopContainer.style.width = (window.innerWidth * 0.4 - 20) +'px';
     doublePieShopContainer.style.height = (window.innerHeight * 0.5 - 12) + 'px';
 }
 //设置容器高宽
-resizeDoublePieShopContainer();
+resizeRateBarContainer();
 
 
 var doublePieShopChart = echarts.init(doublePieShopContainer);
@@ -31,7 +31,7 @@ var shopnum_9 = [
 
 
 doublePieShopOption = {
-    // backgroundColor:'#000000',
+    //backgroundColor:'#000000',
     title : {
         text: '外卖评级店铺数',
         x: 'center',
@@ -45,6 +45,21 @@ doublePieShopOption = {
         trigger: 'item',
         formatter: "{a} <br/>{b}: {c} ({d}%)"
     },
+    legend: {
+        
+        // x: 'middle',
+        // y:'bottom'
+
+        icon: 'circle',
+        bottom: '20%',
+        itemWidth: 12,
+        itemHeight: 12,
+        textStyle:{
+            color: '#90979c'
+
+        },
+        data:['A','B','C',]
+    },
 
     series: [
         {
@@ -56,6 +71,7 @@ doublePieShopOption = {
             color: ['#EE3B3B','#1c6d90', '#09895a',],
             label: {
                 normal: {
+                	show: false,
                     position: 'inner',
                     formatter: '{b}\n{d}%'
                 }
@@ -70,11 +86,12 @@ doublePieShopOption = {
         {
             name:'外卖评级店铺数',
             type:'pie',
-             radius: ['25%', '35%'],
+             radius: ['40%', '60%'],
             //center:['300','330'],
             color: ['#FF8888','#FF3333','#CC0000','#9acfe8','#56afd8','#1a8fc5', '#96dcc3', '#5ac59e', '#439476', '#346654'],
             label: {
                 normal: {
+                	show:false,
                     formatter: '{b}\n  {c} ({d}%)'
                 }
             },

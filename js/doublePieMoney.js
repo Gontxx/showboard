@@ -44,7 +44,22 @@ doublePieMoneyOption = {
     },
     tooltip: {
         trigger: 'item',
-        formatter: "{a} <br/>{b}: {c} ({d}%)"
+        formatter: "{a} <br/>{b}: {c}元 ({d}%)"
+    },
+    legend: {
+        
+        // x: 'middle',
+        // y:'bottom'
+
+        icon: 'circle',
+        bottom: '20%',
+        itemWidth: 12,
+        itemHeight: 12,
+        textStyle:{
+            color: '#90979c'
+
+        },
+        data:['A','B','C',]
     },
 
     series: [
@@ -53,17 +68,20 @@ doublePieMoneyOption = {
             type:'pie',
             selectedMode: 'single',
             //center:['300','330'],
-            radius: [0, '20%'],
+            radius: [0, '30%'],
             color: ['#EE3B3B','#1c6d90', '#09895a',],
             label: {
                 normal: {
-                    position: 'inner',
+                    //position: 'inner',
+                    show:false,
+                    position: 'outer',
                     formatter: '{b}\n{d}%'
                 }
             },
             labelLine: {
                 normal: {
-                    show: false
+                    show: false,
+                    length:20,
                 }
             },
             data:Moneynum_3,
@@ -71,13 +89,21 @@ doublePieMoneyOption = {
         {
             name:'外卖评级成交额',
             type:'pie',
-             radius: ['25%', '35%'],
+            radius: ['40%', '60%'],
             //center:['300','330'],
             color: ['#FF8888','#FF3333','#CC0000','#9acfe8','#56afd8','#1a8fc5', '#96dcc3', '#5ac59e', '#439476', '#346654'],
             label: {
                 normal: {
+                    show:false,
+                    //position: 'inner',
                     formatter: '{b}\n  {c} ({d}%)'
                 }
+            },
+            labelLine:{
+                normal:{
+
+                    show:false
+                },
             },
             data:Moneynum_9,
         }
