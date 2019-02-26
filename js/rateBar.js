@@ -12,8 +12,8 @@ resizeRateBarContainer();
 var rateBarChart = echarts.init(rateBarContainer);
 //------------------------------------引用请注明出处
 
-var  salesdata = [990, 1460, 1264, 791, 904, 1080, 995, 972, 1034];
-var orderdata = [16549, 28585, 30504, 15982, 19176, 20780, 18982, 18612, 19590];
+var salesdata = [16549, 28585, 30504, 15982, 19176, 20780, 18982, 18612, 19590];
+var orderdata = [990, 1460, 1264, 791, 904, 1080, 995, 972, 1034];
 var namedata = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'];
 
 
@@ -90,7 +90,7 @@ rateBarOption = {
             show: false,
         }, {
             gridIndex: 2,
-            name :'平均每单价格（元）',
+            name :'平均销售额（元）',
             nameLocation:'center',
             nameGap:30,
             nameTextStyle:{
@@ -215,7 +215,7 @@ rateBarOption = {
                 data: orderdata,
             },
             {
-                name: '平均每单价格',
+                name: '平均销售额（元）',
                 type: 'bar',
                 //barGap: 20,
                 //barWidth: 20,
