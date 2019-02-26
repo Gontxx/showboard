@@ -2,7 +2,7 @@ var beijingScatterContainer = document.getElementById('beijing-scatter');
 
 //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 function resizeBeijingScatterContainer () {
-    beijingScatterContainer.style.width = (window.innerWidth * 0.4 - 20) + 'px';
+    beijingScatterContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px';
     beijingScatterContainer.style.height = (window.innerHeight * 0.3 - 12) + 'px';
 }
 //设置容器高宽

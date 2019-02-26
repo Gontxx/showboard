@@ -2,7 +2,6 @@ var rateBarContainer = document.getElementById('rate-bar');
 
 //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 function resizeRateBarContainer () {
-    console.log('resizeRateBarContainer', (window.innerWidth * 0.5 - 20))
     rateBarContainer.style.width = (window.innerWidth * 0.5 - 20) +'px';
     rateBarContainer.style.height = (window.innerHeight * 0.5 - 12) + 'px';
 }
