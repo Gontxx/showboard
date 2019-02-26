@@ -91,6 +91,7 @@ rateBarOption = {
         }, {
             gridIndex: 2,
             name :'平均销售额（元）',
+            "splitNumber":4,
             nameLocation:'center',
             nameGap:30,
             nameTextStyle:{

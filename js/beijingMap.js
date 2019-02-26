@@ -95,7 +95,7 @@ $.getJSON(uploadedDataURL, function(geoJson) {
     option = {
         //backgroundColor: '#020933',
         // backgroundColor: '#031f2d',
-        // backgroundColor: '#000000',
+         //backgroundColor: '#fff',
         title: {
             //top:20,
             text: '北京市外卖热度地图',
@@ -137,7 +137,11 @@ $.getJSON(uploadedDataURL, function(geoJson) {
             right: '10%',
             bottom: '3%',
             // top: 'bottom',
-            //text: ['高', '低'], // 文本，默认为数值文本
+            text: ['成交额', ''], // 文本，默认为数值文
+            textStyle:{
+                color:'#fff',
+                fontSize: '18'
+            },
             calculable: true,
             seriesIndex: [1],
             //color: ['#d94e5d','#eac736','#50a3ba'],
