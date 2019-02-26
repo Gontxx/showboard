@@ -1,12 +1,12 @@
-var doublePieShopContainer = document.getElementById('rate-bar');
+var doublePieShopContainer = document.getElementById('double-pie-shop');
 
 //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
-function resizeRateBarContainer () {
-    doublePieShopContainer.style.width = (window.innerWidth * 0.4 - 20) +'px';
+function resizeDoublePieShopContainer () {
+    doublePieShopContainer.style.width = Math.floor((window.innerWidth * 0.5 - 20 - 16) / 3.0) +'px';
     doublePieShopContainer.style.height = (window.innerHeight * 0.5 - 12) + 'px';
 }
 //设置容器高宽
-resizeRateBarContainer();
+resizeDoublePieShopContainer();
 
 
 var doublePieShopChart = echarts.init(doublePieShopContainer);
@@ -31,7 +31,7 @@ var shopnum_9 = [
 
 
 doublePieShopOption = {
-    backgroundColor:'#000000',
+    // backgroundColor:'#000000',
     title : {
         text: '外卖评级店铺数',
         x: 'center',

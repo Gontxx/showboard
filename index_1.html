@@ -11,55 +11,67 @@
 
     <link href="./css/bootstrap.css" rel="stylesheet">
     <!-- <link href="./css/cover.css" rel="stylesheet"> -->
-    <link href="./css/font-awesome.min.css" rel="stylesheet">
-    <!-- <link href="./css/style.css" rel="stylesheet"> -->
+    <!-- <link href="./css/font-awesome.min.css" rel="stylesheet"> -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
 
     <script src="./js/jquery.js"></script>
     <script src="./js/bootstrap.js"></script>
 
   </head>
 
-  <body style="width: 100%; height: 100%; background-color: #000000;">
+  <body>
 
-    <div id="type-pie-container" style="width: 60%; float: left;">
-      <div id="beijing-map" style="margin: 8px; padding: 8px;"></div>
-    </div>
-    <div style="width: 40%; position: relative; height: 100%; float: left;">
-      <!-- <div id="type-pie" style="margin: 8px; padding: 8px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px;"></div> -->
-      <div id="rate-bar" style="margin: 8px; padding: 8px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px;"></div>
-      <div id="rate-scatter" style="margin: 8px; padding: 8px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px;"></div>
+    <div class="menu-column">
+      <div class="nav-item">
+        <p class="link-icon">导航</p>
+      </div>
+      <div class="divide-bar"></div>
+      <div class="nav-item">
+        <a href="/"><i class="fa fa-map"></i><br/>总览</a>
+      </div>
+      <div class="nav-item">
+        <i class="fa fa-tags"></i><br/>评级
+      </div>
     </div>
 
-
-    <!-- <div id="type-pie-container" style="width: 60%; float: left;">
-      <div id="beijing-map" style="margin: 8px; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 10px;"></div>
+    <div id="type-pie-container" class="left-column">
+      <div id="beijing-map" class="chart-container"></div>
     </div>
-    <div style="width: 40%; position: relative; height: 100%; float: left;">
-      <div id="type-pie" style="margin: 8px; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 10px;"></div>
-      <div id="store-bar" style="margin: 8px; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 10px;"></div>
-      <div id="beijing-scatter" style="margin: 8px; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 10px;"></div>
-    </div> -->
+    <div class="right-column">
+      <div id="rate-bar" class="chart-container has-background"></div>
+      <div class="chart-container has-background double-pie">
+        <div id="double-pie-money" style="float: left;"></div>
+        <div id="double-pie-order" style="float: left;"></div>
+        <div id="double-pie-shop" style="float: left;"></div>
+      </div>
+      <!-- <div id="rate-scatter" class="chart-container has-background"></div> -->
+    </div>
+
 
     <!-- <script src="./js/vue.min.js"></script> -->
     <script type="text/javascript" src="./js/echarts.js"></script>
     <script type="text/javascript" src="./js/beijingMap.js"></script>
-    <!-- <script type="text/javascript" src="./js/typePie.js"></script> -->
-    <script type="text/javascript" src="./js/rateScatter.js"></script>
     <script type="text/javascript" src="./js/rateBar.js"></script>
+    <script type="text/javascript" src="./js/doublePieMoney.js"></script>
+    <script type="text/javascript" src="./js/doublePieOrder.js"></script>
+    <script type="text/javascript" src="./js/doublePieShop.js"></script>
     <!-- <script type="text/javascript" src="./js/main.js"></script> -->
     <script type="text/javascript">
       window.onresize = function () {
           //重置容器高宽
           resizeBeijingMapContainer();
           chartBrijingMap.resize();
-          // resizeTypePieContainer();
-          // typePieChart.resize();
-          // resizeBeijingScatterContainer();
-          // beijingScatterChart.resize();
+          
           resizeRateBarContainer();
           rateBarChart.resize();
-          resizeRateScatterContainer();
-          rateScatterChart.resize();
+
+          resizeDoublePieMoneyContainer();
+          doublePieMoneyChart.resize();
+          resizeDoublePieOrderContainer();
+          doublePieOrderChart.resize();
+          resizeDoublePieShopContainer();
+          doublePieShopChart.resize();
       };
       var currRegion1 = 0, currRegion2 = 0, currRegion3 = 0;
       var timer1 = null, timer2 = null, timer3 = null;
@@ -102,26 +114,26 @@
           })
         }, 8000)
 
-        timer3 = setInterval(function() {
-          rateScatterChart.dispatchAction({
-              type: 'downplay',
-              seriesIndex: currRegion3 % ratedata.length,
-              dataIndex: 0,
-          })
-          currRegion3 += 1;
-          rateScatterChart.dispatchAction({
-              type: 'highlight',
-              seriesIndex: currRegion3 % ratedata.length,
-              dataIndex: 0,
-          })
-          rateScatterChart.dispatchAction({
-              type: 'showTip',
-              seriesIndex: currRegion3 % ratedata.length,
-              dataIndex: 0,
-          })
-        }, 10000)
+        // timer3 = setInterval(function() {
+        //   rateScatterChart.dispatchAction({
+        //       type: 'downplay',
+        //       seriesIndex: currRegion3 % ratedata.length,
+        //       dataIndex: 0,
+        //   })
+        //   currRegion3 += 1;
+        //   rateScatterChart.dispatchAction({
+        //       type: 'highlight',
+        //       seriesIndex: currRegion3 % ratedata.length,
+        //       dataIndex: 0,
+        //   })
+        //   rateScatterChart.dispatchAction({
+        //       type: 'showTip',
+        //       seriesIndex: currRegion3 % ratedata.length,
+        //       dataIndex: 0,
+        //   })
+        // }, 10000)
       }
-      autoTip();
+      // autoTip();
     </script>
 
   </body>

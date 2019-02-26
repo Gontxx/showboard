@@ -11,34 +11,38 @@
 
     <link href="./css/bootstrap.css" rel="stylesheet">
     <!-- <link href="./css/cover.css" rel="stylesheet"> -->
-    <link href="./css/font-awesome.min.css" rel="stylesheet">
-    <!-- <link href="./css/style.css" rel="stylesheet"> -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
 
     <script src="./js/jquery.js"></script>
     <script src="./js/bootstrap.js"></script>
 
   </head>
 
-  <body style="width: 100%; height: 100%; background-color: #000000;">
+  <body>
 
-    <div id="type-pie-container" style="width: 60%; float: left;">
-      <div id="beijing-map" style="margin: 8px; padding: 8px;"></div>
-    </div>
-    <div style="width: 40%; position: relative; height: 100%; float: left;">
-      <div id="type-pie" style="margin: 8px; padding: 8px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px;"></div>
-      <div id="store-bar" style="margin: 8px; padding: 8px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px;"></div>
-      <div id="beijing-scatter" style="margin: 8px; padding: 8px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px;"></div>
+    <div class="menu-column">
+      <div class="nav-item">
+        <p class="link-icon">导航</p>
+      </div>
+      <div class="divide-bar"></div>
+      <div class="nav-item">
+        <i class="fa fa-map"></i><br/>总览
+      </div>
+      <div class="nav-item">
+        <a href="/index_1.html"><i class="fa fa-tags"></i><br/>评级</a>
+      </div>
     </div>
 
-
-    <!-- <div id="type-pie-container" style="width: 60%; float: left;">
-      <div id="beijing-map" style="margin: 8px; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 10px;"></div>
+    <div id="type-pie-container" class="left-column">
+      <div id="beijing-map" class="chart-container"></div>
     </div>
-    <div style="width: 40%; position: relative; height: 100%; float: left;">
-      <div id="type-pie" style="margin: 8px; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 10px;"></div>
-      <div id="store-bar" style="margin: 8px; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 10px;"></div>
-      <div id="beijing-scatter" style="margin: 8px; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 10px;"></div>
-    </div> -->
+    <div class="right-column">
+      <div id="type-pie" class="chart-container has-background"></div>
+      <div id="store-bar" class="chart-container has-background"></div>
+      <div id="beijing-scatter" class="chart-container has-background"></div>
+    </div>
+
 
     <!-- <script src="./js/vue.min.js"></script> -->
     <script type="text/javascript" src="./js/echarts.js"></script>
