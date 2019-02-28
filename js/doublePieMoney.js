@@ -3,7 +3,7 @@ var doublePieMoneyContainer = document.getElementById('double-pie-money');
 //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 function resizeDoublePieMoneyContainer () {
     doublePieMoneyContainer.style.width = Math.floor((window.innerWidth * 0.5 - 20 - 16) / 3.0) +'px';
-    doublePieMoneyContainer.style.height = (window.innerHeight * 0.5 - 12) + 'px';
+    doublePieMoneyContainer.style.height = (window.innerHeight * 0.3 - 12) + 'px';
 }
 //设置容器高宽
 resizeDoublePieMoneyContainer();

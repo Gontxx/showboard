@@ -40,13 +40,12 @@
     </div>
     <div class="right-column">
       <div id="box-plot-rate-order" class="chart-container has-background"></div>
-      
+      <div id="box-plot-rate-money" class="chart-container has-background"></div>
       <div class="chart-container has-background double-pie">
         <div id="double-pie-money" style="float: left;"></div>
         <div id="double-pie-order" style="float: left;"></div>
         <div id="double-pie-shop" style="float: left;"></div>
       </div>
-      <!-- <div id="rate-scatter" class="chart-container has-background"></div> -->
     </div>
 
 
@@ -54,8 +53,8 @@
     <script type="text/javascript" src="./js/echarts.js"></script>
     <script type="text/javascript" src="./js/dataTool.min.js"></script>
     <script type="text/javascript" src="./js/beijingMap_rate.js"></script>
-    <script type="text/javascript" src="./js/rateBar.js"></script>
     <script type="text/javascript" src="./js/boxPlotRateOrder.js"></script>
+    <script type="text/javascript" src="./js/boxPlotRateMoney.js"></script>
     <script type="text/javascript" src="./js/doublePieMoney.js"></script>
     <script type="text/javascript" src="./js/doublePieOrder.js"></script>
     <script type="text/javascript" src="./js/doublePieShop.js"></script>
@@ -68,8 +67,10 @@
           
           //resizeRateBarContainer();
           //rateBarChart.resize();
-          boxPlotRateOrderContainer();
+          resizeboxPlotRateOrderContainer();
           boxPlotRateOrderChart.resize();
+          resizeboxPlotRateMoneyContainer();
+          boxPlotRateMoneyChart.resize();
 
           resizeDoublePieMoneyContainer();
           doublePieMoneyChart.resize();

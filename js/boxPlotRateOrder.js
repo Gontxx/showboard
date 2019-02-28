@@ -3,7 +3,7 @@ var boxPlotRateOrderContainer = document.getElementById('box-plot-rate-order');
 //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 function resizeboxPlotRateOrderContainer () {
     boxPlotRateOrderContainer.style.width = (window.innerWidth * 0.5 - 20) +'px';
-    boxPlotRateOrderContainer.style.height = (window.innerHeight * 0.5 - 12) + 'px';
+    boxPlotRateOrderContainer.style.height = (window.innerHeight * 0.35 - 12) + 'px';
 }
 //设置容器高宽
 resizeboxPlotRateOrderContainer();

@@ -38,7 +38,7 @@ html, body {
 
 .double-pie {
     width: calc(100% - 20px);
-    height: calc(50% - 12px);
+    height: calc(30% - 12px);
 }
 
 .nav-item {
