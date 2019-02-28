@@ -33,7 +33,7 @@ var Moneynum_9 = [
 doublePieMoneyOption = {
     //backgroundColor:'#000000',
     title : {
-        text: '外卖评级成交额',
+        text: '成交额',
         x: 'center',
         y:'0%',
         textStyle: {
@@ -63,18 +63,19 @@ doublePieMoneyOption = {
 
     series: [
         {
-            name:'外卖评级成交额',
+            name:'成交额',
             type:'pie',
             selectedMode: 'single',
             //center:['300','330'],
-            radius: [0, '30%'],
+            center:['50%','45%'],
+            radius: [0, '40%'],
             color: ['#EE3B3B','#1c6d90', '#09895a',],
             label: {
                 normal: {
                     //position: 'inner',
-                    show:false,
-                    position: 'outer',
-                    formatter: '{b}\n{d}%'
+                    show:true,
+                    position: 'inner',
+                    formatter: '{b}'//\n{d}%'
                 }
             },
             labelLine: {
@@ -86,16 +87,17 @@ doublePieMoneyOption = {
             data:Moneynum_3,
         },
         {
-            name:'外卖评级成交额',
+            name:'成交额',
             type:'pie',
-            radius: ['40%', '60%'],
+            radius: ['60%', '90%'],
+            center:['50%','45%'],
             //center:['300','330'],
             color: ['#FF8888','#FF3333','#CC0000','#9acfe8','#56afd8','#1a8fc5', '#96dcc3', '#5ac59e', '#439476', '#346654'],
             label: {
                 normal: {
                     show:false,
-                    //position: 'inner',
-                    formatter: '{b}\n  {c} ({d}%)'
+                    position: 'inner',
+                    formatter: '{b}'//\n  {c} ({d}%)'
                 }
             },
             labelLine:{

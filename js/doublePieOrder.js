@@ -33,7 +33,7 @@ var Ordernum_9 = [
 doublePieOrderOption = {
     //backgroundColor:'#000000',
     title : {
-        text: '外卖评级订单数',
+        text: '订单数',
         x: 'center',
         y:'0%',
         textStyle: {
@@ -63,17 +63,18 @@ doublePieOrderOption = {
 
     series: [
         {
-            name:'外卖评级订单数',
+            name:'订单数',
             type:'pie',
             selectedMode: 'single',
             //center:['300','330'],
-            radius: [0, '30%'],
+            radius: [0, '40%'],
+            center:['50%','45%'],
             color: ['#EE3B3B','#1c6d90', '#09895a',],
             label: {
                 normal: {
-                    show:false,
+                    show:true,
                     position: 'inner',
-                    formatter: '{b}\n{d}%'
+                    formatter: '{b}'
                 }
             },
             labelLine: {
@@ -84,15 +85,16 @@ doublePieOrderOption = {
             data:Ordernum_3,
         },
         {
-            name:'外卖评级订单数',
+            name:'订单数',
             type:'pie',
-             radius: ['40%', '60%'],
+             radius: ['60%', '90%'],
+             center:['50%','45%'],
             //center:['300','330'],
             color: ['#FF8888','#FF3333','#CC0000','#9acfe8','#56afd8','#1a8fc5', '#96dcc3', '#5ac59e', '#439476', '#346654'],
             label: {
                 normal: {
                     show:false,
-                    formatter: '{b}\n  {c} ({d}%)'
+                    formatter: '{b}'
                 }
             },
             data:Ordernum_9,
