@@ -18,19 +18,19 @@ namedata = ['A1','A2','A3','B1','B2','B3','C1','C2','C3']
 var data = echarts.dataTool.prepareBoxplotData(saledata);
 
 boxPlotRateMoneyOption = {
-    // title: [
-    //     {
-    //         text: '商家订单数分布',
-    //         left: 'center',
-    //         x: 'center',
-    //         y:'0%',
-    //         textStyle: {
-    //             color: '#fff',
-    //             fontSize: 16,
-    //         },
-    //     },
+    title: [
+        {
+            text: '商家成交额分布',
+            left: 'center',
+            x: 'center',
+            y:'0%',
+            textStyle: {
+                color: '#fff',
+                fontSize: 16,
+            },
+        },
 
-    // ],
+    ],
 
     tooltip: {
         trigger: 'item',
@@ -39,9 +39,10 @@ boxPlotRateMoneyOption = {
         }
     },
     grid: {
+    	//top:'11%',
         left: '10%',
         right: '5%',
-        bottom: '5%'
+        bottom: '10%'
     },
     xAxis: {
         type: 'category',

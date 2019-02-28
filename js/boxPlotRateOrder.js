@@ -41,7 +41,7 @@ boxPlotRateOrderOption = {
     grid: {
         left: '10%',
         right: '5%',
-        bottom: '5%'
+        bottom: '10%'
     },
     xAxis: {
         type: 'category',

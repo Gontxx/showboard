@@ -87,7 +87,7 @@ doublePieOrderOption = {
         {
             name:'订单数',
             type:'pie',
-             radius: ['60%', '90%'],
+             radius: ['60%', '80%'],
              center:['50%','55%'],
             //center:['300','330'],
             color: ['#FF8888','#FF3333','#CC0000','#9acfe8','#56afd8','#1a8fc5', '#96dcc3', '#5ac59e', '#439476', '#346654'],
