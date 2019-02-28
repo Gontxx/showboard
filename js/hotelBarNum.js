@@ -2,7 +2,7 @@ var hotelBarNumContainer = document.getElementById('hotel-bar-Num');
 
 //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 function resizehotelBarNumContainer () {
-    hotelBarNumContainer.style.width = (window.innerWidth * 0.5 - 40) +'px';
+    hotelBarNumContainer.style.width = (window.innerWidth * 0.5 - 40 - 12) +'px';
     hotelBarNumContainer.style.height = (window.innerHeight * 0.5 - 12) + 'px';
 }
 //设置容器高宽

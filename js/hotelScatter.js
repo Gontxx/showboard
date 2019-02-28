@@ -2,7 +2,7 @@ var hotelScatterContainer = document.getElementById('hotel-scatter');
 
 //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 function resizehotelScatterContainer () {
-    hotelScatterContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px';
+    hotelScatterContainer.style.width = (window.innerWidth * 0.5 - 40 - 20) + 'px';
     hotelScatterContainer.style.height = (window.innerHeight * 0.5 - 12) + 'px';
 }
 //设置容器高宽
