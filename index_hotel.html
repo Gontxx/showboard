@@ -46,8 +46,8 @@
     </div>
 
     <div class="left-column-hotel">
-      <div id="beijing-map" class="chart-container has-background"></div>
-      <div id="box-plot-rate-money" class="chart-container has-background"></div>
+      <div id="hotel-bar-price" class="chart-container has-background"></div>
+      <div id="hotel-bar-Num" class="chart-container has-background"></div>
     </div>
     <div class="right-column-hotel">
       <div id="hotel-scatter" class="chart-container has-background"></div>
@@ -64,6 +64,8 @@
     <script type="text/javascript" src="./js/boxPlotRateOrder.js"></script>
     <script type="text/javascript" src="./js/boxPlotRateMoney.js"></script>
     <script type="text/javascript" src="./js/hotelScatter.js"></script>
+    <script type="text/javascript" src="./js/hotelBarPrice.js"></script>
+    <script type="text/javascript" src="./js/hotelBarNum.js"></script>
     <!-- <script type="text/javascript" src="./js/doublePieMoney.js"></script>
     <script type="text/javascript" src="./js/doublePieOrder.js"></script>
     <script type="text/javascript" src="./js/doublePieShop.js"></script> -->
@@ -71,8 +73,8 @@
     <script type="text/javascript">
       window.onresize = function () {
           //重置容器高宽
-          resizeBeijingMapContainer();
-          chartBrijingMap.resize();
+          resizehotelBarPriceContainer();
+          hotelBarPriceChart.resize();
           
           //resizeRateBarContainer();
           //rateBarChart.resize();
