@@ -45,21 +45,21 @@ doublePieOrderOption = {
         trigger: 'item',
         formatter: "{a} <br/>{b}: {c} ({d}%)"
     },
-    legend: {
+    // legend: {
         
-        // x: 'middle',
-        // y:'bottom'
+    //     // x: 'middle',
+    //     // y:'bottom'
 
-        icon: 'circle',
-        bottom: '20%',
-        itemWidth: 12,
-        itemHeight: 12,
-        textStyle:{
-            color: '#90979c'
+    //     icon: 'circle',
+    //     bottom: '20%',
+    //     itemWidth: 12,
+    //     itemHeight: 12,
+    //     textStyle:{
+    //         color: '#90979c'
 
-        },
-        data:['A','B','C',]
-    },
+    //     },
+    //     data:['A','B','C',]
+    // },
 
     series: [
         {
@@ -68,7 +68,7 @@ doublePieOrderOption = {
             selectedMode: 'single',
             //center:['300','330'],
             radius: [0, '40%'],
-            center:['50%','45%'],
+            center:['50%','55%'],
             color: ['#EE3B3B','#1c6d90', '#09895a',],
             label: {
                 normal: {
@@ -88,7 +88,7 @@ doublePieOrderOption = {
             name:'订单数',
             type:'pie',
              radius: ['60%', '90%'],
-             center:['50%','45%'],
+             center:['50%','55%'],
             //center:['300','330'],
             color: ['#FF8888','#FF3333','#CC0000','#9acfe8','#56afd8','#1a8fc5', '#96dcc3', '#5ac59e', '#439476', '#346654'],
             label: {

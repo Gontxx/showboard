@@ -39,7 +39,8 @@
       <div id="beijing-map" class="chart-container"></div>
     </div>
     <div class="right-column">
-      <div id="rate-bar" class="chart-container has-background"></div>
+      <div id="box-plot-rate-order" class="chart-container has-background"></div>
+      
       <div class="chart-container has-background double-pie">
         <div id="double-pie-money" style="float: left;"></div>
         <div id="double-pie-order" style="float: left;"></div>
@@ -51,8 +52,10 @@
 
     <!-- <script src="./js/vue.min.js"></script> -->
     <script type="text/javascript" src="./js/echarts.js"></script>
-    <script type="text/javascript" src="./js/beijingMap.js"></script>
+    <script type="text/javascript" src="./js/dataTool.min.js"></script>
+    <script type="text/javascript" src="./js/beijingMap_rate.js"></script>
     <script type="text/javascript" src="./js/rateBar.js"></script>
+    <script type="text/javascript" src="./js/boxPlotRateOrder.js"></script>
     <script type="text/javascript" src="./js/doublePieMoney.js"></script>
     <script type="text/javascript" src="./js/doublePieOrder.js"></script>
     <script type="text/javascript" src="./js/doublePieShop.js"></script>
@@ -63,8 +66,10 @@
           resizeBeijingMapContainer();
           chartBrijingMap.resize();
           
-          resizeRateBarContainer();
-          rateBarChart.resize();
+          //resizeRateBarContainer();
+          //rateBarChart.resize();
+          boxPlotRateOrderContainer();
+          boxPlotRateOrderChart.resize();
 
           resizeDoublePieMoneyContainer();
           doublePieMoneyChart.resize();
