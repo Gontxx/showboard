@@ -130,7 +130,7 @@ $.getJSON(uploadedDataURL, function(geoJson) {
     //}, 
         visualMap: {
             show: true,
-            min: 0,
+            min: 40000,
             max: 3000000,
             // left: 'center',
             right: '10%',

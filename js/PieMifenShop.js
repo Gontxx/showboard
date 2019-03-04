@@ -37,7 +37,7 @@ var Shopnum_9 = [
 doublePieShopOption = {
     //backgroundColor:'#000000',
     title : {
-        text: '成交额',
+        text: '商家数',
         x: 'center',
         y:'0%',
         textStyle: {
@@ -47,7 +47,7 @@ doublePieShopOption = {
     },
     tooltip: {
         trigger: 'item',
-        formatter: "{a} <br/>{b}: {c}元 ({d}%)"
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
     },
     // legend: {
         
@@ -67,8 +67,9 @@ doublePieShopOption = {
 
     series: [
         {
-            name:'成交额',
+            name:'商家数',
             type:'pie',
+            color: [ '#deb140', '#49dff0', '#034079', '#6f81da', '#00ffb4',],
             startAngle: 200,
             selectedMode: 'single',
             //center:['300','330'],

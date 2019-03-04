@@ -69,6 +69,7 @@ doublePieMoneyOption = {
         {
             name:'成交额',
             type:'pie',
+            color: [ '#deb140', '#49dff0', '#034079', '#6f81da', '#00ffb4',],
             startAngle: 200,
             selectedMode: 'single',
             //center:['300','330'],

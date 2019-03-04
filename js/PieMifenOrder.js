@@ -37,7 +37,7 @@ var Ordernum_9 = [
 doublePieOrderOption = {
     //backgroundColor:'#000000',
     title : {
-        text: '成交额',
+        text: '订单数',
         x: 'center',
         y:'0%',
         textStyle: {
@@ -47,7 +47,7 @@ doublePieOrderOption = {
     },
     tooltip: {
         trigger: 'item',
-        formatter: "{a} <br/>{b}: {c}元 ({d}%)"
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
     },
     // legend: {
         
@@ -67,10 +67,11 @@ doublePieOrderOption = {
 
     series: [
         {
-            name:'成交额',
+            name:'订单数',
             type:'pie',
             startAngle: 200,
             selectedMode: 'single',
+            color: [ '#deb140', '#49dff0', '#034079', '#6f81da', '#00ffb4',],
             //center:['300','330'],
             center:['50%','55%'],
             radius: [0, '80%'],
