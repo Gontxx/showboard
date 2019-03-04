@@ -14,10 +14,5 @@ app.debug = False
 app.config['UPLOAD_FOLDER'] = 'data/'
 app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
 
-@app.route('/data', methods=['GET', 'POST'])
-def getdata():
-    # return make_response(jsonify({"data": "", "code": ""}))
-	return send_from_directory(app.config['UPLOAD_FOLDER'],"chart1.json")
-
 if __name__ == '__main__':
     app.run()
