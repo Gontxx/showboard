@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,136 +10,16 @@
 
     <title>数睿应用</title>
 
-    <link href="./css/bootstrap.css" rel="stylesheet">
-    <!-- <link href="./css/cover.css" rel="stylesheet"> -->
+    <link href="static/css/bootstrap.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="./css/style.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
 
-    <script src="./js/jquery.js"></script>
-    <script src="./js/bootstrap.js"></script>
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/bootstrap.js"></script>
 
   </head>
-
   <body>
-
-    <div class="menu-column">
-      <div class="nav-item">
-        <p class="link-icon">导航</p>
-      </div>
-      <div class="divide-bar"></div>
-      <div class="nav-item">
-        <p class="nav-title">外卖</p>
-      </div>
-      <div class="nav-item">
-        <i class="fa fa-truck"></i><br/>总览
-      </div>
-      <div class="nav-item">
-        <a href="/index_1.html"><i class="fa fa-tags"></i><br/>卫生等级</a>
-      </div>
-      <div class="nav-item">
-        <a href="/index_guilin.html"><i class="fa fa-map-marker"></i><br/>桂林实例</a>
-      </div>
-      <div class="divide-bar"></div>
-      <div class="nav-item">
-        <p class="nav-title">酒店</p>
-      </div>
-      <div class="nav-item">
-        <a href="/index_hotel.html"><i class="fa fa-building"></i><br/>总览</a>
-      </div>
-    </div>
-
-    <div class="left-column">
-      <div id="beijing-map" class="chart-container"></div>
-    </div>
-    <div class="right-column">
-      <div id="type-pie" class="chart-container has-background"></div>
-      <div id="store-bar" class="chart-container has-background"></div>
-      <div id="beijing-scatter" class="chart-container has-background"></div>
-    </div>
-
-
-    <!-- <script src="./js/vue.min.js"></script> -->
-    <script type="text/javascript" src="./js/echarts.js"></script>
-    <script type="text/javascript" src="./js/beijingMap.js"></script>
-    <script type="text/javascript" src="./js/typePie.js"></script>
-    <script type="text/javascript" src="./js/beijingScatter.js"></script>
-    <script type="text/javascript" src="./js/storeBar.js"></script>
-    <!-- <script type="text/javascript" src="./js/main.js"></script> -->
-    <script type="text/javascript">
-      window.onresize = function () {
-          //重置容器高宽
-          resizeBeijingMapContainer();
-          chartBeijingMap.resize();
-          resizeTypePieContainer();
-          typePieChart.resize();
-          resizeBeijingScatterContainer();
-          beijingScatterChart.resize();
-          resizeStoreBarContainer();
-          storeBarChart.resize();
-      };
-      var currRegion1 = 0, currRegion2 = 0, currRegion3 = 0;
-      var timer1 = null, timer2 = null, timer3 = null;
-      function autoTip() {
-        timer1 = setInterval(function() {
-          typePieChart.dispatchAction({
-              type: 'pieUnSelect',
-              seriesIndex: 0,
-              dataIndex: currRegion1 % typePieData.length
-          })
-          currRegion1 += 1;
-          typePieChart.dispatchAction({
-              type: 'pieSelect',
-              seriesIndex: 0,
-              dataIndex: currRegion1 % typePieData.length
-          })
-          typePieChart.dispatchAction({
-              type: 'highlight',
-              seriesIndex: 0,
-              dataIndex: currRegion1 % typePieData.length
-          })
-        }, 5000)
-
-        timer2 = setInterval(function() {
-          chartBeijingMap.dispatchAction({
-              type: 'downplay',
-              seriesIndex: 1,
-              dataIndex: currRegion2 % mapdata.length,
-          })
-          currRegion2 += 1;
-          chartBeijingMap.dispatchAction({
-              type: 'highlight',
-              seriesIndex: 1,
-              dataIndex: currRegion2 % mapdata.length,
-          })
-          chartBeijingMap.dispatchAction({
-              type: 'showTip',
-              seriesIndex: 1,
-              dataIndex: currRegion2 % mapdata.length,
-          })
-
-        }, 8000)
-
-        timer3 = setInterval(function() {
-          beijingScatterChart.dispatchAction({
-              type: 'downplay',
-              seriesIndex: currRegion3 % beijingdata.length,
-              dataIndex: 0,
-          })
-          currRegion3 += 1;
-          beijingScatterChart.dispatchAction({
-              type: 'highlight',
-              seriesIndex: currRegion3 % beijingdata.length,
-              dataIndex: 0,
-          })
-          beijingScatterChart.dispatchAction({
-              type: 'showTip',
-              seriesIndex: currRegion3 % beijingdata.length,
-              dataIndex: 0,
-          })
-        }, 10000)
-      }
-      autoTip();
-    </script>
-
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
   </body>
 </html>
