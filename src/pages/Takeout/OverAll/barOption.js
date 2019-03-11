@@ -53,9 +53,10 @@ export default {
       'splitArea': {
         'show': false
       },
-      'min': function(value) {
-        return value.min - 100000;
-      }
+      'min': 0
+      // 'min': function(value) {
+      //   return value.min >= 100000 ? value.min - 100000 : 0;
+      // }
     }],
   },
   yAxisOption: {
