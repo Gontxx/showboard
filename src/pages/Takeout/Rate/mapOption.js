@@ -13,8 +13,6 @@ export default {
     tooltip: {
       trigger: 'item',
       formatter: function (params) {
-        console.log(params)
-        console.log(params.componentType)
         if (params.seriesType === 'map')
           return params.data.name+'<br/>外卖商家数：'+params.data.value[0]
             +'<br/>A级商家数：'+params.data.value[1]
@@ -124,7 +122,6 @@ export default {
     type: 'effectScatter',
     coordinateSystem: 'geo',
     symbolSize: function (val) {
-      console.log(val)
       return Math.sqrt(val[0]) * 1.2;//val[2] / 50;
     },
     showEffectOn: 'render',

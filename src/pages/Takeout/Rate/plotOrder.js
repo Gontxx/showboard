@@ -1,18 +1,15 @@
 export default {
   option: {
-    title: [
-      {
-        text: '商家订单数分布',
-        left: 'center',
-        x: 'center',
-        y:'0%',
-        textStyle: {
-          color: '#fff',
-          fontSize: 16,
-        },
+    title: {
+      text: '商家订单数分布',
+      left: 'center',
+      x: 'center',
+      y:'0%',
+      textStyle: {
+        color: '#fff',
+        fontSize: 16,
       },
-
-    ],
+    },
     tooltip: {
       trigger: 'item',
       axisPointer: {

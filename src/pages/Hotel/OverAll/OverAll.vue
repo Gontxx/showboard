@@ -22,6 +22,7 @@ import { deepCopy } from '@/assets/util'
 import defaultData from './defaultData'
 import barOption from './barOption'
 import scatterOption from './scatterOption'
+import { createWssocket } from '@/assets/createWS'
 
 export default {
   name: 'Hotel',
@@ -35,34 +36,24 @@ export default {
       hotelScatterChart: null
     }
   },
-  mounted () {
-    this.initCharts()
-    let that = this
-    window.onresize = function () {
-      // 重置容器高宽
-      that.resizehotelBarContainer(that.hotelBarNumContainer)
-      that.hotelBarNumChart.resize()
-      that.resizehotelBarContainer(that.hotelBarPriceContainer)
-      that.hotelBarPriceChart.resize()
-      that.resizehotelScatterContainer()
-      that.hotelScatterChart.resize()
-    }
-  },
   methods: {
     initCharts () {
       this.hotelBarNumContainer = document.getElementById('hotel-bar-num')
       this.resizehotelBarContainer(this.hotelBarNumContainer)
       this.hotelBarNumChart = echarts.init(this.hotelBarNumContainer)
-      this.setBarOption(this.hotelBarNumChart, '商圈/景区覆盖', defaultData.numXData, defaultData.numYData)
 
       this.hotelBarPriceContainer = document.getElementById('hotel-bar-price')
       this.resizehotelBarContainer(this.hotelBarPriceContainer)
       this.hotelBarPriceChart = echarts.init(this.hotelBarPriceContainer)
-      this.setBarOption(this.hotelBarPriceChart, '商圈/景区平均价格', defaultData.priceXData, defaultData.priceYData)
 
       this.hotelScatterContainer = document.getElementById('hotel-scatter')
       this.resizehotelScatterContainer()
       this.hotelScatterChart = echarts.init(this.hotelScatterContainer)
+    },
+    setCharts (data) {
+      console.log('setCharts', data)
+      this.setBarOption(this.hotelBarNumChart, '商圈/景区覆盖', defaultData.numXData, defaultData.numYData)
+      this.setBarOption(this.hotelBarPriceChart, '商圈/景区平均价格', defaultData.priceXData, defaultData.priceYData)
       this.setBeijingScatterOption(defaultData.hotelData)
     },
     resizehotelBarContainer (container) {
@@ -99,6 +90,59 @@ export default {
         return option
       })
       this.hotelScatterChart.setOption(scatterOption.option)
+    },
+    initWSocket () {
+      let that = this
+      let onopen = function () {
+        console.log('open')
+        that.getData(null)
+      }
+      let onmessage = function (event) {
+        // console.log('onmessage', event)
+        let res = JSON.parse(event.data)
+        try {
+          let data = JSON.parse(res.data)
+          let result = JSON.parse(data.result)
+          if (res.action === 'onExecuteResult') {
+            that.setCharts(result)
+          }
+        } catch (e) {
+          console.log('出现错误！可能原因：合约号不存在')
+        }
+      }
+      let wssocket = createWssocket(this.$global.wsAddress, onopen, onmessage)
+      this.$store.commit('SET_WSSOCKET', wssocket)
+    },
+    getData (district) {
+      console.log('district', district)
+      // this.showLoading()
+      let request = {}
+      request.action = 'executeContract'
+      request.contractID = this.$global.contractID
+      request.arg = JSON.stringify({
+        action: 'connectDBAndQuery',
+        arg: JSON.stringify({
+          type: 'takeout',
+          detail: 'overall',
+          district: district
+        })
+      })
+      request.privKey = this.$global.privKey
+      this.$store.state.wsSocket.send(JSON.stringify(request))
+    }
+  },
+  mounted () {
+    this.initCharts()
+    this.setCharts()
+    let that = this
+    window.onresize = function () {
+      // 重置容器高宽
+      that.resizehotelBarContainer(that.hotelBarNumContainer)
+      that.hotelBarNumChart.resize()
+      that.resizehotelBarContainer(that.hotelBarPriceContainer)
+      that.hotelBarPriceChart.resize()
+      that.resizehotelScatterContainer()
+      that.hotelScatterChart.resize()
     }
   }
 }

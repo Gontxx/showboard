@@ -4,12 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
-// import $ from 'jquery'
+import store from './store'
 import Config from './config'
 
 Vue.config.productionTip = false
 axios.defaults.withCredentials = true
 Vue.prototype.$axios = axios
+Vue.prototype.$store = store
 Vue.prototype.$global = Config
 // Vue.prototype.$ = $
 
@@ -17,6 +18,7 @@ Vue.prototype.$global = Config
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>',
   render: h => h(App)
