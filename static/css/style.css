@@ -16,6 +16,7 @@ html, body {
 .left-column {
     width: calc(50% - 80px);
     height: 100vh;
+    position: relative;
     float: left;
 }
 

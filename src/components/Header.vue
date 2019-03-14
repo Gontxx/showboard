@@ -21,7 +21,14 @@
       <p class="nav-title">酒店</p>
     </div>
     <div class="nav-item">
-      <a href="/#/hotel"><i class="fa fa-building"></i><br/>总览</a>
+      <a href="/#/hotel"><i class="fa fa-hotel"></i><br/>总览</a>
+    </div>
+    <div class="divide-bar"></div>
+    <div class="nav-item">
+      <p class="nav-title">二手房</p>
+    </div>
+    <div class="nav-item">
+      <a href="/#/house"><i class="fa fa-building"></i><br/>总览</a>
     </div>
   </div>
 </template>
