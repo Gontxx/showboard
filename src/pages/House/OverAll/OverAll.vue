@@ -1,16 +1,25 @@
 <template>
   <div>
-    <div class='left-column'>
-      <div id='beijing-map' class='chart-container'></div>
-      <div class="btn-group switch-bar" role="group">
-        <button type="button" class="btn btn-default" :class="{'active': mapType ==='count' }" @click="mapType = 'count'">数量</button>
-        <button type="button" class="btn btn-default" :class="{'active': mapType ==='price' }" @click="mapType = 'price'">均价</button>
+    <div class='left-column-house'>
+      <div class="beijing-container">
+        <div id='beijing-map' class='chart-container'></div>
+        <div class="btn-group switch-bar" role="group">
+          <button type="button" class="btn btn-default" :class="{'active': mapType ==='num' }" @click="mapType = 'num'">数量</button>
+          <button type="button" class="btn btn-default" :class="{'active': mapType ==='avgPrice' }" @click="mapType = 'avgPrice'">均价</button>
+        </div>
+      </div>
+      <div class="houseprice-container">
+        <div class='chart-container has-background'></div>
+        <div class='chart-container has-background'></div>
       </div>
     </div>
-    <div class='right-column'>
+    <div class='right-column-house'>
       <div id='type-pie' class='chart-container has-background'></div>
       <div id='store-bar' class='chart-container has-background'></div>
       <div id='beijing-scatter' class='chart-container has-background'></div>
+      <div class='chart-container has-background'></div>
+      <div class='chart-container has-background'></div>
+      <div class='chart-container has-background'></div>
     </div>
   </div>
 </template>
@@ -32,7 +41,7 @@ import barOption from './barOption'
 import scatterOption from './scatterOption'
 
 export default {
-  name: 'Takeout',
+  name: 'House',
   data () {
     return {
       beijingMapContainer: null,
@@ -43,21 +52,19 @@ export default {
       storeBarChart: null,
       beijingScatterContainer: null,
       beijingScatterChart: null,
-      timer1: -1,
-      timer2: -1,
-      timer3: -1,
-      currRegion1: 0,
-      currRegion2: 0,
-      currRegion3: 0,
-      mapType: 'count'
+      mapType: 'num',
+      current: 0,
+      tmpData: defaultData
     }
   },
   watch: {
     mapType () {
       console.log('type change')
+      this.setCharts(this.tmpData)
     }
   },
   methods: {
+    // 图表初始化
     initCharts () {
       echarts.registerMap('beijing', beijingJson)
       this.beijingMapContainer = document.getElementById('beijing-map')
@@ -89,18 +96,29 @@ export default {
       this.typePieChart.showLoading()
       this.storeBarChart.showLoading()
     },
+    // 动态设置图标内容
     setCharts (data) {
       console.log('setCharts', data)
-      this.setBeijingMapOption(data.fig1)
+      this.setBeijingMapOption(data.fig1.map(item => {
+        return {name: item.name, value: item.value[this.mapType]}
+      }))
       this.setTypePieOption(data.fig2, data.district + '外卖标签分类')
       this.setStoreBarOption(data.fig3.nameData, data.fig3.lineData, data.district + '单门店成交额前15名')
       this.setBeijingScatterOption(data.fig1)
       this.autoTip()
     },
+    // 调整图表大小，同种类型的图表可共用一个
     resizeBeijingMapContainer () {
-      this.beijingMapContainer.style.width = (window.innerWidth * 0.5 - 40) + 'px'
-      this.beijingMapContainer.style.height = (window.innerHeight - 20) + 'px'
+      this.beijingMapContainer.style.width = (window.innerWidth * 0.5 - 80 - 20) + 'px'
+      this.beijingMapContainer.style.height = (window.innerHeight * 0.6 - 20) + 'px'
     },
+    // 同类图表共用一个尺寸调整函数示例，参考外卖的Rate
+    // 使用方法:this.resizeDoublePieContainer(this.doublePieMoneyContainer)
+    resizeDoublePieContainer (container) {
+      container.style.width = Math.floor((window.innerWidth * 0.5 - 20 - 16) / 3.0) + 'px'
+      container.style.height = (window.innerHeight * 0.3 - 12) + 'px'
+    },
+    // 根据配置设置图表内容
     setBeijingMapOption (data) {
       this.chartBeijingMap.showLoading()
       mapOption.geoOption.data = data
@@ -113,6 +131,18 @@ export default {
       mapOption.option.series = [mapOption.seriesOption_1, mapOption.seriesOption_2, mapOption.seriesOption_3]
       this.chartBeijingMap.setOption(mapOption.option)
       this.chartBeijingMap.hideLoading()
+    },
+    // 同类图表共用一个设置函数示例，参考外卖的Rate
+    // 使用方法this.setDoublePieOption(this.doublePieShopChart, data.district + '店铺数', data.fig4.shopNum_3, data.fig4.shopNum_9)
+    setDoublePieOption (chart, title, data3, data9) {
+      pieOption.seriesOption_1.name = title
+      pieOption.seriesOption_1.data = data3
+      pieOption.seriesOption_2.name = title
+      pieOption.seriesOption_2.data = data9
+      pieOption.option.title.text = title
+      pieOption.option.series = [pieOption.seriesOption_1, pieOption.seriesOption_2]
+      chart.setOption(pieOption.option)
+      chart.hideLoading()
     },
     convertData (data) {
       let res = []
@@ -198,74 +228,6 @@ export default {
       this.beijingScatterChart.setOption(scatterOption.option)
       this.beijingScatterChart.hideLoading()
     },
-    autoTip () {
-      if (this.timer1 !== -1) {
-        clearInterval(this.timer1)
-      }
-      if (this.timer2 !== -1) {
-        clearInterval(this.timer2)
-      }
-      if (this.timer3 !== -1) {
-        clearInterval(this.timer3)
-      }
-      let that = this
-      this.timer1 = setInterval(function () {
-        that.typePieChart.dispatchAction({
-          type: 'pieUnSelect',
-          seriesIndex: 0,
-          dataIndex: that.currRegion1 % defaultData.typePieData.length
-        })
-        that.currRegion1 += 1
-        that.typePieChart.dispatchAction({
-          type: 'pieSelect',
-          seriesIndex: 0,
-          dataIndex: that.currRegion1 % defaultData.typePieData.length
-        })
-        that.typePieChart.dispatchAction({
-          type: 'highlight',
-          seriesIndex: 0,
-          dataIndex: that.currRegion1 % defaultData.typePieData.length
-        })
-      }, 5000)
-
-      this.timer2 = setInterval(function () {
-        that.chartBeijingMap.dispatchAction({
-          type: 'downplay',
-          seriesIndex: 1,
-          dataIndex: that.currRegion2 % defaultData.beijingData.length
-        })
-        that.currRegion2 += 1
-        that.chartBeijingMap.dispatchAction({
-          type: 'highlight',
-          seriesIndex: 1,
-          dataIndex: that.currRegion2 % defaultData.beijingData.length
-        })
-        that.chartBeijingMap.dispatchAction({
-          type: 'showTip',
-          seriesIndex: 1,
-          dataIndex: that.currRegion2 % defaultData.beijingData.length
-        })
-      }, 8000)
-
-      this.timer3 = setInterval(function () {
-        that.beijingScatterChart.dispatchAction({
-          type: 'downplay',
-          seriesIndex: that.currRegion3 % defaultData.beijingData.length,
-          dataIndex: 0
-        })
-        that.currRegion3 += 1
-        that.beijingScatterChart.dispatchAction({
-          type: 'highlight',
-          seriesIndex: that.currRegion3 % defaultData.beijingData.length,
-          dataIndex: 0
-        })
-        that.beijingScatterChart.dispatchAction({
-          type: 'showTip',
-          seriesIndex: that.currRegion3 % defaultData.beijingData.length,
-          dataIndex: 0
-        })
-      }, 10000)
-    },
     initWSocket () {
       let that = this
       let onopen = function () {
@@ -278,6 +240,7 @@ export default {
         try {
           let data = JSON.parse(res.data)
           let result = JSON.parse(data.result)
+          that.tmpData = result
           if (res.action === 'onExecuteResult') {
             that.setCharts(result)
           }
@@ -295,9 +258,9 @@ export default {
       request.action = 'executeContract'
       request.contractID = this.$global.contractID
       request.arg = JSON.stringify({
-        action: 'connectDBAndQuery',
+        action: 'connectDBAndQueryHouse',
         arg: JSON.stringify({
-          type: 'takeout',
+          type: 'house',
           detail: 'overall',
           district: district
         })
@@ -308,7 +271,10 @@ export default {
   },
   mounted () {
     this.initCharts()
-    this.initWSocket()
+    // 建立webSocket连接
+    // this.initWSocket()
+    // 暂时使用默认数据
+    this.setCharts(this.tmpData)
     let that = this
     window.onresize = function () {
       // 重置容器高宽
@@ -327,6 +293,27 @@ export default {
 
 <style scoped>
   .switch-bar {
-    bottom: 60px;
+    position: absolute;
+    left: calc(50% - 60px);
+    bottom: 0;
+  }
+  .left-column-house {
+    width: calc(50% - 80px);
+    height: 100vh;
+    float: left;
+  }
+  .right-column-house {
+    width: 50%;
+    height: 100vh;
+    position: relative;
+    float: left;
+    overflow: scroll;
+  }
+  .beijing-container {
+    position: relative;
+  }
+  .houseprice-container {
+    height: 40vh;
+    overflow: scroll;
   }
 </style>
