@@ -96,7 +96,7 @@ export default {
       this.typePieChart.showLoading()
       this.storeBarChart.showLoading()
     },
-    // 动态设置图标内容
+    // 动态设置图标内容总函数
     setCharts (data) {
       console.log('setCharts', data)
       this.setBeijingMapOption(data.fig1.map(item => {
@@ -105,7 +105,6 @@ export default {
       this.setTypePieOption(data.fig2, data.district + '外卖标签分类')
       this.setStoreBarOption(data.fig3.nameData, data.fig3.lineData, data.district + '单门店成交额前15名')
       this.setBeijingScatterOption(data.fig1)
-      this.autoTip()
     },
     // 调整图表大小，同种类型的图表可共用一个
     resizeBeijingMapContainer () {
