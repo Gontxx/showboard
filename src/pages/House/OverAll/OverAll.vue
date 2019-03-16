@@ -8,20 +8,14 @@
           <button type="button" class="btn btn-default" :class="{'active': mapType ==='avgPrice' }" @click="mapType = 'avgPrice'">均价</button>
         </div>
       </div>
-      <div class="houseprice-container">
-        
-        <div id='unit-price-bar' class='chart-container has-background'></div>
-        <div id='total-price-bar' class='chart-container has-background'></div>
-
-      </div>
-    </div>
-    <div class='right-column-house'>
       <div id='line' class='chart-container has-background'></div>
       <div id='store-bar' class='chart-container has-background'></div>
+    </div>
+    <div class='right-column-house'>
       <div id='type-bar' class='chart-container has-background'></div>
       <div id='size-bar' class='chart-container has-background'></div>
-
-
+      <div id='unit-price-bar' class='chart-container has-background'></div>
+      <div id='total-price-bar' class='chart-container has-background'></div>
     </div>
   </div>
 </template>
@@ -32,14 +26,12 @@ import 'echarts/lib/chart/map'
 import 'echarts/lib/chart/pie'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/scatter'
-import { deepCopy } from '@/assets/util'
 import { createWssocket } from '@/assets/createWS'
 import beijingJson from '@/components/beijing1.json'
 import beijingOptions from '@/components/beijingOptions'
 import defaultData from './defaultData'
 import mapOption from './mapOption'
 import lineOption from './lineOption'
-import pieOption from './pieOption'
 import barOption from './barOption'
 import typeBarOption from './typeBarOption'
 import sizeBarOption from './sizeBarOption'
@@ -80,38 +72,27 @@ export default {
     initCharts () {
       echarts.registerMap('beijing', beijingJson)
       this.beijingMapContainer = document.getElementById('beijing-map')
-      this.resizeBeijingMapContainer()
       this.chartBeijingMap = echarts.init(this.beijingMapContainer)
 
-
       this.lineContainer = document.getElementById('line')
-      this.resizeLineContainer()
       this.lineChart = echarts.init(this.lineContainer)
 
       this.storeBarContainer = document.getElementById('store-bar')
-      this.resizeStoreBarContainer()
       this.storeBarChart = echarts.init(this.storeBarContainer)
 
       this.typeBarContainer = document.getElementById('type-bar')
-      this.resizeTypeBarContainer()
       this.typeBarChart = echarts.init(this.typeBarContainer)
-      this.typeBarChart.showLoading()
 
       this.sizeBarContainer = document.getElementById('size-bar')
-      this.resizeSizeBarContainer()
       this.sizeBarChart = echarts.init(this.sizeBarContainer)
-      this.sizeBarChart.showLoading()
 
       this.unitPriceBarContainer = document.getElementById('unit-price-bar')
-      this.resizeUnitPriceBarContainer()
       this.unitPriceBarChart = echarts.init(this.unitPriceBarContainer)
-      this.unitPriceBarChart.showLoading()
 
       this.totalPriceBarContainer = document.getElementById('total-price-bar')
-      this.resizeTotalPriceBarContainer()
       this.totalPriceBarChart = echarts.init(this.totalPriceBarContainer)
-      this.totalPriceBarChart.showLoading()
 
+      this.resizeChart()
       this.showLoading()
 
       let that = this
@@ -122,6 +103,35 @@ export default {
     },
     showLoading () {
       this.storeBarChart.showLoading()
+      this.typeBarChart.showLoading()
+      this.sizeBarChart.showLoading()
+      this.unitPriceBarChart.showLoading()
+      this.totalPriceBarChart.showLoading()
+    },
+    resizeChart () {
+      let ww = window.innerWidth
+      let hh = window.innerHeight
+      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40 - 20), (hh * 0.5 - 16))
+      this.chartBeijingMap.resize()
+      this.resizeContainer(this.lineContainer, (ww * 0.5 - 40 - 20), (hh * 0.25 - 12))
+      this.lineChart.resize()
+      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.25 - 12))
+      this.storeBarChart.resize()
+      this.resizeContainer(this.typeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.25 - 12))
+      this.typeBarChart.resize()
+      this.resizeContainer(this.sizeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.25 - 12))
+      this.sizeBarChart.resize()
+      this.resizeContainer(this.unitPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.25 - 12))
+      this.unitPriceBarChart.resize()
+      this.resizeContainer(this.totalPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.25 - 12))
+      this.totalPriceBarChart.resize()
+    },
+    resizeContainer (container, width, height) {
+      container.style.width = width + 'px'
+      container.style.height = height + 'px'
+    },
+    switchChart () {
+      this.current = 1 - this.current
     },
     // 动态设置图标内容总函数
     setCharts (data) {
@@ -151,17 +161,6 @@ export default {
         return {name: item.name, value: item.value['totalPrice']}
       }))
     },
-    // 调整图表大小，同种类型的图表可共用一个
-    resizeBeijingMapContainer () {
-      this.beijingMapContainer.style.width = (window.innerWidth * 0.5 - 80 - 20) + 'px'
-      this.beijingMapContainer.style.height = (window.innerHeight * 0.6 - 20) + 'px'
-    },
-    // 同类图表共用一个尺寸调整函数示例，参考外卖的Rate
-    // 使用方法:this.resizeDoublePieContainer(this.doublePieMoneyContainer)
-    resizeDoublePieContainer (container) {
-      container.style.width = Math.floor((window.innerWidth * 0.5 - 20 - 16) / 3.0) + 'px'
-      container.style.height = (window.innerHeight * 0.3 - 12) + 'px'
-    },
     // 根据配置设置图表内容
     setBeijingMapOption (data) {
       this.chartBeijingMap.showLoading()
@@ -181,18 +180,6 @@ export default {
       }
       this.chartBeijingMap.hideLoading()
     },
-    // 同类图表共用一个设置函数示例，参考外卖的Rate
-    // 使用方法this.setDoublePieOption(this.doublePieShopChart, data.district + '店铺数', data.fig4.shopNum_3, data.fig4.shopNum_9)
-    setDoublePieOption (chart, title, data3, data9) {
-      pieOption.seriesOption_1.name = title
-      pieOption.seriesOption_1.data = data3
-      pieOption.seriesOption_2.name = title
-      pieOption.seriesOption_2.data = data9
-      pieOption.option.title.text = title
-      pieOption.option.series = [pieOption.seriesOption_1, pieOption.seriesOption_2]
-      chart.setOption(pieOption.option)
-      chart.hideLoading()
-    },
     convertData (data) {
       let res = []
       for (let i = 0; i < data.length; i++) {
@@ -206,21 +193,9 @@ export default {
       }
       return res
     },
-    resizeLineContainer () {
-      this.lineContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.lineContainer.style.height = (window.innerHeight * 0.38 - 12) + 'px'
-    },
     setlineOption (data) {
       var newdata = []
-      // var total = 0
-      // data.forEach(function (value, index, array) {
-      //   total += value.value
-      // })
-
-      var t = 0
       data.forEach(function (value, index, array) {
-        t += value.value
-
         newdata.push(value.value)
       })
 
@@ -228,13 +203,9 @@ export default {
       lineOption.option.series.areaStyle.normal.color = new echarts.graphic.LinearGradient(0, 0, 0, 1, [
         {offset: 0, color: 'rgba(61,234,255, 0.9)'},
         {offset: 0.95, color: 'rgba(61,234,255, 0)'}
-      ], false),
+      ], false)
       this.lineChart.setOption(lineOption.option)
       this.lineChart.hideLoading()
-    },
-    resizeStoreBarContainer () {
-      this.storeBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.storeBarContainer.style.height = (window.innerHeight * 0.32 - 12) + 'px'
     },
     setStoreBarOption (nameData, lineData, title) {
       barOption.option.title.text = title
@@ -245,18 +216,12 @@ export default {
       this.storeBarChart.setOption(barOption.option)
       this.storeBarChart.hideLoading()
     },
-
-    resizeTypeBarContainer () {
-      this.typeBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.typeBarContainer.style.height = (window.innerHeight * 0.4 - 12) + 'px'
-    },
     setTypeBarOption (data) {
       var data1 = []
       var data2 = []
       var data3 = []
       var data4 = []
       var xdata = []
-
 
       data.forEach(function (value, index, array) {
         data1.push(value.value[0].value)
@@ -277,11 +242,6 @@ export default {
       this.typeBarChart.setOption(typeBarOption.option)
       this.typeBarChart.hideLoading()
     },
-
-    resizeSizeBarContainer () {
-      this.sizeBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.sizeBarContainer.style.height = (window.innerHeight * 0.4 - 12) + 'px'
-    },
     setSizeBarOption (data) {
       var data1 = []
       var data2 = []
@@ -289,7 +249,6 @@ export default {
       var data4 = []
       var data5 = []
       var xdata = []
-
 
       data.forEach(function (value, index, array) {
         data1.push(value.value[0].value)
@@ -299,7 +258,7 @@ export default {
         data5.push(value.value[4].value)
         xdata.push(value.name)
       })
-      console.log(xdata)
+      // console.log(xdata)
 
       sizeBarOption.option.title.text = '各区房屋面积分布'
       sizeBarOption.option.legend.data = ['50m2以下', '50-80m2', '80-110m2', '110-150m2', '150m2以上']
@@ -314,10 +273,6 @@ export default {
       this.sizeBarChart.hideLoading()
     },
 
-    resizeUnitPriceBarContainer () {
-      this.unitPriceBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.unitPriceBarContainer.style.height = (window.innerHeight * 0.4 - 12) + 'px'
-    },
     setUnitPriceBarOption (data) {
       var data1 = []
       var data2 = []
@@ -331,7 +286,6 @@ export default {
       var data10 = []
       var data11 = []
       var xdata = []
-
 
       data.forEach(function (value, index, array) {
         data1.push(value.value[0].value)
@@ -347,7 +301,7 @@ export default {
         data11.push(value.value[10].value)
         xdata.push(value.name)
       })
-      console.log(xdata)
+      // console.log(xdata)
 
       unitPriceBarOption.option.title.text = '各区房屋单价分布'
       unitPriceBarOption.option.legend.data = ['<1w', '1-2w', '2-3w', '3-4w', '4-5w', '5-6w', '6-7w', '7-8w', '8-9w', '9-10w', '>10w']
@@ -367,11 +321,6 @@ export default {
       this.unitPriceBarChart.setOption(unitPriceBarOption.option)
       this.unitPriceBarChart.hideLoading()
     },
-
-    resizeTotalPriceBarContainer () {
-      this.totalPriceBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.totalPriceBarContainer.style.height = (window.innerHeight * 0.4 - 12) + 'px'
-    },
     setTotalPriceBarOption (data) {
       var data1 = []
       var data2 = []
@@ -380,7 +329,6 @@ export default {
       var data5 = []
       var data6 = []
       var xdata = []
-
 
       data.forEach(function (value, index, array) {
         data1.push(value.value[0].value)
@@ -391,7 +339,6 @@ export default {
         data6.push(value.value[5].value)
         xdata.push(value.name)
       })
-
 
       totalPriceBarOption.option.title.text = '各区房屋总价分布'
       totalPriceBarOption.option.legend.data = ['200万以下', '200-300万', '300-500万', '500-700万', '700-1000万', '1000万以上']
@@ -456,20 +403,7 @@ export default {
     let that = this
     window.onresize = function () {
       // 重置容器高宽
-      that.resizeBeijingMapContainer()
-      that.chartBeijingMap.resize()
-      that.resizeLineContainer()
-      that.lineChart.resize()
-      that.resizeStoreBarContainer()
-      that.storeBarChart.resize()
-      that.resizeTypeBarContainer()
-      that.typeBarChart.resize()
-      that.resizeSizeBarContainer()
-      that.sizeBarChart.resize()
-      that.resizeUnitPriceBarContainer()
-      that.unitPriceBarChart.resize()
-      that.resizeTotalPriceBarContainer()
-      that.totalPriceBarChart.resize()
+      that.resizeChart()
     }
   }
 }
@@ -482,22 +416,16 @@ export default {
     bottom: 0;
   }
   .left-column-house {
-    width: calc(50% - 80px);
+    width: calc((100% - 80px) / 2);
     height: 100vh;
     float: left;
   }
   .right-column-house {
-    width: 50%;
+    width: calc((100% - 80px) / 2);
     height: 100vh;
-    position: relative;
     float: left;
-    overflow: scroll;
   }
   .beijing-container {
     position: relative;
-  }
-  .houseprice-container {
-    height: 40vh;
-    overflow: scroll;
   }
 </style>
