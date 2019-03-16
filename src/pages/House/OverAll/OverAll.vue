@@ -9,8 +9,10 @@
         </div>
       </div>
       <div class="houseprice-container">
-        <div class='chart-container has-background'></div>
-        <div class='chart-container has-background'></div>
+        
+        <div id='unit-price-bar' class='chart-container has-background'></div>
+        <div id='total-price-bar' class='chart-container has-background'></div>
+
       </div>
     </div>
     <div class='right-column-house'>
@@ -18,8 +20,8 @@
       <div id='store-bar' class='chart-container has-background'></div>
       <div id='type-bar' class='chart-container has-background'></div>
       <div id='size-bar' class='chart-container has-background'></div>
-      <div id='unit-price-bar' class='chart-container has-background'></div>
-      <div id='total-price-bar' class='chart-container has-background'></div>
+
+
     </div>
   </div>
 </template>
@@ -41,6 +43,8 @@ import pieOption from './pieOption'
 import barOption from './barOption'
 import typeBarOption from './typeBarOption'
 import sizeBarOption from './sizeBarOption'
+import unitPriceBarOption from './unitPriceBarOption'
+import totalPriceBarOption from './totalPriceBarOption'
 
 export default {
   name: 'House',
@@ -275,8 +279,8 @@ export default {
     },
 
     resizeSizeBarContainer () {
-      this.typeBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.typeBarContainer.style.height = (window.innerHeight * 0.4 - 12) + 'px'
+      this.sizeBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
+      this.sizeBarContainer.style.height = (window.innerHeight * 0.4 - 12) + 'px'
     },
     setSizeBarOption (data) {
       var data1 = []
@@ -305,75 +309,102 @@ export default {
       sizeBarOption.option.series[1].data = data2
       sizeBarOption.option.series[2].data = data3
       sizeBarOption.option.series[3].data = data4
-      sizeBarOption.option.series[3].data = data5
+      sizeBarOption.option.series[4].data = data5
       this.sizeBarChart.setOption(sizeBarOption.option)
       this.sizeBarChart.hideLoading()
     },
 
     resizeUnitPriceBarContainer () {
-      this.typeBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.typeBarContainer.style.height = (window.innerHeight * 0.4 - 12) + 'px'
+      this.unitPriceBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
+      this.unitPriceBarContainer.style.height = (window.innerHeight * 0.4 - 12) + 'px'
     },
     setUnitPriceBarOption (data) {
-      // var data1 = new Array()
-      // var data2 = new Array()
-      // var data3 = new Array()
-      // var data4 = new Array()
-      // var xdata = new Array()
-      //
-      //
-      // data.forEach(function (value, index, array) {
-      //   data1.push(value.value[0].value)
-      //   data2.push(value.value[1].value)
-      //   data3.push(value.value[2].value)
-      //   data4.push(value.value[3].value)
-      //   xdata.push(value.name)
-      // })
-      // console.log(xdata)
-      //
-      // unitPriceBarOption.option.title.text = '各区房型分布'
-      // unitPriceBarOption.option.legend.data = ['一居', '二居', '三居', '四居及以上']
-      // unitPriceBarOption.xAxisOption.data = xdata
-      // unitPriceBarOption.option.xAxis = unitPriceBarOption.xAxisOption
-      // unitPriceBarOption.option.series[0].data = data1
-      // unitPriceBarOption.option.series[1].data = data2
-      // unitPriceBarOption.option.series[2].data = data3
-      // unitPriceBarOption.option.series[3].data = data4
-      // this.typeBarChart.setOption(typeBarOption.option)
-      // this.typeBarChart.hideLoading()
+      var data1 = []
+      var data2 = []
+      var data3 = []
+      var data4 = []
+      var data5 = []
+      var data6 = []
+      var data7 = []
+      var data8 = []
+      var data9 = []
+      var data10 = []
+      var data11 = []
+      var xdata = []
+
+
+      data.forEach(function (value, index, array) {
+        data1.push(value.value[0].value)
+        data2.push(value.value[1].value)
+        data3.push(value.value[2].value)
+        data4.push(value.value[3].value)
+        data5.push(value.value[4].value)
+        data6.push(value.value[5].value)
+        data7.push(value.value[6].value)
+        data8.push(value.value[7].value)
+        data9.push(value.value[8].value)
+        data10.push(value.value[9].value)
+        data11.push(value.value[10].value)
+        xdata.push(value.name)
+      })
+      console.log(xdata)
+
+      unitPriceBarOption.option.title.text = '各区房屋单价分布'
+      unitPriceBarOption.option.legend.data = ['<1w', '1-2w', '2-3w', '3-4w', '4-5w', '5-6w', '6-7w', '7-8w', '8-9w', '9-10w', '>10w']
+      unitPriceBarOption.xAxisOption.data = xdata
+      unitPriceBarOption.option.xAxis = unitPriceBarOption.xAxisOption
+      unitPriceBarOption.option.series[0].data = data1
+      unitPriceBarOption.option.series[1].data = data2
+      unitPriceBarOption.option.series[2].data = data3
+      unitPriceBarOption.option.series[3].data = data4
+      unitPriceBarOption.option.series[4].data = data5
+      unitPriceBarOption.option.series[5].data = data6
+      unitPriceBarOption.option.series[6].data = data7
+      unitPriceBarOption.option.series[7].data = data8
+      unitPriceBarOption.option.series[8].data = data9
+      unitPriceBarOption.option.series[9].data = data10
+      unitPriceBarOption.option.series[10].data = data11
+      this.unitPriceBarChart.setOption(unitPriceBarOption.option)
+      this.unitPriceBarChart.hideLoading()
     },
 
     resizeTotalPriceBarContainer () {
-      this.typeBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.typeBarContainer.style.height = (window.innerHeight * 0.4 - 12) + 'px'
+      this.totalPriceBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
+      this.totalPriceBarContainer.style.height = (window.innerHeight * 0.4 - 12) + 'px'
     },
     setTotalPriceBarOption (data) {
-      // var data1 = new Array()
-      // var data2 = new Array()
-      // var data3 = new Array()
-      // var data4 = new Array()
-      // var xdata = new Array()
-      //
-      //
-      // data.forEach(function (value, index, array) {
-      //   data1.push(value.value[0].value)
-      //   data2.push(value.value[1].value)
-      //   data3.push(value.value[2].value)
-      //   data4.push(value.value[3].value)
-      //   xdata.push(value.name)
-      // })
-      // console.log(xdata)
-      //
-      // typeBarOption.option.title.text = '各区房型分布'
-      // typeBarOption.option.legend.data = ['一居', '二居', '三居', '四居及以上']
-      // typeBarOption.xAxisOption.data = xdata
-      // typeBarOption.option.xAxis = typeBarOption.xAxisOption
-      // typeBarOption.option.series[0].data = data1
-      // typeBarOption.option.series[1].data = data2
-      // typeBarOption.option.series[2].data = data3
-      // typeBarOption.option.series[3].data = data4
-      // this.typeBarChart.setOption(typeBarOption.option)
-      // this.typeBarChart.hideLoading()
+      var data1 = []
+      var data2 = []
+      var data3 = []
+      var data4 = []
+      var data5 = []
+      var data6 = []
+      var xdata = []
+
+
+      data.forEach(function (value, index, array) {
+        data1.push(value.value[0].value)
+        data2.push(value.value[1].value)
+        data3.push(value.value[2].value)
+        data4.push(value.value[3].value)
+        data5.push(value.value[4].value)
+        data6.push(value.value[5].value)
+        xdata.push(value.name)
+      })
+
+
+      totalPriceBarOption.option.title.text = '各区房屋总价分布'
+      totalPriceBarOption.option.legend.data = ['200万以下', '200-300万', '300-500万', '500-700万', '700-1000万', '1000万以上']
+      totalPriceBarOption.xAxisOption.data = xdata
+      totalPriceBarOption.option.xAxis = totalPriceBarOption.xAxisOption
+      totalPriceBarOption.option.series[0].data = data1
+      totalPriceBarOption.option.series[1].data = data2
+      totalPriceBarOption.option.series[2].data = data3
+      totalPriceBarOption.option.series[3].data = data4
+      totalPriceBarOption.option.series[4].data = data5
+      totalPriceBarOption.option.series[5].data = data6
+      this.totalPriceBarChart.setOption(totalPriceBarOption.option)
+      this.totalPriceBarChart.hideLoading()
     },
     initWSocket () {
       let that = this
