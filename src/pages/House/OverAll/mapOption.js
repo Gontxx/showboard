@@ -1,7 +1,7 @@
 export default {
   option: {
     title: {
-      text: '北京市外卖热度地图',
+      text: '北京市二手房热度地图',
       x: 'center',
       y: '3%',
       textStyle: {
@@ -13,22 +13,20 @@ export default {
       trigger: 'item',
       formatter: function (params) {
         if (params.seriesType === 'map') {
-          return params.data.name + '<br/>外卖商家数：' + params.data.value[0] +
-            '<br/>订单数：' + params.data.value[1] +
-            '<br/>成交额：' + params.data.value[2] + '元'
+          return params.data.name + '：' + params.data.value
         }
       }
     },
     visualMap: {
       show: true,
       min: 0,
-      max: 10000000,
+      //max: 10000,
       right: '10%',
       bottom: '3%',
-      text: ['成交额', ''], // 文本，默认为数值文
+      text: ['', ''], // 文本，默认为数值文
       textStyle: {
         color: '#fff',
-        fontSize: '15'
+        fontSize: '12'
       },
       calculable: true,
       seriesIndex: [1],
