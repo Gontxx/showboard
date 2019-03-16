@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-column">
     <div class='left-column-house'>
       <div class="beijing-container">
         <div id='beijing-map' class='chart-container'></div>
@@ -8,14 +8,14 @@
           <button type="button" class="btn btn-default" :class="{'active': mapType ==='avgPrice' }" @click="mapType = 'avgPrice'">均价</button>
         </div>
       </div>
-      <div id='line' class='chart-container has-background'></div>
-      <div id='store-bar' class='chart-container has-background'></div>
-    </div>
-    <div class='right-column-house'>
-      <div id='type-bar' class='chart-container has-background'></div>
-      <div id='size-bar' class='chart-container has-background'></div>
       <div id='unit-price-bar' class='chart-container has-background'></div>
       <div id='total-price-bar' class='chart-container has-background'></div>
+    </div>
+    <div class='right-column-house'>
+      <div id='line' class='chart-container has-background'></div>
+      <div id='store-bar' class='chart-container has-background'></div>
+      <div id='type-bar' class='chart-container has-background'></div>
+      <div id='size-bar' class='chart-container has-background'></div>
     </div>
   </div>
 </template>
@@ -111,19 +111,19 @@ export default {
     resizeChart () {
       let ww = window.innerWidth
       let hh = window.innerHeight
-      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40 - 20), (hh * 0.5 - 16))
+      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40 - 20), (hh * 0.7 - 16))
       this.chartBeijingMap.resize()
-      this.resizeContainer(this.lineContainer, (ww * 0.5 - 40 - 20), (hh * 0.25 - 12))
+      this.resizeContainer(this.lineContainer, (ww * 0.5 - 40 - 20), (hh * 0.35 - 12))
       this.lineChart.resize()
-      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.25 - 12))
+      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.35 - 12))
       this.storeBarChart.resize()
-      this.resizeContainer(this.typeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.25 - 12))
+      this.resizeContainer(this.typeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
       this.typeBarChart.resize()
-      this.resizeContainer(this.sizeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.25 - 12))
+      this.resizeContainer(this.sizeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
       this.sizeBarChart.resize()
-      this.resizeContainer(this.unitPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.25 - 12))
+      this.resizeContainer(this.unitPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
       this.unitPriceBarChart.resize()
-      this.resizeContainer(this.totalPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.25 - 12))
+      this.resizeContainer(this.totalPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
       this.totalPriceBarChart.resize()
     },
     resizeContainer (container, width, height) {
@@ -410,18 +410,23 @@ export default {
 </script>
 
 <style scoped>
+  .main-column {
+    width: calc(100% - 80px);
+    height: 100vh;
+    overflow: scroll;
+  }
   .switch-bar {
     position: absolute;
     left: calc(50% - 60px);
     bottom: 0;
   }
   .left-column-house {
-    width: calc((100% - 80px) / 2);
+    width: 50%;
     height: 100vh;
     float: left;
   }
   .right-column-house {
-    width: calc((100% - 80px) / 2);
+    width: 50%;
     height: 100vh;
     float: left;
   }
