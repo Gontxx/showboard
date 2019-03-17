@@ -95,11 +95,11 @@ export default {
       this.resizeChart()
       this.showLoading()
 
-      let that = this
-      this.chartBeijingMap.on('click', function (params) {
-        console.log('chartBeijingMap click', params)
-        that.getData(params.name.substring(0, params.name.length - 1))
-      })
+      // let that = this
+      // this.chartBeijingMap.on('click', function (params) {
+      //   console.log('chartBeijingMap click', params)
+      //   that.getData(params.name.substring(0, params.name.length - 1))
+      // })
     },
     showLoading () {
       this.storeBarChart.showLoading()
