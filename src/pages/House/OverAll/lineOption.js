@@ -67,7 +67,7 @@ export default {
         },
       },
       axisTick: {show: false,},
-      name :'房屋数量',
+      name :'房屋数量累积比',
     }],
     series: {
       name: '值',

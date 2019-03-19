@@ -195,8 +195,16 @@ export default {
     },
     setlineOption (data) {
       var newdata = []
+      var total = 0
+      var t = 0
       data.forEach(function (value, index, array) {
-        newdata.push(value.value)
+        total += value.value
+      })
+
+      data.forEach(function (value, index, array) {
+        t += value.value
+        newdata.push(t / total)
+        // newdata.push(value.value)
       })
 
       lineOption.option.series.data = newdata // [90, 105, 84, 125, 110, 92]
