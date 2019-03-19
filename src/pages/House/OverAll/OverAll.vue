@@ -144,10 +144,11 @@ export default {
       var linedata = []
       data.fig3.forEach(function (value, index, array) {
         namedata.push(value.name)
-        linedata.push(value.value.toFixed(2))
+        // linedata.push(value.value.toFixed(2))
+        linedata.push(value.value)
       })
       // this.setStoreBarOption(data.fig3.nameData, data.fig3.lineData, data.district + '单门店成交额前15名')
-      this.setStoreBarOption(namedata, linedata, '商圈房价柱状图')
+      this.setStoreBarOption(namedata, linedata, '商圈房屋数量柱状图')
       this.setTypeBarOption(data.fig4.map(item => {
         return {name: item.name, value: item.value['roomType']}
       }))

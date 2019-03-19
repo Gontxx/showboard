@@ -28,7 +28,7 @@ export default {
         }
       },
       scale: true,
-      name:'房价（元）'
+      name:'房屋数量'
     },
     'tooltip': {
       'trigger': 'item',
