@@ -87,7 +87,9 @@ export default {
     "yAxis": [{
       "type": "value",
       "splitLine": {
-        "show": false
+        lineStyle: {
+          type: 'dashed'
+        }
       },
       "axisLine": {
         lineStyle: {
@@ -104,7 +106,7 @@ export default {
       "splitArea": {
         "show": false
       },
-
+      name :'房屋数量',
     }],
     "series": [{
       "name": "200万以下",

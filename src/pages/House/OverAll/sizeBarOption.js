@@ -87,8 +87,13 @@ export default {
     "yAxis": [{
       "type": "value",
       "splitLine": {
-        "show": false
+        lineStyle: {
+          type: 'dashed'
+        }
       },
+      // "splitLine": {
+      //   "show": false
+      // },
       "axisLine": {
         lineStyle: {
           color: '#90979c'
@@ -104,6 +109,7 @@ export default {
       "splitArea": {
         "show": false
       },
+      name :'房屋数量',
 
     }],
     "series": [{

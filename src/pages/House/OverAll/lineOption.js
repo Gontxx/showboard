@@ -12,7 +12,7 @@ export default {
     },
     tooltip: {},
     grid: {
-      top: '10%',
+      top: '12%',
       left: '1%',
       right: '10%',
       bottom: '8%',
@@ -42,11 +42,16 @@ export default {
       //min: 0,
       //max: 140,
 
+      // splitLine: {
+      //   show: true,
+      //   type: 'dashed',
+      //   lineStyle: {
+      //     color: '#90979c'
+      //   }
+      // },
       splitLine: {
-        show: true,
-        type: 'dashed',
         lineStyle: {
-          color: '#90979c'
+          type: 'dashed'
         }
       },
       axisLine: {
