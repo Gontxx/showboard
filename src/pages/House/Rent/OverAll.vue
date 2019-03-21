@@ -396,9 +396,9 @@ export default {
       request.action = 'executeContract'
       request.contractID = this.$global.contractID
       request.arg = JSON.stringify({
-        action: 'connectDBAndQueryHouse',
+        action: 'connectDBAndQueryZufang',
         arg: JSON.stringify({
-          type: 'house',
+          type: 'zufang',
           detail: 'overall',
           district: district
         })

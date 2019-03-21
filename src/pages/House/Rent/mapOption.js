@@ -1,7 +1,7 @@
 export default {
   option: {
     title: {
-      text: '北京市二手房热度地图',
+      text: '北京市租房热度地图',
       x: 'center',
       y: '3%',
       textStyle: {
