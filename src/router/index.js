@@ -4,7 +4,8 @@ import Takeout from '@/pages/Takeout/OverAll/OverAll'
 import TakeoutRate from '@/pages/Takeout/Rate/Rate'
 import TakeoutGuilin from '@/pages/Takeout/Guilin/Guilin'
 import Hotel from '@/pages/Hotel/OverAll/OverAll'
-import House from '@/pages/House/OverAll/OverAll'
+import SecondHand from '@/pages/House/SecondHand/OverAll'
+import Rent from '@/pages/House/Rent/OverAll'
 
 Vue.use(Router)
 
@@ -32,8 +33,13 @@ export default new Router({
     },
     {
       path: '/house',
-      name: 'House',
-      component: House
+      name: 'SecondHand',
+      component: SecondHand
+    },
+    {
+      path: '/rent',
+      name: 'Rent',
+      component: Rent
     }
   ]
 })

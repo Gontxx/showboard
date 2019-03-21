@@ -25,10 +25,13 @@
     </div>
     <div class="divide-bar"></div>
     <div class="nav-item">
-      <p class="nav-title">二手房</p>
+      <p class="nav-title">住房</p>
     </div>
     <div class="nav-item">
-      <a href="/#/house"><i class="fa fa-building"></i><br/>总览</a>
+      <a href="/#/house"><i class="fa fa-building"></i><br/>二手房</a>
+    </div>
+    <div class="nav-item">
+      <a href="/#/rent"><i class="fa fa-key"></i><br/>租房</a>
     </div>
   </div>
 </template>
