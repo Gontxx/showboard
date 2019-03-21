@@ -58,7 +58,8 @@ export default {
       totalPriceBarChart: null,
       mapType: 'num',
       current: 0,
-      tmpData: defaultData
+      tmpData: defaultData,
+      district: '北京市'
     }
   },
   watch: {
@@ -94,19 +95,25 @@ export default {
 
       this.resizeChart()
       this.showLoading()
-
-      // let that = this
-      // this.chartBeijingMap.on('click', function (params) {
-      //   console.log('chartBeijingMap click', params)
-      //   that.getData(params.name.substring(0, params.name.length - 1))
-      // })
-    },
-    showLoading () {
-      this.storeBarChart.showLoading()
       this.typeBarChart.showLoading()
       this.sizeBarChart.showLoading()
       this.unitPriceBarChart.showLoading()
       this.totalPriceBarChart.showLoading()
+
+      let that = this
+      this.chartBeijingMap.on('click', function (params) {
+        console.log('chartBeijingMap click', params)
+        that.district = params.name
+        that.getData(params.name.substring(0, params.name.length - 1))
+      })
+    },
+    showLoading () {
+      this.lineChart.showLoading()
+      this.storeBarChart.showLoading()
+      // this.typeBarChart.showLoading()
+      // this.sizeBarChart.showLoading()
+      // this.unitPriceBarChart.showLoading()
+      // this.totalPriceBarChart.showLoading()
     },
     resizeChart () {
       let ww = window.innerWidth
@@ -139,16 +146,14 @@ export default {
       this.setBeijingMapOption(data.fig1.map(item => {
         return {name: item.name, value: item.value[this.mapType]}
       }))
-      this.setlineOption(data.fig2)
+      this.setlineOption(data.fig2, this.district + '房价分布图')
       var namedata = []
       var linedata = []
       data.fig3.forEach(function (value, index, array) {
         namedata.push(value.name)
-        // linedata.push(value.value.toFixed(2))
         linedata.push(value.value)
       })
-      // this.setStoreBarOption(data.fig3.nameData, data.fig3.lineData, data.district + '单门店成交额前15名')
-      this.setStoreBarOption(namedata, linedata, '商圈房屋数量柱状图')
+      this.setStoreBarOption(namedata, linedata, this.district + '商圈房屋数量柱状图')
       this.setTypeBarOption(data.fig4.map(item => {
         return {name: item.name, value: item.value['roomType']}
       }))
@@ -194,7 +199,7 @@ export default {
       }
       return res
     },
-    setlineOption (data) {
+    setlineOption (data, title) {
       var newdata = []
       var total = 0
       var t = 0
@@ -205,9 +210,8 @@ export default {
       data.forEach(function (value, index, array) {
         t += value.value
         newdata.push(t / total)
-        // newdata.push(value.value)
       })
-
+      lineOption.option.title.text = title
       lineOption.option.series.data = newdata // [90, 105, 84, 125, 110, 92]
       lineOption.option.series.areaStyle.normal.color = new echarts.graphic.LinearGradient(0, 0, 0, 1, [
         {offset: 0, color: 'rgba(61,234,255, 0.9)'},
