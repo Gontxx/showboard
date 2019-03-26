@@ -180,9 +180,9 @@ export default {
       mapOption.option.series = [mapOption.seriesOption_1, mapOption.seriesOption_2, mapOption.seriesOption_3]
       this.chartBeijingMap.setOption(mapOption.option)
       if (this.mapType === 'num') {
-        this.chartBeijingMap.setOption({visualMap: {min: 0, max: 10000}})
+        this.chartBeijingMap.setOption({visualMap: {min: 0, max: 5000}})
       } else {
-        this.chartBeijingMap.setOption({visualMap: {min: 0, max: 100000}})
+        this.chartBeijingMap.setOption({visualMap: {min: 0, max: 12000}})
       }
       this.chartBeijingMap.hideLoading()
     },
@@ -341,6 +341,7 @@ export default {
       var data4 = []
       var data5 = []
       var data6 = []
+      var data7 = []
       var xdata = []
 
       data.forEach(function (value, index, array) {
@@ -350,6 +351,7 @@ export default {
         data4.push(value.value[3].value)
         data5.push(value.value[4].value)
         data6.push(value.value[5].value)
+        data7.push(value.value[6].value)
         xdata.push(value.name)
       })
 
@@ -363,6 +365,7 @@ export default {
       totalPriceBarOption.option.series[3].data = data4
       totalPriceBarOption.option.series[4].data = data5
       totalPriceBarOption.option.series[5].data = data6
+      totalPriceBarOption.option.series[6].data = data7
       this.totalPriceBarChart.setOption(totalPriceBarOption.option)
       this.totalPriceBarChart.hideLoading()
     },

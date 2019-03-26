@@ -109,7 +109,7 @@ export default {
       name :'房屋数量',
     }],
     "series": [{
-      "name": "200万以下",
+      "name": "<1500",
       "type": "bar",
       "stack": "总量",
       "barMaxWidth": 35,
@@ -133,7 +133,7 @@ export default {
     },
 
       {
-        "name": "200-300万",
+        "name": "1500-2500",
         "type": "bar",
         "stack": "总量",
         "itemStyle": {
@@ -152,7 +152,7 @@ export default {
 
       },
       {
-        "name": "300-500万",
+        "name": "2500-3500",
         "type": "bar",
         "stack": "总量",
         "itemStyle": {
@@ -171,7 +171,7 @@ export default {
 
       },
       {
-        "name": "500-700万",
+        "name": "3500-5000",
         "type": "bar",
         "stack": "总量",
         "itemStyle": {
@@ -190,7 +190,7 @@ export default {
 
       },
       {
-        "name": "700-1000万",
+        "name": "5000-8000",
         "type": "bar",
         "stack": "总量",
         "itemStyle": {
@@ -209,7 +209,26 @@ export default {
 
       },
       {
-        "name": "1000万以上",
+        "name": "8000-10000",
+        "type": "bar",
+        "stack": "总量",
+        "itemStyle": {
+          "normal": {
+            //"color": "rgba(0,191,183,1)",
+            "barBorderRadius": 0,
+            "label": {
+              "show": false,
+              "position": "top",
+              formatter: function(p) {
+                return p.value > 0 ? (p.value) : '';
+              }
+            }
+          }
+        },
+
+      },
+      {
+        "name": ">10000",
         "type": "bar",
         "stack": "总量",
         "itemStyle": {
