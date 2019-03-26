@@ -8,12 +8,12 @@
           <button type="button" class="btn btn-default" :class="{'active': mapType ==='avgPrice' }" @click="mapType = 'avgPrice'">均价</button>
         </div>
       </div>
-      <div id='unit-price-bar' class='chart-container has-background'></div>
-      <div id='total-price-bar' class='chart-container has-background'></div>
-    </div>
-    <div class='right-column-house'>
+      <!--<div id='unit-price-bar' class='chart-container has-background'></div>-->
       <div id='line' class='chart-container has-background'></div>
       <div id='store-bar' class='chart-container has-background'></div>
+    </div>
+    <div class='right-column-house'>
+      <div id='total-price-bar' class='chart-container has-background'></div>
       <div id='type-bar' class='chart-container has-background'></div>
       <div id='size-bar' class='chart-container has-background'></div>
     </div>
@@ -87,8 +87,8 @@ export default {
       this.sizeBarContainer = document.getElementById('size-bar')
       this.sizeBarChart = echarts.init(this.sizeBarContainer)
 
-      this.unitPriceBarContainer = document.getElementById('unit-price-bar')
-      this.unitPriceBarChart = echarts.init(this.unitPriceBarContainer)
+      // this.unitPriceBarContainer = document.getElementById('unit-price-bar')
+      // this.unitPriceBarChart = echarts.init(this.unitPriceBarContainer)
 
       this.totalPriceBarContainer = document.getElementById('total-price-bar')
       this.totalPriceBarChart = echarts.init(this.totalPriceBarContainer)
@@ -97,7 +97,7 @@ export default {
       this.showLoading()
       this.typeBarChart.showLoading()
       this.sizeBarChart.showLoading()
-      this.unitPriceBarChart.showLoading()
+      // this.unitPriceBarChart.showLoading()
       this.totalPriceBarChart.showLoading()
 
       let that = this
@@ -118,18 +118,18 @@ export default {
     resizeChart () {
       let ww = window.innerWidth
       let hh = window.innerHeight
-      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40 - 20), (hh * 0.7 - 16))
+      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40 - 20), (hh * 0.6 - 16))
       this.chartBeijingMap.resize()
-      this.resizeContainer(this.lineContainer, (ww * 0.5 - 40 - 20), (hh * 0.35 - 12))
+      this.resizeContainer(this.lineContainer, (ww * 0.5 - 40 - 20), (hh * 0.3 - 12))
       this.lineChart.resize()
-      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.35 - 12))
+      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.3 - 12))
       this.storeBarChart.resize()
       this.resizeContainer(this.typeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
       this.typeBarChart.resize()
       this.resizeContainer(this.sizeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
       this.sizeBarChart.resize()
-      this.resizeContainer(this.unitPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
-      this.unitPriceBarChart.resize()
+      // this.resizeContainer(this.unitPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
+      // this.unitPriceBarChart.resize()
       this.resizeContainer(this.totalPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
       this.totalPriceBarChart.resize()
     },
@@ -156,16 +156,16 @@ export default {
       this.setStoreBarOption(namedata, linedata, this.district + '商圈房屋数量柱状图')
       this.setTypeBarOption(data.fig4.map(item => {
         return {name: item.name, value: item.value['roomType']}
-      }))
+      }), this.district === '北京市' ? '各区房屋房型分布' : this.district + '各商圈房型分布')
       this.setSizeBarOption(data.fig4.map(item => {
         return {name: item.name, value: item.value['areaSize']}
-      }))
-      this.setUnitPriceBarOption(data.fig4.map(item => {
-        return {name: item.name, value: item.value['unitPrice']}
-      }))
+      }), this.district === '北京市' ? '各区房屋面积分布' : this.district + '各商圈房屋面积布')
+      // this.setUnitPriceBarOption(data.fig4.map(item => {
+      //   return {name: item.name, value: item.value['unitPrice']}
+      // }))
       this.setTotalPriceBarOption(data.fig4.map(item => {
-        return {name: item.name, value: item.value['totalPrice']}
-      }))
+        return {name: item.name, value: item.value['price']}
+      }), this.district === '北京市' ? '各区房屋月租分布' : this.district + '各商圈房屋月租分布')
     },
     // 根据配置设置图表内容
     setBeijingMapOption (data) {
@@ -229,7 +229,7 @@ export default {
       this.storeBarChart.setOption(barOption.option)
       this.storeBarChart.hideLoading()
     },
-    setTypeBarOption (data) {
+    setTypeBarOption (data, title) {
       var data1 = []
       var data2 = []
       var data3 = []
@@ -244,7 +244,7 @@ export default {
         xdata.push(value.name)
       })
 
-      typeBarOption.option.title.text = '各区房型分布'
+      typeBarOption.option.title.text = title
       typeBarOption.option.legend.data = ['一居', '二居', '三居', '四居及以上']
       typeBarOption.xAxisOption.data = xdata
       typeBarOption.option.xAxis = typeBarOption.xAxisOption
@@ -255,7 +255,7 @@ export default {
       this.typeBarChart.setOption(typeBarOption.option)
       this.typeBarChart.hideLoading()
     },
-    setSizeBarOption (data) {
+    setSizeBarOption (data, title) {
       var data1 = []
       var data2 = []
       var data3 = []
@@ -273,7 +273,7 @@ export default {
       })
       // console.log(xdata)
 
-      sizeBarOption.option.title.text = '各区房屋面积分布'
+      sizeBarOption.option.title.text = title
       sizeBarOption.option.legend.data = ['50m2以下', '50-80m2', '80-110m2', '110-150m2', '150m2以上']
       sizeBarOption.xAxisOption.data = xdata
       sizeBarOption.option.xAxis = sizeBarOption.xAxisOption
@@ -286,7 +286,7 @@ export default {
       this.sizeBarChart.hideLoading()
     },
 
-    setUnitPriceBarOption (data) {
+    setUnitPriceBarOption (data, district) {
       var data1 = []
       var data2 = []
       var data3 = []
@@ -316,7 +316,7 @@ export default {
       })
       // console.log(xdata)
 
-      unitPriceBarOption.option.title.text = '各区房屋单价分布'
+      unitPriceBarOption.option.title.text = district + '各商圈房屋单价分布'
       unitPriceBarOption.option.legend.data = ['<1w', '1-2w', '2-3w', '3-4w', '4-5w', '5-6w', '6-7w', '7-8w', '8-9w', '9-10w', '>10w']
       unitPriceBarOption.xAxisOption.data = xdata
       unitPriceBarOption.option.xAxis = unitPriceBarOption.xAxisOption
@@ -334,7 +334,7 @@ export default {
       this.unitPriceBarChart.setOption(unitPriceBarOption.option)
       this.unitPriceBarChart.hideLoading()
     },
-    setTotalPriceBarOption (data) {
+    setTotalPriceBarOption (data, title) {
       var data1 = []
       var data2 = []
       var data3 = []
@@ -353,8 +353,8 @@ export default {
         xdata.push(value.name)
       })
 
-      totalPriceBarOption.option.title.text = '各区房屋总价分布'
-      totalPriceBarOption.option.legend.data = ['200万以下', '200-300万', '300-500万', '500-700万', '700-1000万', '1000万以上']
+      totalPriceBarOption.option.title.text = title
+      totalPriceBarOption.option.legend.data = ['<1500', '1500-2500', '2500-3500', '3500-5000', '5000-8000', '8000-10000', '>10000']
       totalPriceBarOption.xAxisOption.data = xdata
       totalPriceBarOption.option.xAxis = totalPriceBarOption.xAxisOption
       totalPriceBarOption.option.series[0].data = data1
@@ -383,6 +383,7 @@ export default {
             that.setCharts(result)
           }
         } catch (e) {
+          console.log('ERROR', e)
           console.log('出现错误！可能原因：合约号不存在')
         }
       }
