@@ -6,13 +6,18 @@ import router from './router'
 import axios from 'axios'
 import store from './store'
 import Config from './config'
+import { Menu, Submenu, MenuItem, MenuItemGroup } from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 axios.defaults.withCredentials = true
 Vue.prototype.$axios = axios
 Vue.prototype.$store = store
 Vue.prototype.$global = Config
-// Vue.prototype.$ = $
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(MenuItem)
+Vue.use(MenuItemGroup)
 
 /* eslint-disable no-new */
 new Vue({
