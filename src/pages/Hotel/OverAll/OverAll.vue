@@ -98,16 +98,16 @@ export default {
         that.getData(null)
       }
       let onmessage = function (event) {
-        // console.log('onmessage', event)
+        console.log('onmessage', event)
         let res = JSON.parse(event.data)
         try {
-          let data = JSON.parse(res.data)
-          let result = JSON.parse(data.result)
           if (res.action === 'onExecuteResult') {
+            let data = JSON.parse(res.data)
+            let result = JSON.parse(data.result)
             that.setCharts(result)
           }
         } catch (e) {
-          console.log('出现错误！可能原因：合约号不存在')
+          console.log('出现错误！', e)
         }
       }
       let wssocket = createWssocket(this.$global.wsAddress, onopen, onmessage)
@@ -119,6 +119,7 @@ export default {
       let request = {}
       request.action = 'executeContract'
       request.contractID = this.$global.contractID
+      request.requestID = new Date().getTime()
       request.arg = JSON.stringify({
         action: 'connectDBAndQuery',
         arg: JSON.stringify({

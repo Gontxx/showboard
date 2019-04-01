@@ -2,6 +2,7 @@
   <div>
     <div class='left-column'>
       <div id='beijing-map' class='chart-container'></div>
+      <hash-result :hash="hashResult"></hash-result>
     </div>
     <div class='right-column'>
       <div id='type-pie' class='chart-container has-background'></div>
@@ -19,6 +20,7 @@ import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/scatter'
 import { deepCopy } from '@/assets/util'
 import { createWssocket } from '@/assets/createWS'
+import hashResult from '@/components/hashResult'
 import beijingJson from '@/components/beijing1.json'
 import beijingOptions from '@/components/beijingOptions'
 import defaultData from './defaultData'
@@ -44,8 +46,12 @@ export default {
       timer3: -1,
       currRegion1: 0,
       currRegion2: 0,
-      currRegion3: 0
+      currRegion3: 0,
+      hashResult: ''
     }
+  },
+  components: {
+    hashResult
   },
   methods: {
     initCharts () {
@@ -71,7 +77,7 @@ export default {
 
       let that = this
       this.chartBeijingMap.on('click', function (params) {
-        console.log('chartBeijingMap click', params)
+        // console.log('chartBeijingMap click', params)
         that.getData(params.name.substring(0, params.name.length - 1))
       })
     },
@@ -263,16 +269,18 @@ export default {
         that.getData('')
       }
       let onmessage = function (event) {
-        // console.log('onmessage', event)
+        console.log('onmessage', event)
         let res = JSON.parse(event.data)
         try {
-          let data = JSON.parse(res.data)
-          let result = JSON.parse(data.result)
           if (res.action === 'onExecuteResult') {
+            let data = JSON.parse(res.data)
+            let result = JSON.parse(data.result)
             that.setCharts(result)
+          } else if (res.action === 'onHashResult') {
+            that.hashResult = res.data
           }
         } catch (e) {
-          console.log('出现错误！可能原因：合约号不存在')
+          console.log('出现错误！', e)
         }
       }
       let wssocket = createWssocket(this.$global.wsAddress, onopen, onmessage)
@@ -284,6 +292,7 @@ export default {
       let request = {}
       request.action = 'executeContract'
       request.contractID = this.$global.contractID
+      request.requestID = new Date().getTime()
       request.arg = JSON.stringify({
         action: 'connectDBAndQuery',
         arg: JSON.stringify({

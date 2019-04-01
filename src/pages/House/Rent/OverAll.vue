@@ -7,6 +7,7 @@
           <button type="button" class="btn btn-default" :class="{'active': mapType ==='num' }" @click="mapType = 'num'">数量</button>
           <button type="button" class="btn btn-default" :class="{'active': mapType ==='avgPrice' }" @click="mapType = 'avgPrice'">均价</button>
         </div>
+        <hash-result :hash="hashResult" :top="true"></hash-result>
       </div>
       <!--<div id='unit-price-bar' class='chart-container has-background'></div>-->
       <div id='line' class='chart-container has-background'></div>
@@ -37,6 +38,7 @@ import typeBarOption from './typeBarOption'
 import sizeBarOption from './sizeBarOption'
 import unitPriceBarOption from './unitPriceBarOption'
 import totalPriceBarOption from './totalPriceBarOption'
+import hashResult from '@/components/hashResult'
 
 export default {
   name: 'House',
@@ -59,7 +61,8 @@ export default {
       mapType: 'num',
       current: 0,
       tmpData: defaultData,
-      district: '北京市'
+      district: '北京市',
+      hashResult: ''
     }
   },
   watch: {
@@ -67,6 +70,9 @@ export default {
       console.log('type change')
       this.setCharts(this.tmpData)
     }
+  },
+  components: {
+    hashResult
   },
   methods: {
     // 图表初始化
@@ -102,7 +108,7 @@ export default {
 
       let that = this
       this.chartBeijingMap.on('click', function (params) {
-        console.log('chartBeijingMap click', params)
+        // console.log('chartBeijingMap click', params)
         that.district = params.name
         that.getData(params.name.substring(0, params.name.length - 1))
       })
@@ -180,9 +186,9 @@ export default {
       mapOption.option.series = [mapOption.seriesOption_1, mapOption.seriesOption_2, mapOption.seriesOption_3]
       this.chartBeijingMap.setOption(mapOption.option)
       if (this.mapType === 'num') {
-        this.chartBeijingMap.setOption({visualMap: {min: 0, max: 10000}})
+        this.chartBeijingMap.setOption({visualMap: {min: 0, max: 5000}})
       } else {
-        this.chartBeijingMap.setOption({visualMap: {min: 0, max: 100000}})
+        this.chartBeijingMap.setOption({visualMap: {min: 0, max: 12000}})
       }
       this.chartBeijingMap.hideLoading()
     },
@@ -373,18 +379,19 @@ export default {
         that.getData('')
       }
       let onmessage = function (event) {
-        // console.log('onmessage', event)
+        console.log('onmessage', event)
         let res = JSON.parse(event.data)
         try {
-          let data = JSON.parse(res.data)
-          let result = JSON.parse(data.result)
-          that.tmpData = result
           if (res.action === 'onExecuteResult') {
+            let data = JSON.parse(res.data)
+            let result = JSON.parse(data.result)
+            that.tmpData = result
             that.setCharts(result)
+          } else if (res.action === 'onHashResult') {
+            that.hashResult = res.data
           }
         } catch (e) {
-          console.log('ERROR', e)
-          console.log('出现错误！可能原因：合约号不存在')
+          console.log('出现错误！', e)
         }
       }
       let wssocket = createWssocket(this.$global.wsAddress, onopen, onmessage)
@@ -396,6 +403,7 @@ export default {
       let request = {}
       request.action = 'executeContract'
       request.contractID = this.$global.contractID
+      request.requestID = new Date().getTime()
       request.arg = JSON.stringify({
         action: 'connectDBAndQueryZufang',
         arg: JSON.stringify({
