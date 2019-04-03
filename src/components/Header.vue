@@ -34,6 +34,7 @@
         <el-menu-item-group>
           <span slot="title">住房</span>
           <el-menu-item index="house">在售二手房</el-menu-item>
+          <el-menu-item index="house-sold">二手房成交</el-menu-item>
           <el-menu-item index="rent">租房</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
