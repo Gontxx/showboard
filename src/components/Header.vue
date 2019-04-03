@@ -4,19 +4,20 @@
       class="el-menu-vertical-demo"
       background-color="#262626"
       text-color="#ffffff"
-      active-text-color="#8DB6CD"
       @select="handleSelect"
       :collapse="true">
       <div class="nav-item">
         <p class="link-icon nav-title">导航</p>
       </div>
+      <div class="divide-bar"></div>
       <el-submenu index="takeout">
         <template slot="title">
           <i class="fa fa-truck fa-lg fa-icon"></i>
           <span slot="title">外卖</span>
         </template>
         <el-menu-item-group>
-          <span slot="title">外卖</span>
+          <span slot="title" class="sub-title">外卖</span>
+          <div class="divide-bar"></div>
           <el-menu-item index="/">总览</el-menu-item>
           <el-menu-item index="takeout-rate">卫生等级</el-menu-item>
           <el-menu-item index="guilin">桂林实例</el-menu-item>
@@ -32,7 +33,8 @@
           <span slot="title">住房</span>
         </template>
         <el-menu-item-group>
-          <span slot="title">住房</span>
+          <span slot="title" class="sub-title">住房</span>
+          <div class="divide-bar"></div>
           <el-menu-item index="house">在售二手房</el-menu-item>
           <el-menu-item index="house-sold">二手房成交</el-menu-item>
           <el-menu-item index="rent">租房</el-menu-item>
@@ -82,8 +84,14 @@ export default {
   .el-menu-vertical-demo {
     width: 80px;
     height: 100vh;
+    border-right: none;
   }
   .fa-icon {
     color: #FFFFFF;
+  }
+  .sub-title {
+    color: #8cc5ff;
+    font-size: 16px;
+    font-style: italic;
   }
 </style>

@@ -82,12 +82,12 @@ html, body {
 }
 
 .divide-bar {
-    margin: 20px 10px 20px 10px ;
+    margin: 10px 10px 0 10px ;
     border-bottom: 1px solid #ffffff;
 }
 
 .nav-title {
-    color: #8DB6CD;
+    color: #8cc5ff;
     font-style: italic;
 }
 
