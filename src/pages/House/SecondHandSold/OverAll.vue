@@ -17,6 +17,7 @@
       <div id='store-bar' class='chart-container has-background'></div>
       <div id='type-bar' class='chart-container has-background'></div>
       <div id='size-bar' class='chart-container has-background'></div>
+      <div id='age-bar' class='chart-container has-background'></div>
     </div>
   </div>
 </template>
@@ -58,6 +59,8 @@ export default {
       unitPriceBarChart: null,
       totalPriceBarContainer: null,
       totalPriceBarChart: null,
+      ageBarContainer: null,
+      ageBarChart: null,
       mapType: 'num',
       current: 0,
       tmpData: defaultData,
@@ -99,12 +102,11 @@ export default {
       this.totalPriceBarContainer = document.getElementById('total-price-bar')
       this.totalPriceBarChart = echarts.init(this.totalPriceBarContainer)
 
+      this.ageBarContainer = document.getElementById('age-bar')
+      this.ageBarChart = echarts.init(this.ageBarContainer)
+
       this.resizeChart()
       this.showLoading()
-      this.typeBarChart.showLoading()
-      this.sizeBarChart.showLoading()
-      this.unitPriceBarChart.showLoading()
-      this.totalPriceBarChart.showLoading()
 
       let that = this
       this.chartBeijingMap.on('click', function (params) {
@@ -116,28 +118,31 @@ export default {
     showLoading () {
       this.lineChart.showLoading()
       this.storeBarChart.showLoading()
-      // this.typeBarChart.showLoading()
-      // this.sizeBarChart.showLoading()
-      // this.unitPriceBarChart.showLoading()
-      // this.totalPriceBarChart.showLoading()
+      this.typeBarChart.showLoading()
+      this.sizeBarChart.showLoading()
+      this.unitPriceBarChart.showLoading()
+      this.totalPriceBarChart.showLoading()
+      this.ageBarChart.showLoading()
     },
     resizeChart () {
       let ww = window.innerWidth
       let hh = window.innerHeight
-      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40 - 20), (hh * 0.7 - 16))
+      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40 - 20), (hh * 0.9 - 18))
       this.chartBeijingMap.resize()
-      this.resizeContainer(this.lineContainer, (ww * 0.5 - 40 - 20), (hh * 0.35 - 12))
+      this.resizeContainer(this.lineContainer, (ww * 0.5 - 40 - 20), (hh * 0.3 - 12))
       this.lineChart.resize()
-      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.35 - 12))
+      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.3 - 12))
       this.storeBarChart.resize()
-      this.resizeContainer(this.typeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
+      this.resizeContainer(this.typeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.3 - 12))
       this.typeBarChart.resize()
-      this.resizeContainer(this.sizeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
+      this.resizeContainer(this.sizeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.35 - 12))
       this.sizeBarChart.resize()
-      this.resizeContainer(this.unitPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
+      this.resizeContainer(this.unitPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.35 - 12))
       this.unitPriceBarChart.resize()
-      this.resizeContainer(this.totalPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
+      this.resizeContainer(this.totalPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.35 - 12))
       this.totalPriceBarChart.resize()
+      this.resizeContainer(this.ageBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.35 - 12))
+      this.ageBarChart.resize()
     },
     resizeContainer (container, width, height) {
       container.style.width = width + 'px'
@@ -250,7 +255,7 @@ export default {
         xdata.push(value.name)
       })
 
-      typeBarOption.option.title.text = '各区房型分布'
+      typeBarOption.option.title.text = (this.district === '' ? '各区' : this.district + '各商圈') + '房型分布'
       typeBarOption.option.legend.data = ['一居', '二居', '三居', '四居及以上']
       typeBarOption.xAxisOption.data = xdata
       typeBarOption.option.xAxis = typeBarOption.xAxisOption
@@ -279,7 +284,7 @@ export default {
       })
       // console.log(xdata)
 
-      sizeBarOption.option.title.text = '各区房屋面积分布'
+      sizeBarOption.option.title.text = (this.district === '' ? '各区' : this.district + '各商圈') + '房屋面积分布'
       sizeBarOption.option.legend.data = ['50m2以下', '50-80m2', '80-110m2', '110-150m2', '150m2以上']
       sizeBarOption.xAxisOption.data = xdata
       sizeBarOption.option.xAxis = sizeBarOption.xAxisOption
@@ -322,7 +327,7 @@ export default {
       })
       // console.log(xdata)
 
-      unitPriceBarOption.option.title.text = '各区房屋单价分布'
+      unitPriceBarOption.option.title.text = (this.district === '' ? '各区' : this.district + '各商圈') + '房屋单价分布'
       unitPriceBarOption.option.legend.data = ['<1w', '1-2w', '2-3w', '3-4w', '4-5w', '5-6w', '6-7w', '7-8w', '8-9w', '9-10w', '>10w']
       unitPriceBarOption.xAxisOption.data = xdata
       unitPriceBarOption.option.xAxis = unitPriceBarOption.xAxisOption
@@ -359,7 +364,7 @@ export default {
         xdata.push(value.name)
       })
 
-      totalPriceBarOption.option.title.text = '各区房屋总价分布'
+      totalPriceBarOption.option.title.text = (this.district === '' ? '各区' : this.district + '各商圈') + '房屋总价分布'
       totalPriceBarOption.option.legend.data = ['200万以下', '200-300万', '300-500万', '500-700万', '700-1000万', '1000万以上']
       totalPriceBarOption.xAxisOption.data = xdata
       totalPriceBarOption.option.xAxis = totalPriceBarOption.xAxisOption
@@ -381,17 +386,17 @@ export default {
       let onmessage = function (event) {
         console.log('onmessage', event)
         let res = JSON.parse(event.data)
-        try {
-          if (res.action === 'onExecuteResult') {
+        if (res.action === 'onExecuteResult') {
+          try {
             let data = JSON.parse(res.data)
             let result = JSON.parse(data.result)
             that.tmpData = result
             that.setCharts(result)
-          } else if (res.action === 'onHashResult') {
-            that.hashResult = res.data
+          } catch (e) {
+            console.log('出现错误！', e)
           }
-        } catch (e) {
-          console.log('出现错误！', e)
+        } else if (res.action === 'onHashResult') {
+          that.hashResult = res.data
         }
       }
       let wssocket = createWssocket(this.$global.wsAddress, onopen, onmessage)
@@ -405,9 +410,9 @@ export default {
       request.contractID = this.$global.contractID
       request.requestID = new Date().getTime()
       request.arg = JSON.stringify({
-        action: 'connectDBAndQueryHouse',
+        action: 'connectDBAndQueryChengjiao',
         arg: JSON.stringify({
-          type: 'house',
+          type: 'chengjiao',
           detail: 'overall',
           district: district
         })
