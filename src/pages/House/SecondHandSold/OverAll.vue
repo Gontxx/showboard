@@ -39,6 +39,7 @@ import typeBarOption from './typeBarOption'
 import sizeBarOption from './sizeBarOption'
 import unitPriceBarOption from './unitPriceBarOption'
 import totalPriceBarOption from './totalPriceBarOption'
+import ageBarOption from './ageBarOption'
 import hashResult from '@/components/hashResult'
 
 export default {
@@ -171,11 +172,14 @@ export default {
       this.setSizeBarOption(data.fig4.map(item => {
         return {name: item.name, value: item.value['areaSize']}
       }))
-      this.setUnitPriceBarOption(data.fig4.map(item => {
-        return {name: item.name, value: item.value['unitPrice']}
-      }))
+      // this.setUnitPriceBarOption(data.fig4.map(item => {
+      //   return {name: item.name, value: item.value['price']}
+      // }))
       this.setTotalPriceBarOption(data.fig4.map(item => {
-        return {name: item.name, value: item.value['totalPrice']}
+        return {name: item.name, value: item.value['price']}
+      }))
+      this.setAgeBarOption(data.fig4.map(item => {
+        return {name: item.name, value: item.value['age']}
       }))
     },
     // 根据配置设置图表内容
@@ -376,6 +380,39 @@ export default {
       totalPriceBarOption.option.series[5].data = data6
       this.totalPriceBarChart.setOption(totalPriceBarOption.option)
       this.totalPriceBarChart.hideLoading()
+    },
+    setAgeBarOption (data) {
+      var data1 = []
+      var data2 = []
+      var data3 = []
+      var data4 = []
+      var data5 = []
+      var data6 = []
+      var xdata = []
+
+      data.forEach(function (value, index, array) {
+        data1.push(value.value[0].value)
+        data2.push(value.value[1].value)
+        data3.push(value.value[2].value)
+        data4.push(value.value[3].value)
+        data5.push(value.value[4].value)
+        data6.push(value.value[5].value)
+        xdata.push(value.name)
+      })
+      // console.log(xdata)
+
+      ageBarOption.option.title.text = (this.district === '' ? '各区' : this.district + '各商圈') + '房屋房龄分布'
+      ageBarOption.option.legend.data = ['<5年', '5-10年', '10-15年', '15-20年', '20-30年', '>30年']
+      ageBarOption.xAxisOption.data = xdata
+      ageBarOption.option.xAxis = ageBarOption.xAxisOption
+      ageBarOption.option.series[0].data = data1
+      ageBarOption.option.series[1].data = data2
+      ageBarOption.option.series[2].data = data3
+      ageBarOption.option.series[3].data = data4
+      ageBarOption.option.series[4].data = data5
+      ageBarOption.option.series[5].data = data6
+      this.ageBarChart.setOption(ageBarOption.option)
+      this.ageBarChart.hideLoading()
     },
     initWSocket () {
       let that = this
