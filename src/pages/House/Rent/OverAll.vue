@@ -9,7 +9,6 @@
         </div>
         <hash-result :hash="hashResult" :top="true"></hash-result>
       </div>
-      <!--<div id='unit-price-bar' class='chart-container has-background'></div>-->
       <div id='line' class='chart-container has-background'></div>
       <div id='store-bar' class='chart-container has-background'></div>
     </div>
@@ -36,7 +35,6 @@ import lineOption from './lineOption'
 import barOption from './barOption'
 import typeBarOption from './typeBarOption'
 import sizeBarOption from './sizeBarOption'
-import unitPriceBarOption from './unitPriceBarOption'
 import totalPriceBarOption from './totalPriceBarOption'
 import hashResult from '@/components/hashResult'
 
@@ -54,8 +52,6 @@ export default {
       typeBarChart: null,
       sizeBarContainer: null,
       sizeBarChart: null,
-      unitPriceBarContainer: null,
-      unitPriceBarChart: null,
       totalPriceBarContainer: null,
       totalPriceBarChart: null,
       mapType: 'num',
@@ -93,18 +89,11 @@ export default {
       this.sizeBarContainer = document.getElementById('size-bar')
       this.sizeBarChart = echarts.init(this.sizeBarContainer)
 
-      // this.unitPriceBarContainer = document.getElementById('unit-price-bar')
-      // this.unitPriceBarChart = echarts.init(this.unitPriceBarContainer)
-
       this.totalPriceBarContainer = document.getElementById('total-price-bar')
       this.totalPriceBarChart = echarts.init(this.totalPriceBarContainer)
 
       this.resizeChart()
       this.showLoading()
-      this.typeBarChart.showLoading()
-      this.sizeBarChart.showLoading()
-      // this.unitPriceBarChart.showLoading()
-      this.totalPriceBarChart.showLoading()
 
       let that = this
       this.chartBeijingMap.on('click', function (params) {
@@ -116,10 +105,9 @@ export default {
     showLoading () {
       this.lineChart.showLoading()
       this.storeBarChart.showLoading()
-      // this.typeBarChart.showLoading()
-      // this.sizeBarChart.showLoading()
-      // this.unitPriceBarChart.showLoading()
-      // this.totalPriceBarChart.showLoading()
+      this.typeBarChart.showLoading()
+      this.sizeBarChart.showLoading()
+      this.totalPriceBarChart.showLoading()
     },
     resizeChart () {
       let ww = window.innerWidth
@@ -134,8 +122,6 @@ export default {
       this.typeBarChart.resize()
       this.resizeContainer(this.sizeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
       this.sizeBarChart.resize()
-      // this.resizeContainer(this.unitPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
-      // this.unitPriceBarChart.resize()
       this.resizeContainer(this.totalPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
       this.totalPriceBarChart.resize()
     },
@@ -166,9 +152,6 @@ export default {
       this.setSizeBarOption(data.fig4.map(item => {
         return {name: item.name, value: item.value['areaSize']}
       }), this.district === '北京市' ? '各区房屋面积分布' : this.district + '各商圈房屋面积布')
-      // this.setUnitPriceBarOption(data.fig4.map(item => {
-      //   return {name: item.name, value: item.value['unitPrice']}
-      // }))
       this.setTotalPriceBarOption(data.fig4.map(item => {
         return {name: item.name, value: item.value['price']}
       }), this.district === '北京市' ? '各区房屋月租分布' : this.district + '各商圈房屋月租分布')
@@ -290,55 +273,6 @@ export default {
       sizeBarOption.option.series[4].data = data5
       this.sizeBarChart.setOption(sizeBarOption.option)
       this.sizeBarChart.hideLoading()
-    },
-
-    setUnitPriceBarOption (data, district) {
-      var data1 = []
-      var data2 = []
-      var data3 = []
-      var data4 = []
-      var data5 = []
-      var data6 = []
-      var data7 = []
-      var data8 = []
-      var data9 = []
-      var data10 = []
-      var data11 = []
-      var xdata = []
-
-      data.forEach(function (value, index, array) {
-        data1.push(value.value[0].value)
-        data2.push(value.value[1].value)
-        data3.push(value.value[2].value)
-        data4.push(value.value[3].value)
-        data5.push(value.value[4].value)
-        data6.push(value.value[5].value)
-        data7.push(value.value[6].value)
-        data8.push(value.value[7].value)
-        data9.push(value.value[8].value)
-        data10.push(value.value[9].value)
-        data11.push(value.value[10].value)
-        xdata.push(value.name)
-      })
-      // console.log(xdata)
-
-      unitPriceBarOption.option.title.text = district + '各商圈房屋单价分布'
-      unitPriceBarOption.option.legend.data = ['<1w', '1-2w', '2-3w', '3-4w', '4-5w', '5-6w', '6-7w', '7-8w', '8-9w', '9-10w', '>10w']
-      unitPriceBarOption.xAxisOption.data = xdata
-      unitPriceBarOption.option.xAxis = unitPriceBarOption.xAxisOption
-      unitPriceBarOption.option.series[0].data = data1
-      unitPriceBarOption.option.series[1].data = data2
-      unitPriceBarOption.option.series[2].data = data3
-      unitPriceBarOption.option.series[3].data = data4
-      unitPriceBarOption.option.series[4].data = data5
-      unitPriceBarOption.option.series[5].data = data6
-      unitPriceBarOption.option.series[6].data = data7
-      unitPriceBarOption.option.series[7].data = data8
-      unitPriceBarOption.option.series[8].data = data9
-      unitPriceBarOption.option.series[9].data = data10
-      unitPriceBarOption.option.series[10].data = data11
-      this.unitPriceBarChart.setOption(unitPriceBarOption.option)
-      this.unitPriceBarChart.hideLoading()
     },
     setTotalPriceBarOption (data, title) {
       var data1 = []
