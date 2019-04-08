@@ -13,7 +13,11 @@ export default {
       trigger: 'item',
       formatter: function (params) {
         if (params.seriesType === 'map') {
-          return params.data.name + '：' + params.data.value
+          if (params.data.mapType === 'num') {
+            return params.data.name + '：' + params.data.value
+          } else {
+            return params.data.name + '：' + params.data.value + '元'
+          }
         }
       }
     },

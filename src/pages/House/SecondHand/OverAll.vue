@@ -150,7 +150,7 @@ export default {
     setCharts (data) {
       console.log('setCharts', data)
       this.setBeijingMapOption(data.fig1.map(item => {
-        return {name: item.name, value: item.value[this.mapType]}
+        return {name: item.name, value: item.value[this.mapType], mapType: this.mapType}
       }))
       this.setlineOption(data.fig2, this.district + '房价分布图')
       var namedata = []
