@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Takeout from '@/pages/Takeout/OverAll/OverAll'
 import TakeoutRate from '@/pages/Takeout/Rate/Rate'
+import TakeoutTianjin from '@/pages/Takeout/Tianjin/OverAll'
+import TakeoutRateTianjin from '@/pages/Takeout/TianjinRate/Rate'
 import TakeoutGuilin from '@/pages/Takeout/Guilin/Guilin'
 import Hotel from '@/pages/Hotel/OverAll/OverAll'
 import SecondHand from '@/pages/House/SecondHand/OverAll'
@@ -21,6 +23,16 @@ export default new Router({
       path: '/takeout-rate',
       name: 'TakeoutRate',
       component: TakeoutRate
+    },
+    {
+      path: '/takeout-tianjin',
+      name: 'TakeoutTianjin',
+      component: TakeoutTianjin
+    },
+    {
+      path: '/takeout-rate-tianjin',
+      name: 'TakeoutRateTianjin',
+      component: TakeoutRateTianjin
     },
     {
       path: '/guilin',
