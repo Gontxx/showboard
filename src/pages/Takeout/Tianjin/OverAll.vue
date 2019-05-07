@@ -294,7 +294,7 @@ export default {
       request.contractID = this.$global.contractID
       request.requestID = new Date().getTime()
       request.arg = JSON.stringify({
-        action: 'connectDBAndQuery',
+        action: 'connectDBAndQueryTianjin',
         arg: JSON.stringify({
           type: 'takeout',
           detail: 'overall',
