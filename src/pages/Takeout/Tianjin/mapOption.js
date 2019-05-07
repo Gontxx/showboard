@@ -1,7 +1,7 @@
 export default {
   option: {
     title: {
-      text: '北京市外卖热度地图',
+      text: '天津市外卖热度地图',
       x: 'center',
       y: '3%',
       textStyle: {
@@ -39,7 +39,7 @@ export default {
   },
   geoOption: {
     show: true,
-    map: 'beijing',
+    map: 'tianjin',
     label: {
       normal: {
         show: false
@@ -89,7 +89,7 @@ export default {
   },
   seriesOption_2: {
     type: 'map',
-    map: 'beijing',
+    map: 'tianjin',
     geoIndex: 0,
     aspectScale: 0.75, // 长宽比
     showLegendSymbol: false, // 存在legend时显示

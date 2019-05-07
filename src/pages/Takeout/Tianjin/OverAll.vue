@@ -21,8 +21,8 @@ import 'echarts/lib/chart/scatter'
 import { deepCopy } from '@/assets/util'
 import { createWssocket } from '@/assets/createWS'
 import hashResult from '@/components/hashResult'
-import beijingJson from '@/components/beijing1.json'
-import beijingOptions from '@/components/beijingOptions'
+import tianjinJson from '@/components/tianjin.json'
+import tianjinOptions from '@/components/tianjinOptions'
 import defaultData from './defaultData'
 import mapOption from './mapOption'
 import pieOption from './pieOption'
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     initCharts () {
-      echarts.registerMap('beijing', beijingJson)
+      echarts.registerMap('tianjin', tianjinJson)
       this.beijingMapContainer = document.getElementById('beijing-map')
       this.resizeBeijingMapContainer()
       this.chartBeijingMap = echarts.init(this.beijingMapContainer)
@@ -113,7 +113,7 @@ export default {
     convertData (data) {
       let res = []
       for (let i = 0; i < data.length; i++) {
-        let geoCoord = beijingOptions.geoCoordMap[data[i].name]
+        let geoCoord = tianjinOptions.geoCoordMap[data[i].name]
         if (geoCoord) {
           res.push({
             name: data[i].name,
