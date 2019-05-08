@@ -61,28 +61,25 @@ export default {
     initCharts () {
       echarts.registerMap('beijing', beijingJson)
       this.beijingMapContainer = document.getElementById('beijing-map')
-      this.resizeBeijingMapContainer()
       this.chartBeijingMap = echarts.init(this.beijingMapContainer)
 
       this.boxPlotRateOrderContainer = document.getElementById('box-plot-rate-order')
-      this.resizeboxPlotRateOrderContainer()
       this.boxPlotRateOrderChart = echarts.init(this.boxPlotRateOrderContainer)
 
       this.boxPlotRateMoneyContainer = document.getElementById('box-plot-rate-money')
-      this.resizeboxPlotRateMoneyContainer()
       this.boxPlotRateMoneyChart = echarts.init(this.boxPlotRateMoneyContainer)
 
       this.doublePieMoneyContainer = document.getElementById('double-pie-money')
-      this.resizeDoublePieContainer(this.doublePieMoneyContainer)
       this.doublePieMoneyChart = echarts.init(this.doublePieMoneyContainer)
 
       this.doublePieOrderContainer = document.getElementById('double-pie-order')
-      this.resizeDoublePieContainer(this.doublePieOrderContainer)
       this.doublePieOrderChart = echarts.init(this.doublePieOrderContainer)
 
       this.doublePieShopContainer = document.getElementById('double-pie-shop')
-      this.resizeDoublePieContainer(this.doublePieShopContainer)
       this.doublePieShopChart = echarts.init(this.doublePieShopContainer)
+
+      this.resizeChart()
+      this.showLoading()
 
       let that = this
       this.chartBeijingMap.on('click', function (params) {
@@ -97,6 +94,26 @@ export default {
       this.doublePieOrderChart.showLoading()
       this.doublePieShopChart.showLoading()
     },
+    resizeChart () {
+      let ww = window.innerWidth
+      let hh = window.innerHeight
+      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40), (hh - 20))
+      this.chartBeijingMap.resize()
+      this.resizeContainer(this.boxPlotRateOrderContainer, (ww * 0.5 - 20), (hh * 0.35 - 12))
+      this.boxPlotRateOrderChart.resize()
+      this.resizeContainer(this.boxPlotRateMoneyContainer, (ww * 0.5 - 20), (hh * 0.35 - 12))
+      this.boxPlotRateMoneyChart.resize()
+      this.resizeContainer(this.doublePieMoneyContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.3 - 12))
+      this.doublePieMoneyChart.resize()
+      this.resizeContainer(this.doublePieOrderContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.3 - 12))
+      this.doublePieOrderChart.resize()
+      this.resizeContainer(this.doublePieShopContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.3 - 12))
+      this.doublePieShopChart.resize()
+    },
+    resizeContainer (container, width, height) {
+      container.style.width = width + 'px'
+      container.style.height = height + 'px'
+    },
     setCharts (data) {
       console.log('setCharts', data)
       this.setBeijingMapOption(data.fig1)
@@ -106,10 +123,6 @@ export default {
       this.setDoublePieOption(this.doublePieOrderChart, data.district + '订单数', data.fig4.orderNum_3, data.fig4.orderNum_9)
       this.setDoublePieOption(this.doublePieShopChart, data.district + '店铺数', data.fig4.shopNum_3, data.fig4.shopNum_9)
       this.autoTip()
-    },
-    resizeBeijingMapContainer () {
-      this.beijingMapContainer.style.width = (window.innerWidth * 0.5 - 40) + 'px'
-      this.beijingMapContainer.style.height = (window.innerHeight - 20) + 'px'
     },
     setBeijingMapOption (data) {
       this.chartBeijingMap.showLoading()
@@ -150,10 +163,6 @@ export default {
       }
       return res
     },
-    resizeboxPlotRateOrderContainer () {
-      this.boxPlotRateOrderContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.boxPlotRateOrderContainer.style.height = (window.innerHeight * 0.35 - 12) + 'px'
-    },
     setboxPlotRateOrderOption (orderdata, namedata, title) {
       let data = echarts.dataTool.prepareBoxplotData(orderdata)
       plotOrderOption.xAxisOption.data = namedata
@@ -164,10 +173,6 @@ export default {
       this.boxPlotRateOrderChart.setOption(plotOrderOption.option)
       this.boxPlotRateOrderChart.hideLoading()
     },
-    resizeboxPlotRateMoneyContainer () {
-      this.boxPlotRateMoneyContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.boxPlotRateMoneyContainer.style.height = (window.innerHeight * 0.35 - 12) + 'px'
-    },
     setboxPlotRateMoneyOption (saledata, namedata, title) {
       let data = echarts.dataTool.prepareBoxplotData(saledata)
       plotMoneyOption.xAxisOption.data = namedata
@@ -177,10 +182,6 @@ export default {
       plotMoneyOption.option.title.text = title
       this.boxPlotRateMoneyChart.setOption(plotMoneyOption.option)
       this.boxPlotRateMoneyChart.hideLoading()
-    },
-    resizeDoublePieContainer (container) {
-      container.style.width = Math.floor((window.innerWidth * 0.5 - 20 - 16) / 3.0) + 'px'
-      container.style.height = (window.innerHeight * 0.3 - 12) + 'px'
     },
     setDoublePieOption (chart, title, data3, data9) {
       pieOption.seriesOption_1.name = title
@@ -265,18 +266,7 @@ export default {
     let that = this
     window.onresize = function () {
       // 重置容器高宽
-      that.resizeBeijingMapContainer()
-      that.chartBeijingMap.resize()
-      that.resizeboxPlotRateOrderContainer()
-      that.boxPlotRateOrderChart.resize()
-      that.resizeboxPlotRateMoneyContainer()
-      that.boxPlotRateMoneyChart.resize()
-      that.resizeDoublePieContainer(that.doublePieMoneyContainer)
-      that.doublePieMoneyChart.resize()
-      that.resizeDoublePieContainer(that.doublePieShopContainer)
-      that.doublePieShopChart.resize()
-      that.resizeDoublePieContainer(that.doublePieOrderContainer)
-      that.doublePieOrderChart.resize()
+      that.resizeChart()
     }
   }
 }

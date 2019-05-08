@@ -357,8 +357,6 @@ export default {
     this.initCharts()
     // 建立webSocket连接
     this.initWSocket()
-    // 暂时使用默认数据
-    // this.setCharts(this.tmpData)
     let that = this
     window.onresize = function () {
       // 重置容器高宽

@@ -57,23 +57,20 @@ export default {
     initCharts () {
       echarts.registerMap('beijing', beijingJson)
       this.beijingMapContainer = document.getElementById('beijing-map')
-      this.resizeBeijingMapContainer()
       this.chartBeijingMap = echarts.init(this.beijingMapContainer)
 
       this.typePieContainer = document.getElementById('type-pie')
-      this.resizeTypePieContainer()
       this.typePieChart = echarts.init(this.typePieContainer)
 
       this.storeBarContainer = document.getElementById('store-bar')
-      this.resizeStoreBarContainer()
       this.storeBarChart = echarts.init(this.storeBarContainer)
 
       this.beijingScatterContainer = document.getElementById('beijing-scatter')
-      this.resizeBeijingScatterContainer()
       this.beijingScatterChart = echarts.init(this.beijingScatterContainer)
-      this.beijingScatterChart.showLoading()
 
+      this.resizeChart()
       this.showLoading()
+      this.beijingScatterChart.showLoading()
 
       let that = this
       this.chartBeijingMap.on('click', function (params) {
@@ -85,6 +82,22 @@ export default {
       this.typePieChart.showLoading()
       this.storeBarChart.showLoading()
     },
+    resizeChart () {
+      let ww = window.innerWidth
+      let hh = window.innerHeight
+      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40), (hh - 20))
+      this.chartBeijingMap.resize()
+      this.resizeContainer(this.typePieContainer, (ww * 0.5 - 20), (hh * 0.38 - 12))
+      this.typePieChart.resize()
+      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 20), (hh * 0.32 - 12))
+      this.storeBarChart.resize()
+      this.resizeContainer(this.beijingScatterContainer, (ww * 0.5 - 20), (hh * 0.3 - 12))
+      this.beijingScatterChart.resize()
+    },
+    resizeContainer (container, width, height) {
+      container.style.width = width + 'px'
+      container.style.height = height + 'px'
+    },
     setCharts (data) {
       console.log('setCharts', data)
       this.setBeijingMapOption(data.fig1)
@@ -92,10 +105,6 @@ export default {
       this.setStoreBarOption(data.fig3.nameData, data.fig3.lineData, data.district + '单门店成交额前15名')
       this.setBeijingScatterOption(data.fig1)
       this.autoTip()
-    },
-    resizeBeijingMapContainer () {
-      this.beijingMapContainer.style.width = (window.innerWidth * 0.5 - 40) + 'px'
-      this.beijingMapContainer.style.height = (window.innerHeight - 20) + 'px'
     },
     setBeijingMapOption (data) {
       this.chartBeijingMap.showLoading()
@@ -123,10 +132,6 @@ export default {
       }
       return res
     },
-    resizeTypePieContainer () {
-      this.typePieContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.typePieContainer.style.height = (window.innerHeight * 0.38 - 12) + 'px'
-    },
     setTypePieOption (data, title) {
       pieOption.legendOption.data = [data[0].name]
       pieOption.legendOption.formatter = function (name) {
@@ -151,10 +156,6 @@ export default {
       this.typePieChart.setOption(pieOption.option)
       this.typePieChart.hideLoading()
     },
-    resizeStoreBarContainer () {
-      this.storeBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.storeBarContainer.style.height = (window.innerHeight * 0.32 - 12) + 'px'
-    },
     setStoreBarOption (nameData, lineData, title) {
       barOption.yAxisOption.data = nameData
       barOption.seriesOption_1.data = lineData
@@ -164,10 +165,6 @@ export default {
       barOption.option.title.text = title
       this.storeBarChart.setOption(barOption.option)
       this.storeBarChart.hideLoading()
-    },
-    resizeBeijingScatterContainer () {
-      this.beijingScatterContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.beijingScatterContainer.style.height = (window.innerHeight * 0.3 - 12) + 'px'
     },
     setBeijingScatterOption (data) {
       scatterOption.legendOption.data = data.map(item => {
@@ -311,14 +308,7 @@ export default {
     let that = this
     window.onresize = function () {
       // 重置容器高宽
-      that.resizeBeijingMapContainer()
-      that.chartBeijingMap.resize()
-      that.resizeTypePieContainer()
-      that.typePieChart.resize()
-      that.resizeStoreBarContainer()
-      that.storeBarChart.resize()
-      that.resizeBeijingScatterContainer()
-      that.beijingScatterChart.resize()
+      that.resizeChart()
     }
   }
 }
