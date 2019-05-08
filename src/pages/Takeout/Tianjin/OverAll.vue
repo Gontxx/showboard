@@ -5,7 +5,7 @@
       <hash-result :hash="hashResult"></hash-result>
     </div>
     <div class='right-column'>
-      <div id='type-pie' class='chart-container has-background'></div>
+<!--      <div id='type-pie' class='chart-container has-background'></div>-->
       <div id='store-bar' class='chart-container has-background'></div>
       <div id='beijing-scatter' class='chart-container has-background'></div>
     </div>
@@ -60,9 +60,9 @@ export default {
       this.resizeBeijingMapContainer()
       this.chartBeijingMap = echarts.init(this.beijingMapContainer)
 
-      this.typePieContainer = document.getElementById('type-pie')
-      this.resizeTypePieContainer()
-      this.typePieChart = echarts.init(this.typePieContainer)
+      // this.typePieContainer = document.getElementById('type-pie')
+      // this.resizeTypePieContainer()
+      // this.typePieChart = echarts.init(this.typePieContainer)
 
       this.storeBarContainer = document.getElementById('store-bar')
       this.resizeStoreBarContainer()
@@ -82,13 +82,13 @@ export default {
       })
     },
     showLoading () {
-      this.typePieChart.showLoading()
+      // this.typePieChart.showLoading()
       this.storeBarChart.showLoading()
     },
     setCharts (data) {
       console.log('setCharts', data)
       this.setBeijingMapOption(data.fig1)
-      this.setTypePieOption(data.fig2, data.district + '外卖标签分类')
+      // this.setTypePieOption(data.fig2, data.district + '外卖标签分类')
       this.setStoreBarOption(data.fig3.nameData, data.fig3.lineData, data.district + '单门店成交额前15名')
       this.setBeijingScatterOption(data.fig1)
       this.autoTip()
@@ -153,7 +153,7 @@ export default {
     },
     resizeStoreBarContainer () {
       this.storeBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.storeBarContainer.style.height = (window.innerHeight * 0.32 - 12) + 'px'
+      this.storeBarContainer.style.height = (window.innerHeight * 0.5 - 12) + 'px'
     },
     setStoreBarOption (nameData, lineData, title) {
       barOption.yAxisOption.data = nameData
@@ -167,7 +167,7 @@ export default {
     },
     resizeBeijingScatterContainer () {
       this.beijingScatterContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.beijingScatterContainer.style.height = (window.innerHeight * 0.3 - 12) + 'px'
+      this.beijingScatterContainer.style.height = (window.innerHeight * 0.5 - 12) + 'px'
     },
     setBeijingScatterOption (data) {
       scatterOption.legendOption.data = data.map(item => {

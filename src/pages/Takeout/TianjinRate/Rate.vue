@@ -102,9 +102,9 @@ export default {
       this.setBeijingMapOption(data.fig1)
       this.setboxPlotRateOrderOption(data.fig2.map(item => item.value), data.fig2.map(item => item.name), data.district + '商家订单数分布')
       this.setboxPlotRateMoneyOption(data.fig3.map(item => item.value), data.fig3.map(item => item.name), data.district + '商家成交额分布')
-      this.setDoublePieOption(this.doublePieMoneyChart, data.district + '成交额', data.fig4.saleNum_3, data.fig4.saleNum_9)
-      this.setDoublePieOption(this.doublePieOrderChart, data.district + '订单数', data.fig4.orderNum_3, data.fig4.orderNum_9)
-      this.setDoublePieOption(this.doublePieShopChart, data.district + '店铺数', data.fig4.shopNum_3, data.fig4.shopNum_9)
+      this.setDoublePieOption(this.doublePieMoneyChart, data.district + '成交额', data.fig4.saleNum)
+      this.setDoublePieOption(this.doublePieOrderChart, data.district + '订单数', data.fig4.orderNum)
+      this.setDoublePieOption(this.doublePieShopChart, data.district + '店铺数', data.fig4.shopNum)
       this.autoTip()
     },
     resizeBeijingMapContainer () {
@@ -169,13 +169,13 @@ export default {
       container.style.width = Math.floor((window.innerWidth * 0.5 - 20 - 16) / 3.0) + 'px'
       container.style.height = (window.innerHeight * 0.3 - 12) + 'px'
     },
-    setDoublePieOption (chart, title, data3, data9) {
+    setDoublePieOption (chart, title, data3) {
       pieOption.seriesOption_1.name = title
       pieOption.seriesOption_1.data = data3
       pieOption.seriesOption_2.name = title
-      pieOption.seriesOption_2.data = data9
+      // pieOption.seriesOption_2.data = data9
       pieOption.option.title.text = title
-      pieOption.option.series = [pieOption.seriesOption_1, pieOption.seriesOption_2]
+      pieOption.option.series = [pieOption.seriesOption_1]
       chart.setOption(pieOption.option)
       chart.hideLoading()
     },
