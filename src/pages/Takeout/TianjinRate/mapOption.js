@@ -14,13 +14,12 @@ export default {
       trigger: 'item',
       formatter: function (params) {
         if (params.seriesType === 'map')
-          console.log(params.data)
+          // console.log(params.data)
           return params.data.name+'<br/>外卖商家数：'+params.data.value[6]
-            +'<br/>良好商家数：'+params.data.value[2]
-            +'<br/>一般商家数：'+params.data.value[3]
-            +'<br/>暂停业商家数：'+params.data.value[4]
+            +'<br/>优秀商家数：'+params.data.value[2]
+            +'<br/>良好商家数：'+params.data.value[3]
+            +'<br/>一般商家数：'+params.data.value[4]
             +'<br/>不合格商家数：'+params.data.value[5];
-
       }
     },
     visualMap: {

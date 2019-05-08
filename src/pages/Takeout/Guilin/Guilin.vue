@@ -55,57 +55,63 @@ export default {
     let that = this
     window.onresize = function () {
       // 重置容器高宽
-      that.resizeBeijingMapContainer()
-      that.chartBeijingMap.resize()
-      that.resizeBoxPlotRateOrderContainer()
-      that.boxPlotRateOrderChart.resize()
-      that.resizeMifenBarContainer()
-      that.mifenBarChart.resize()
-      that.resizePieContainer(that.pieMoneyContainer)
-      that.pieMoneyChart.resize()
-      that.resizePieContainer(that.pieShopContainer)
-      that.pieShopChart.resize()
-      that.resizePieContainer(that.pieOrderContainer)
-      that.pieOrderChart.resize()
+      that.resizeChart()
     }
-    this.autoTip()
   },
   methods: {
     initCharts () {
       echarts.registerMap('beijing', beijingJson)
       this.beijingMapContainer = document.getElementById('beijing-map-mifen')
-      this.resizeBeijingMapContainer()
       this.chartBeijingMap = echarts.init(this.beijingMapContainer)
-      this.setBeijingMapOption(defaultData.beijingData)
 
       this.mifenBarContainer = document.getElementById('mifen-bar')
-      this.resizeMifenBarContainer()
       this.mifenBarChart = echarts.init(this.mifenBarContainer)
-      this.setMifenBarOption(defaultData.nameData, defaultData.Data1, defaultData.Data2, defaultData.Data3, defaultData.Data4)
 
       this.boxPlotRateOrderContainer = document.getElementById('box-plot-mifen')
-      this.resizeBoxPlotRateOrderContainer()
       this.boxPlotRateOrderChart = echarts.init(this.boxPlotRateOrderContainer)
-      this.setBoxPlotRateOrderOption(defaultData.pricelist, defaultData.typedata)
 
       this.pieMoneyContainer = document.getElementById('pie-money')
-      this.resizePieContainer(this.pieMoneyContainer)
       this.pieMoneyChart = echarts.init(this.pieMoneyContainer)
-      this.setPieOption(this.pieMoneyChart, '成交额', defaultData.Moneynum_4)
 
       this.pieOrderContainer = document.getElementById('pie-order')
-      this.resizePieContainer(this.pieOrderContainer)
       this.pieOrderChart = echarts.init(this.pieOrderContainer)
-      this.setPieOption(this.pieOrderChart, '订单数', defaultData.Ordernum_4)
 
       this.pieShopContainer = document.getElementById('pie-shop')
-      this.resizePieContainer(this.pieShopContainer)
       this.pieShopChart = echarts.init(this.pieShopContainer)
-      this.setPieOption(this.pieShopChart, '商家数', defaultData.Shopnum_4)
+
+      this.resizeChart()
+      this.setCharts(defaultData)
     },
-    resizeBeijingMapContainer () {
-      this.beijingMapContainer.style.width = (window.innerWidth * 0.5 - 40) + 'px'
-      this.beijingMapContainer.style.height = (window.innerHeight - 20) + 'px'
+    resizeChart () {
+      let ww = window.innerWidth
+      let hh = window.innerHeight
+      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40), (hh - 20))
+      this.chartBeijingMap.resize()
+      this.resizeContainer(this.mifenBarContainer, (ww * 0.5 - 20), (hh * 0.35 - 12))
+      this.mifenBarChart.resize()
+      this.resizeContainer(this.boxPlotRateOrderContainer, (ww * 0.5 - 20), (hh * 0.32 - 12))
+      this.boxPlotRateOrderChart.resize()
+      this.resizeContainer(this.pieMoneyContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.3 - 12))
+      this.pieMoneyChart.resize()
+      this.resizeContainer(this.pieOrderContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.3 - 12))
+      this.pieOrderChart.resize()
+      this.resizeContainer(this.pieShopContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.3 - 12))
+      this.pieShopChart.resize()
+    },
+    resizeContainer (container, width, height) {
+      container.style.width = width + 'px'
+      container.style.height = height + 'px'
+    },
+    setCharts (data) {
+      console.log('setCharts', data)
+      this.setBeijingMapOption(data.beijingData)
+      this.setMifenBarOption(data.nameData, data.Data1, data.Data2, data.Data3, data.Data4)
+      this.setBoxPlotRateOrderOption(data.pricelist, data.typedata)
+      this.setPieOption(this.pieMoneyChart, '成交额', data.Moneynum_4)
+      this.setPieOption(this.pieOrderChart, '订单数', data.Ordernum_4)
+      this.setPieOption(this.pieShopChart, '商家数', data.Shopnum_4)
+
+      this.autoTip()
     },
     setBeijingMapOption (data) {
       this.chartBeijingMap.showLoading()
@@ -133,10 +139,6 @@ export default {
       }
       return res
     },
-    resizeBoxPlotRateOrderContainer () {
-      this.boxPlotRateOrderContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.boxPlotRateOrderContainer.style.height = (window.innerHeight * 0.35 - 12) + 'px'
-    },
     setBoxPlotRateOrderOption (orderdata, namedata) {
       let data = echarts.dataTool.prepareBoxplotData(orderdata)
       plotOrderOption.xAxisOption.data = namedata
@@ -144,10 +146,6 @@ export default {
       plotOrderOption.option.xAxis = plotOrderOption.xAxisOption
       plotOrderOption.option.series = [plotOrderOption.seriesOption]
       this.boxPlotRateOrderChart.setOption(plotOrderOption.option)
-    },
-    resizeMifenBarContainer () {
-      this.mifenBarContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
-      this.mifenBarContainer.style.height = (window.innerHeight * 0.32 - 12) + 'px'
     },
     setMifenBarOption (nameData, Data1, Data2, Data3, Data4) {
       barOption.xAxisOption.data = nameData
@@ -158,10 +156,6 @@ export default {
       barOption.option.xAxis = [barOption.xAxisOption]
       barOption.option.series = [barOption.seriesOption_1, barOption.seriesOption_2, barOption.seriesOption_3, barOption.seriesOption_4]
       this.mifenBarChart.setOption(barOption.option)
-    },
-    resizePieContainer (container) {
-      container.style.width = Math.floor((window.innerWidth * 0.5 - 20 - 16) / 3.0) + 'px'
-      container.style.height = (window.innerHeight * 0.3 - 12) + 'px'
     },
     setPieOption (chart, title, data) {
       pieOption.seriesOption.name = title

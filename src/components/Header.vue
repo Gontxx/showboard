@@ -23,7 +23,6 @@
           <el-menu-item index="guilin">桂林实例</el-menu-item>
           <div class="divide-bar"></div>
           <el-menu-item index="takeout-tianjin">饿了么：天津实例</el-menu-item>
-          <el-menu-item index="takeout-rate-tianjin">饿了么卫生评级</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item index="hotel">
