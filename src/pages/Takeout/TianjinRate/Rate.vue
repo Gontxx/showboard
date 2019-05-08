@@ -133,7 +133,6 @@ export default {
             name: data[i].name,
             value: geoCoord.concat(data[i].value['all'])
           })
-
         }
       }
       return res
@@ -145,9 +144,8 @@ export default {
         if (geoCoord) {
           res.push({
             name: data[i].name,
-            value: geoCoord.concat(data[i].value['良好'], data[i].value['一般'], data[i].value['暂停业'],data[i].value['不合格'],data[i].value['all'])
+            value: geoCoord.concat(data[i].value['良好'], data[i].value['一般'], data[i].value['暂停业'], data[i].value['不合格'], data[i].value['all'])
           })
-
         }
       }
       return res
