@@ -23,12 +23,12 @@ export default {
       show: true,
       min: 0,
       max: 10000000,
-      right: '10%',
-      bottom: '3%',
+      right: '5%',
+      bottom: '1%',
       text: ['成交额', ''], // 文本，默认为数值文
       textStyle: {
         color: '#fff',
-        fontSize: '15'
+        fontSize: '10'
       },
       calculable: true,
       seriesIndex: [1],

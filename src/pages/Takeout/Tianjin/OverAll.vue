@@ -179,7 +179,7 @@ export default {
         let option = deepCopy(scatterOption.seriesOption)
         option.name = item.name
         option.symbolSize = function (data) {
-          return Math.sqrt(data[2]) / 200
+          return Math.sqrt(data[2]) / 100
         }
         option.label.normal.formatter = function (param) {
           return param.data[3]
