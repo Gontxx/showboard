@@ -1,3 +1,34 @@
+var rich = {
+  yellow: {
+    color: "#ffc72b",
+    fontSize: 12,
+    padding: [2, 0],
+    align: 'center'
+  },
+  total: {
+    color: "#ffc72b",
+    fontSize: 12,
+    align: 'center'
+  },
+  white: {
+    color: "#fff",
+    align: 'center',
+    fontSize: 12,
+    //padding: [21, 0]
+    padding: [2, 0]
+  },
+  blue: {
+    color: '#49dff0',
+    fontSize: 12,
+    align: 'center'
+  },
+  hr: {
+    borderColor: '#0b5263',
+    width: '100%',
+    borderWidth: 1,
+    height: 0,
+  }
+}
 export default {
   option: {
     title: {
@@ -36,7 +67,7 @@ export default {
       calculable: true,
       seriesIndex: [1],
       inRange: {
-        color: ['#00467F', '#A5CC82']//['#e0ffff', '#006edd']
+        color: ['#e0ffff', '#006edd']//['#00467F', '#A5CC82']//
       },
     },
   },
@@ -74,11 +105,43 @@ export default {
     },
     label: {
       normal: {
-        formatter: '{b}',
+        formatter: '{white|{b}}\n{yellow|😀:{@[6]}\n😀:{@[6]}\n😀:{@[6]}\n😀:{@[6]}\n}',
         position: 'right',
         show: true,
         textBorderColor:'#CD8500',
         textBorderWidth:1,
+        rich:{
+          yellow: {
+            color: "#F4E925",
+            fontSize: 14,
+            //padding: [2, 0],
+            //align: 'center'
+          },
+          total: {
+            color: "#ffc72b",
+            fontSize: 12,
+            align: 'center'
+          },
+          white: {
+            color: "#fff",
+            align: 'center',
+            fontSize: 15,
+            //padding: [21, 0]
+            padding: [2, 0],
+          },
+          blue: {
+            color: '#49dff0',
+            fontSize: 12,
+            align: 'center'
+          },
+          hr: {
+            borderColor: '#0b5263',
+            width: '100%',
+            borderWidth: 1,
+            height: 0,
+          }
+
+        }
       },
       emphasis: {
         show: true
@@ -137,7 +200,7 @@ export default {
         position: 'right',
         textBorderColor:'#CD8500',
         textBorderWidth:1,
-        show: true
+        show: false
       }
     },
     itemStyle: {
