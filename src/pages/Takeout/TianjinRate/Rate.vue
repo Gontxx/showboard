@@ -114,9 +114,9 @@ export default {
     setBeijingMapOption (data) {
       this.chartBeijingMap.showLoading()
       mapOption.geoOption.data = data
-      mapOption.seriesOption_1.data = this.convertData(data)
-      mapOption.seriesOption_2.data = data
-      mapOption.seriesOption_3.data = this.convertData(data.sort(function (a, b) {
+      mapOption.seriesOption_1.data = this.convertData1(data)
+      mapOption.seriesOption_2.data = this.convertData1(data) // data
+      mapOption.seriesOption_3.data = this.convertData1(data.sort(function (a, b) {
         return b[0] - a[0]
       }).slice(0, 5))
       mapOption.option.geo = mapOption.geoOption
@@ -131,8 +131,23 @@ export default {
         if (geoCoord) {
           res.push({
             name: data[i].name,
-            value: geoCoord.concat(data[i].value[0])
+            value: geoCoord.concat(data[i].value['all'])
           })
+
+        }
+      }
+      return res
+    },
+    convertData1 (data) {
+      let res = []
+      for (let i = 0; i < data.length; i++) {
+        let geoCoord = tianjinOptions.geoCoordMap[data[i].name]
+        if (geoCoord) {
+          res.push({
+            name: data[i].name,
+            value: geoCoord.concat(data[i].value['良好'], data[i].value['一般'], data[i].value['暂停业'],data[i].value['不合格'],data[i].value['all'])
+          })
+
         }
       }
       return res

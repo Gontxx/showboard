@@ -19,12 +19,12 @@ export default {
     type:'pie',
     selectedMode: 'single',
     center:['50%','55%'],
-    radius: [0, '40%'],
-    color: ['#EE3B3B','#1c6d90', '#09895a',],
+    radius: [0, '60%'],
+    color: [ '#09895a','#1c6d90','#EE3B3B',],
     label: {
       normal: {
         show: true,
-        position: 'inner',
+        position: 'outer',
         formatter: '{b}'
       }
     },

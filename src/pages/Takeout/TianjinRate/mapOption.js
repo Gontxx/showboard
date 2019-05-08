@@ -14,16 +14,18 @@ export default {
       trigger: 'item',
       formatter: function (params) {
         if (params.seriesType === 'map')
-          return params.data.name+'<br/>外卖商家数：'+params.data.value[0]
-            +'<br/>A级商家数：'+params.data.value[1]
-            +'<br/>B级商家数：'+params.data.value[2]
-            +'<br/>C级商家数：'+params.data.value[3];
+          console.log(params.data)
+          return params.data.name+'<br/>外卖商家数：'+params.data.value[6]
+            +'<br/>良好商家数：'+params.data.value[2]
+            +'<br/>一般商家数：'+params.data.value[3]
+            +'<br/>暂停业商家数：'+params.data.value[4]
+            +'<br/>不合格商家数：'+params.data.value[5];
 
       }
     },
     visualMap: {
       show: true,
-      max: 1200,
+      max: 500,
       right: '10%',
       bottom: '3%',
       text: ['商家数', ''], // 文本，默认为数值文
