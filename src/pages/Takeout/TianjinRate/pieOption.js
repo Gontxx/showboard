@@ -20,7 +20,8 @@ export default {
     selectedMode: 'single',
     center:['50%','55%'],
     radius: [0, '60%'],
-    color: [ '#09895a','#1c6d90','#EE3B3B',],
+    minAngle: 5,
+    color: [ '#1c6d90','#09895a','#EE3B3B','#EEB422',],
     label: {
       normal: {
         show: true,

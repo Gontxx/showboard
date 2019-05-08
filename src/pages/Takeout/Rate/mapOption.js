@@ -14,10 +14,10 @@ export default {
       trigger: 'item',
       formatter: function (params) {
         if (params.seriesType === 'map')
-          return params.data.name+'<br/>外卖商家数：'+params.data.value[0]
-            +'<br/>A级商家数：'+params.data.value[1]
-            +'<br/>B级商家数：'+params.data.value[2]
-            +'<br/>C级商家数：'+params.data.value[3];
+          return params.data.name+'<br/>外卖商家数：'+params.data.value[5]
+            +'<br/>A级商家数：'+params.data.value[2]
+            +'<br/>B级商家数：'+params.data.value[3]
+            +'<br/>C级商家数：'+params.data.value[4];
 
       }
     },

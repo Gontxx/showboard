@@ -115,7 +115,7 @@ export default {
       this.chartBeijingMap.showLoading()
       mapOption.geoOption.data = data
       mapOption.seriesOption_1.data = this.convertData(data)
-      mapOption.seriesOption_2.data = data
+      mapOption.seriesOption_2.data = this.convertData1(data)
       mapOption.seriesOption_3.data = this.convertData(data.sort(function (a, b) {
         return b[0] - a[0]
       }).slice(0, 5))
@@ -132,6 +132,19 @@ export default {
           res.push({
             name: data[i].name,
             value: geoCoord.concat(data[i].value[0])
+          })
+        }
+      }
+      return res
+    },
+    convertData1 (data) {
+      let res = []
+      for (let i = 0; i < data.length; i++) {
+        let geoCoord = beijingOptions.geoCoordMap[data[i].name]
+        if (geoCoord) {
+          res.push({
+            name: data[i].name,
+            value: geoCoord.concat(data[i].value[1], data[i].value[2], data[i].value[3], data[i].value[0])
           })
         }
       }
