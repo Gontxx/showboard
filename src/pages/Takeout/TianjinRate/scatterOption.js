@@ -41,8 +41,8 @@ export default {
     grid: {
       top:"18%",
       left: '0%',
-      right: '9.5%',
-      bottom: '20%',
+      right: '8%',
+      bottom: '12%',
       containLabel: true
     },
     xAxis: {

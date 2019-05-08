@@ -18,7 +18,7 @@ export default {
     },
     grid: {
       left: '10%',
-      right: '5%',
+      right: '6%',
       bottom: '10%'
     },
     yAxis: {
@@ -32,7 +32,7 @@ export default {
         show: true,
         textStyle: {
           color: '#B2B2B2',
-          fontSize: 12,
+          fontSize: 9,
         },
       },
       splitLine: {

@@ -33,7 +33,7 @@ export default {
   option: {
     title: {
       //top:20,
-      text: '天津市外卖热度地图',
+      text: '天津市互联网餐饮活跃度地图',
       x: 'center',
       y: '3%',
       textStyle: {
@@ -104,7 +104,8 @@ export default {
     },
     label: {
       normal: {
-        formatter: '{white|{b}}\n{yellow|😀:{@[6]}\n😀:{@[6]}\n😀:{@[6]}\n😀:{@[6]}\n}',
+        //formatter: '{white|{b}}\n{yellow|😄{@[2]}\n🙂{@[3]}\n😐{@[4]}\n🤢{@[5]}\n}',
+        formatter:'{b}',
         position: 'right',
         show: true,
         textBorderColor:'#CD8500',
