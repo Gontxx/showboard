@@ -31,7 +31,7 @@ export default {
     },
     labelLine: {
       normal: {
-        show: false
+        show: true
       }
     },
   },
