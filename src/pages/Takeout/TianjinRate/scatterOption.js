@@ -1,7 +1,7 @@
 export default {
   option: {
     title: {
-      text: '各区外卖成交情况',
+      text: '行政区互联网餐饮活跃度分析',
       x: 'center',
       y: '0%',
       textStyle: {
