@@ -4,6 +4,7 @@ import Takeout from '@/pages/Takeout/OverAll/OverAll'
 import TakeoutRate from '@/pages/Takeout/Rate/Rate'
 import TakeoutTianjin from '@/pages/Takeout/TianjinRate/Rate'
 import TakeoutGuilin from '@/pages/Takeout/Guilin/Guilin'
+import TakeoutXilinguole from '@/pages/Takeout/Xilinguole/OverAll'
 import Hotel from '@/pages/Hotel/OverAll/OverAll'
 import SecondHand from '@/pages/House/SecondHand/OverAll'
 import Rent from '@/pages/House/Rent/OverAll'
@@ -32,6 +33,11 @@ export default new Router({
       path: '/guilin',
       name: 'TakeoutGuilin',
       component: TakeoutGuilin
+    },
+    {
+      path: '/takeout-xilinguole',
+      name: 'TakeoutXilinguole',
+      component: TakeoutXilinguole
     },
     {
       path: '/hotel',
