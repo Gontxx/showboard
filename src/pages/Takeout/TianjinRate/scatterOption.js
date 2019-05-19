@@ -1,7 +1,7 @@
 export default {
   option: {
     title: {
-      text: '各区外卖成交情况',
+      text: '行政区互联网餐饮活跃度分析',
       x: 'center',
       y: '0%',
       textStyle: {
@@ -41,8 +41,8 @@ export default {
     grid: {
       top:"18%",
       left: '0%',
-      right: '9.5%',
-      bottom: '20%',
+      right: '8%',
+      bottom: '12%',
       containLabel: true
     },
     xAxis: {

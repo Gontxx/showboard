@@ -18,7 +18,7 @@ export default {
     },
     grid: {
       //top:'11%',
-      left: '10%',
+      left: '11%',
       right: '5%',
       bottom: '10%'
     },
@@ -33,7 +33,7 @@ export default {
         show: true,
         textStyle: {
           color: '#B2B2B2',
-          fontSize: 12,
+          fontSize: 9,
         },
       },
       splitLine: {

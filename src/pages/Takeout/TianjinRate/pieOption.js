@@ -21,7 +21,7 @@ export default {
     center:['50%','55%'],
     radius: [0, '60%'],
     minAngle: 5,
-    color: [ '#1c6d90','#09895a','#EE3B3B','#EEB422',],
+    color: [ '#1c6d90','#09895a','#EEB422','#EE3B3B',],
     label: {
       normal: {
         show: true,

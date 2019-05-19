@@ -1,5 +1,5 @@
 <template>
-  <div v-if="hash !== ''" class="hash-result" :class="{'top': top, 'bottom': !top}">本数据由数链实时获取<br/>{{hash}}</div>
+  <div v-if="hash !== ''" class="hash-result" :class="{'top': top, 'bottom': !top}">可信数据指纹溯源码 <br/>{{hash}}</div>
 </template>
 
 <script>
