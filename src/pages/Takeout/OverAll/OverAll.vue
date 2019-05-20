@@ -185,6 +185,7 @@ export default {
           return param.data[3]
         }
         option.data = [deepCopy(item.value)]
+
         option.data[0].push(item.name)
         return option
       })

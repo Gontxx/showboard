@@ -93,7 +93,7 @@ export default {
       this.setTypePieOption(data.fig1, '外卖标签分类')
       this.setStoreBarOption(this.storeBarChart, data.fig2.nameData, data.fig2.lineData, '单门店成交额前15名')
       this.setStoreBarOption(this.ratingBarChart, data.fig4.nameData, data.fig4.lineData, '单门店评分前15名')
-      this.setBeijingScatterOption(data.fig3, '各城区团购情况')
+      this.setBeijingScatterOption(data.fig3)
       // this.autoTip()
     },
     setTypePieOption (data, title) {
@@ -130,17 +130,18 @@ export default {
       chart.setOption(barOption.option)
       chart.hideLoading()
     },
-    setBeijingScatterOption (data, title) {
+    setBeijingScatterOption (data) {
+      // console.log(data)
       scatterOption.legendOption.data = data.map(item => {
         return item.area
       })
       scatterOption.option.legend = scatterOption.legendOption
-      scatterOption.option.title = title
+
       scatterOption.option.series = data.map(item => {
         let option = deepCopy(scatterOption.seriesOption)
         option.name = item.area
         option.symbolSize = function (data) {
-          return Math.sqrt(data[2]) / 200
+          return Math.sqrt(data[2]) / 20
         }
         option.label.normal.formatter = function (param) {
           return param.data[3]
@@ -148,8 +149,13 @@ export default {
         option.label.emphasis.formatter = function (param) {
           return param.data[3]
         }
-        option.data = [deepCopy(item.value)]
-        option.data[0].push(item.name)
+        // option.data = [deepCopy([item.shopNum, item.saleNum, item.saleNum])]
+        option.data = [[]]
+        option.data[0].push(item.shopNum)
+        option.data[0].push(item.saleNum)
+        option.data[0].push(item.saleNum)
+        option.data[0].push(item.area)
+        // console.log(option.data)
         return option
       })
       this.beijingScatterChart.setOption(scatterOption.option)

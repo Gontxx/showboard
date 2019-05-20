@@ -1,7 +1,7 @@
 export default {
   option: {
     title: {
-      text: '各区外卖成交情况',
+      text: '各城区团购情况',
       x: 'center',
       y: '0%',
       textStyle: {
@@ -34,7 +34,6 @@ export default {
       },
       formatter: function (params) {
         return params.value[3] + '<br/>外卖商家数：' + params.value[0]
-          + '<br/>订单数：' + params.value[1]
           + '<br/>成交额：' + params.value[2] + '元';
       }
     },
