@@ -20,7 +20,6 @@ import 'echarts/lib/chart/scatter'
 import { deepCopy } from '@/assets/util'
 import { createWssocket } from '@/assets/createWS'
 import hashResult from '@/components/hashResult'
-import defaultData from './defaultData'
 import pieOption from './pieOption'
 import barOption from './barOption'
 import scatterOption from './scatterOption'
@@ -94,7 +93,6 @@ export default {
       this.setStoreBarOption(this.storeBarChart, data.fig2.nameData, data.fig2.lineData, '单门店成交额前15名')
       this.setStoreBarOption(this.ratingBarChart, data.fig4.nameData, data.fig4.lineData, '单门店评分前15名')
       this.setBeijingScatterOption(data.fig3)
-      // this.autoTip()
     },
     setTypePieOption (data, title) {
       pieOption.legendOption.data = [data[0].name]
@@ -160,52 +158,6 @@ export default {
       })
       this.beijingScatterChart.setOption(scatterOption.option)
       this.beijingScatterChart.hideLoading()
-    },
-    autoTip () {
-      if (this.timer1 !== -1) {
-        clearInterval(this.timer1)
-      }
-      if (this.timer3 !== -1) {
-        clearInterval(this.timer3)
-      }
-      let that = this
-      this.timer1 = setInterval(function () {
-        that.typePieChart.dispatchAction({
-          type: 'pieUnSelect',
-          seriesIndex: 0,
-          dataIndex: that.currRegion1 % defaultData.typePieData.length
-        })
-        that.currRegion1 += 1
-        that.typePieChart.dispatchAction({
-          type: 'pieSelect',
-          seriesIndex: 0,
-          dataIndex: that.currRegion1 % defaultData.typePieData.length
-        })
-        that.typePieChart.dispatchAction({
-          type: 'highlight',
-          seriesIndex: 0,
-          dataIndex: that.currRegion1 % defaultData.typePieData.length
-        })
-      }, 5000)
-
-      this.timer3 = setInterval(function () {
-        that.beijingScatterChart.dispatchAction({
-          type: 'downplay',
-          seriesIndex: that.currRegion3 % defaultData.beijingData.length,
-          dataIndex: 0
-        })
-        that.currRegion3 += 1
-        that.beijingScatterChart.dispatchAction({
-          type: 'highlight',
-          seriesIndex: that.currRegion3 % defaultData.beijingData.length,
-          dataIndex: 0
-        })
-        that.beijingScatterChart.dispatchAction({
-          type: 'showTip',
-          seriesIndex: that.currRegion3 % defaultData.beijingData.length,
-          dataIndex: 0
-        })
-      }, 10000)
     },
     initWSocket () {
       let that = this
