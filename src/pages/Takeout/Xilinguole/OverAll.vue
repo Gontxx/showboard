@@ -74,13 +74,13 @@ export default {
     resizeChart () {
       let ww = window.innerWidth
       let hh = window.innerHeight
-      this.resizeContainer(this.typePieContainer, (ww * 0.5 - 40 - 12), (hh * 0.5 - 12))
+      this.resizeContainer(this.typePieContainer, (ww * 0.5 - 12), (hh * 0.5 - 12))
       this.typePieChart.resize()
-      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 40 - 12), (hh * 0.5 - 12))
+      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 12), (hh * 0.5 - 12))
       this.storeBarChart.resize()
-      this.resizeContainer(this.beijingScatterContainer, (ww * 0.5 - 40 - 12), (hh * 0.5 - 12))
+      this.resizeContainer(this.beijingScatterContainer, (ww * 0.5 - 12), (hh * 0.5 - 12))
       this.beijingScatterChart.resize()
-      this.resizeContainer(this.ratingBarContainer, (ww * 0.5 - 40 - 12), (hh * 0.5 - 12))
+      this.resizeContainer(this.ratingBarContainer, (ww * 0.5 - 12), (hh * 0.5 - 12))
       this.ratingBarChart.resize()
     },
     resizeContainer (container, width, height) {

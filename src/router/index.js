@@ -17,7 +17,7 @@ export default new Router({
     {
       path: '/',
       name: 'Index',
-      component: Takeout
+      component: TakeoutXilinguole
     },
     {
       path: '/takeout-rate',

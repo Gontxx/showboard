@@ -29,13 +29,13 @@ html, body {
 }
 
 .left-column-hotel {
-    width: calc((100% - 80px) / 2);
+    width: 50%;
     height: 100vh;
     float: left;
 }
 
 .right-column-hotel {
-    width: calc((100% - 80px) / 2);
+    width: 50%;
     height: 100vh;
     float: left;
 }
