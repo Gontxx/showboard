@@ -69,7 +69,7 @@ export default {
         }
       },
       scale: true,
-      name :'成交额',
+      name :'订单数',
     },
   },
   legendOption: {
