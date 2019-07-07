@@ -50,6 +50,14 @@ html, body {
     border-radius: 8px;
 }
 
+.float_bottom {
+  float: bottom;
+}
+
+.full_width {
+  width: 100%;
+}
+
 .double-pie {
     width: calc(100% - 20px);
     height: calc(30% - 12px);

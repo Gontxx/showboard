@@ -9,6 +9,7 @@ import Hotel from '@/pages/Hotel/OverAll/OverAll'
 import SecondHand from '@/pages/House/SecondHand/OverAll'
 import Rent from '@/pages/House/Rent/OverAll'
 import HouseSold from '@/pages/House/SecondHandSold/OverAll'
+import Enterprise from '@/pages/Enterprise/OverAll/OverAll'
 
 Vue.use(Router)
 
@@ -58,6 +59,11 @@ export default new Router({
       path: '/house-sold',
       name: 'HouseSold',
       component: HouseSold
+    },
+    {
+      path: '/enterprise',
+      name: 'Enterprise',
+      component: Enterprise
     },
   ]
 })
