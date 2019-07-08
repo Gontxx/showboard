@@ -48,6 +48,10 @@
         <i class="fa fa-shopping-bag fa-lg fa-icon"></i>
         <span slot="title">跨境电商</span>
       </el-menu-item>
+      <el-menu-item index="company">
+        <i class="fa fa-users fa-lg fa-icon"></i>
+        <span slot="title">企业</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>

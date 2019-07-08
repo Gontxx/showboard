@@ -9,7 +9,7 @@ import Hotel from '@/pages/Hotel/OverAll/OverAll'
 import SecondHand from '@/pages/House/SecondHand/OverAll'
 import Rent from '@/pages/House/Rent/OverAll'
 import HouseSold from '@/pages/House/SecondHandSold/OverAll'
-import Enterprise from '@/pages/Enterprise/OverAll/OverAll'
+import Company from '@/pages/Company/OverAll/OverAll'
 
 Vue.use(Router)
 
@@ -18,7 +18,7 @@ export default new Router({
     {
       path: '/',
       name: 'Index',
-      component: TakeoutXilinguole
+      component: Takeout
     },
     {
       path: '/takeout-rate',
@@ -61,9 +61,9 @@ export default new Router({
       component: HouseSold
     },
     {
-      path: '/enterprise',
-      name: 'Enterprise',
-      component: Enterprise
+      path: '/company',
+      name: 'Company',
+      component: Company
     },
   ]
 })
