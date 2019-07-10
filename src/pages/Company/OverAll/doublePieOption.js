@@ -22,8 +22,8 @@ export default {
     name:'企业数',
     type:'pie',
     selectedMode: 'single',
-    center:['50%','55%'],
-    radius: [0, '50%'],
+    center:['30%','60%'],
+    radius: [0, '75%'],
     color: ['#4181ff','#afffd3','#4ab0cc','#55e8a9','#56afd8','#1a8fc5', '#96dcc3', '#5ac59e', '#439476', '#346654'],
     label: {
       normal: {
@@ -48,10 +48,10 @@ export default {
   seriesOption_2: {
     name:'企业数',
     type:'pie',
-    radius: ['60%', '75%'],
-    center:['50%','55%'],
+    radius: ['0%', '30%'],
+    center:['75%','40%'],
     //center:['300','330'],
-    color: ['#4181ff','#afffd3','#4ab0cc','#55e8a9','#56afd8','#1a8fc5'],
+    color: ['#25ff84','#fdff78','#8124ff','#55e8a9','#56afd8','#1a8fc5'],
     label: {
       normal: {
         show:true,
