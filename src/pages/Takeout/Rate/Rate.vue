@@ -49,6 +49,7 @@ export default {
       doublePieOrderChart: null,
       doublePieShopContainer: null,
       doublePieShopChart: null,
+      tmpData: defaultData,
       timer: -1,
       currRegion: 0,
       hashResult: ''
@@ -263,6 +264,7 @@ export default {
   mounted () {
     this.initCharts()
     this.initWSocket()
+    // this.setCharts(this.tmpData)
     let that = this
     window.onresize = function () {
       // 重置容器高宽

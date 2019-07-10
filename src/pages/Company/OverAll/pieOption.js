@@ -23,10 +23,5 @@ export default {
     center: ['50%', '55%'],
     radius: ['0%', '70%'],
     avoidLabelOverlap: false
-  },
-  itemStyle: {
-    normal: {
-      label: true
     }
-  }
 }
