@@ -3,9 +3,9 @@
     <div class="left-column">
       <div id="beijing-map" class="chart-container"></div>
       <hash-result :hash="hashResult"></hash-result>
+      <div id='beijing-scatter' class='chart-container has-background'></div>
     </div>
     <div class="right-column">
-      <div id='beijing-scatter' class='chart-container has-background'></div>
       <div class="chart-container has-background box-plot">
         <div id="box-plot-rate-order" style="float: left;"></div>
         <div id="box-plot-rate-money" style="float: left;"></div>
@@ -14,6 +14,40 @@
         <div id="double-pie-money" style="float: left;"></div>
         <div id="double-pie-order" style="float: left;"></div>
         <div id="double-pie-shop" style="float: left;"></div>
+      </div>
+      <div class="chart-container has-background" style="height:32%">
+        <el-table
+        :data="tableData"
+        height="100%"
+        style="width: 100%; border-style: none;"
+        :cell-style="{background:'rgb(38,38,38)',color:'#ffffff'}"
+        :header-cell-style="{background:'rgb(38,38,38)',color:'#ffffff',border:'none', padding:'8px'}"
+        :default-sort="{prop: 'order', order: 'descending'}">
+          <el-table-column
+            :label="tableHeader"
+            align="center"
+          >
+            <el-table-column
+              prop="shopName"
+              label="店铺名称"
+              align="center"
+            >
+            </el-table-column>
+            <el-table-column
+              prop="address"
+              label="地址"
+              align="center"
+            >
+            </el-table-column>
+            <el-table-column
+              prop="score"
+              label="评分"
+              sortable
+              align="center"
+            >
+            </el-table-column>
+          </el-table-column>
+        </el-table>
       </div>
     </div>
   </div>
@@ -58,7 +92,11 @@ export default {
       doublePieShopChart: null,
       timer: -1,
       currRegion: 0,
-      hashResult: ''
+      hashResult: '',
+      currDistrict: null,
+      tableData: null,
+      tmpData: defaultData,
+      tableHeader: '不合格商家信息'
     }
   },
   components: {
@@ -95,6 +133,12 @@ export default {
       this.chartBeijingMap.on('click', function (params) {
         // console.log('chartBeijingMap click', params)
         that.getData(params.name.substring(0, params.name.length - 1))
+        that.currDistrict = params.dataIndex
+        that.tableHeader = params.name + '不合格商家信息'
+        if (that.currDistrict > 0) {
+          // 地图中没有滨海新区
+          that.currDistrict = that.currDistrict + 1
+        }
       })
     },
     showLoading () {
@@ -107,19 +151,19 @@ export default {
     resizeChart () {
       let ww = window.innerWidth
       let hh = window.innerHeight
-      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40), (hh - 20))
+      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 100), (hh - 20) * 0.58)
       this.chartBeijingMap.resize()
-      this.resizeContainer(this.beijingScatterContainer, (ww * 0.5 - 20), (hh * 0.35 - 12))
+      this.resizeContainer(this.beijingScatterContainer, (ww * 0.5 - 100), (hh - 20) * 0.35)
       this.beijingScatterChart.resize()
       this.resizeContainer(this.boxPlotRateOrderContainer, Math.floor((ww * 0.5 - 20 - 16) / 2.0), (hh * 0.32 - 12))
       this.boxPlotRateOrderChart.resize()
       this.resizeContainer(this.boxPlotRateMoneyContainer, Math.floor((ww * 0.5 - 20 - 16) / 2.0), (hh * 0.32 - 12))
       this.boxPlotRateMoneyChart.resize()
-      this.resizeContainer(this.doublePieMoneyContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.3 - 12))
+      this.resizeContainer(this.doublePieMoneyContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.32 - 12))
       this.doublePieMoneyChart.resize()
-      this.resizeContainer(this.doublePieOrderContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.3 - 12))
+      this.resizeContainer(this.doublePieOrderContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.32 - 12))
       this.doublePieOrderChart.resize()
-      this.resizeContainer(this.doublePieShopContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.3 - 12))
+      this.resizeContainer(this.doublePieShopContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.32 - 12))
       this.doublePieShopChart.resize()
     },
     resizeContainer (container, width, height) {
@@ -135,6 +179,7 @@ export default {
       this.setDoublePieOption(this.doublePieMoneyChart, data.district + '成交额', data.fig4.saleNum)
       this.setDoublePieOption(this.doublePieOrderChart, data.district + '订单数', data.fig4.orderNum)
       this.setDoublePieOption(this.doublePieShopChart, data.district + '店铺数', data.fig4.shopNum)
+      this.showUnqualified(data.fig1)
       this.autoTip()
     },
     setBeijingMapOption (data) {
@@ -296,11 +341,32 @@ export default {
       })
       request.privKey = this.$global.privKey
       this.$store.state.wsSocket.send(JSON.stringify(request))
+    },
+    showUnqualified (data) {
+      console.log('区域编号' + this.currDistrict)
+      this.tableData = []
+      let that = this
+      if (this.currDistrict === null) {
+        data.forEach(function (value, index, array) {
+          value['unqualified_shop_list'].forEach(function (v, i, a) {
+            that.tableData.push(v)
+          })
+        })
+      } else {
+        console.log('hello')
+        console.log(data)
+        data[this.currDistrict]['unqualified_shop_list'].forEach(function (v, i, a) {
+          that.tableData.push(v)
+        })
+      }
+      console.log(this.tableData)
     }
   },
   mounted () {
     this.initCharts()
     this.initWSocket()
+    // 暂时使用默认数据
+    // this.setCharts(this.tmpData)
     let that = this
     window.onresize = function () {
       // 重置容器高宽

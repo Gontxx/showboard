@@ -19,7 +19,7 @@ export default {
 <style scoped>
   .hash-result {
     color: white;
-    position: absolute;
+    position: relative;
     text-align: left;
     word-wrap: break-word;
     left: 15px;

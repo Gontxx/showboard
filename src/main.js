@@ -6,7 +6,7 @@ import router from './router'
 import axios from 'axios'
 import store from './store'
 import Config from './config'
-import { Menu, Submenu, MenuItem, MenuItemGroup } from 'element-ui'
+import { Menu, Submenu, MenuItem, MenuItemGroup, Table, TableColumn } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
@@ -18,6 +18,8 @@ Vue.use(Menu)
 Vue.use(Submenu)
 Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
+Vue.use(Table)
+Vue.use(TableColumn)
 
 /* eslint-disable no-new */
 new Vue({
