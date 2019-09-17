@@ -159,11 +159,12 @@ export default {
       this.boxPlotRateOrderChart.resize()
       this.resizeContainer(this.boxPlotRateMoneyContainer, Math.floor((ww * 0.5 - 20 - 16) / 2.0), (hh * 0.32 - 12))
       this.boxPlotRateMoneyChart.resize()
-      this.resizeContainer(this.doublePieMoneyContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.32 - 12))
+
+      this.resizeContainer(this.doublePieMoneyContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.32 - 10))
       this.doublePieMoneyChart.resize()
-      this.resizeContainer(this.doublePieOrderContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.32 - 12))
+      this.resizeContainer(this.doublePieOrderContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.32 - 10))
       this.doublePieOrderChart.resize()
-      this.resizeContainer(this.doublePieShopContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.32 - 12))
+      this.resizeContainer(this.doublePieShopContainer, Math.floor((ww * 0.5 - 20 - 16) / 3.0), (hh * 0.32 - 10))
       this.doublePieShopChart.resize()
     },
     resizeContainer (container, width, height) {
