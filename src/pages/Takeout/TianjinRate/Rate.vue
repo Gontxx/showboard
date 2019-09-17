@@ -19,9 +19,10 @@
         <el-table
         :data="tableData"
         height="100%"
+        stripe
         style="width: 100%; border-style: none;"
-        :cell-style="{background:'rgb(38,38,38)',color:'#ffffff'}"
         :header-cell-style="{background:'rgb(38,38,38)',color:'#ffffff',border:'none', padding:'8px'}"
+        :cell-style="{background:'rgb(18,18,18)',color:'#ffffff', border:'none'}"
         :default-sort="{prop: 'order', order: 'descending'}">
           <el-table-column
             :label="tableHeader"
@@ -155,6 +156,7 @@ export default {
       this.chartBeijingMap.resize()
       this.resizeContainer(this.beijingScatterContainer, (ww * 0.5 - 100), (hh - 20) * 0.35)
       this.beijingScatterChart.resize()
+
       this.resizeContainer(this.boxPlotRateOrderContainer, Math.floor((ww * 0.5 - 20 - 16) / 2.0), (hh * 0.32 - 12))
       this.boxPlotRateOrderChart.resize()
       this.resizeContainer(this.boxPlotRateMoneyContainer, Math.floor((ww * 0.5 - 20 - 16) / 2.0), (hh * 0.32 - 12))
