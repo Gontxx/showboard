@@ -19,7 +19,6 @@
         <el-table
         :data="tableData"
         height="100%"
-        stripe
         style="width: 100%; border-style: none;"
         :header-cell-style="{background:'rgb(38,38,38)',color:'#ffffff',border:'none', padding:'8px'}"
         :cell-style="{background:'rgb(18,18,18)',color:'#ffffff', border:'none'}"

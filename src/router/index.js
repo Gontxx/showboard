@@ -10,6 +10,7 @@ import SecondHand from '@/pages/House/SecondHand/OverAll'
 import Rent from '@/pages/House/Rent/OverAll'
 import HouseSold from '@/pages/House/SecondHandSold/OverAll'
 import Company from '@/pages/Company/OverAll/OverAll'
+import PiYao from '@/pages/Rumor/Refution'
 
 Vue.use(Router)
 
@@ -65,5 +66,10 @@ export default new Router({
       name: 'Company',
       component: Company
     },
+    {
+      path: '/refute',
+      name: 'PiYao',
+      component: PiYao
+    }
   ]
 })

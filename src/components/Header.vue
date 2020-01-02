@@ -52,6 +52,10 @@
         <i class="fa fa-users fa-lg fa-icon"></i>
         <span slot="title">企业</span>
       </el-menu-item>
+      <el-menu-item index="refute">
+        <i class="fa fa-bullhorn fa-lg fa-icon" ></i>
+        <span slot="title">辟谣</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
