@@ -52,10 +52,18 @@
         <i class="fa fa-users fa-lg fa-icon"></i>
         <span slot="title">企业</span>
       </el-menu-item>
-      <el-menu-item index="refute">
-        <i class="fa fa-bullhorn fa-lg fa-icon" ></i>
-        <span slot="title">辟谣</span>
-      </el-menu-item>
+      <el-submenu index="rumor">
+        <template slot="title">
+          <i class="fa fa-bullhorn fa-lg fa-icon"></i>
+          <span slot="title">谣言</span>
+        </template>
+        <el-menu-item-group>
+          <span slot="title" class="sub-title">谣言</span>
+          <div class="divide-bar"></div>
+          <el-menu-item index="/refute">辟谣</el-menu-item>
+          <el-menu-item index="weibo">微博</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
     </el-menu>
   </div>
 </template>

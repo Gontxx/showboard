@@ -151,9 +151,9 @@ export default {
     resizeChart () {
       let ww = window.innerWidth
       let hh = window.innerHeight
-      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 100), (hh - 20) * 0.58)
+      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 100), hh * 0.64)
       this.chartBeijingMap.resize()
-      this.resizeContainer(this.beijingScatterContainer, (ww * 0.5 - 100), (hh - 20) * 0.35)
+      this.resizeContainer(this.beijingScatterContainer, (ww * 0.5 - 100), hh * 0.32)
       this.beijingScatterChart.resize()
 
       this.resizeContainer(this.boxPlotRateOrderContainer, Math.floor((ww * 0.5 - 20 - 16) / 2.0), (hh * 0.32 - 12))

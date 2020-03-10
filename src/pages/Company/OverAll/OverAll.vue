@@ -339,6 +339,7 @@ export default {
         let res = JSON.parse(event.data)
         try {
           if (res.action === 'onExecuteResult') {
+            console.log(res)
             let data = JSON.parse(res.data)
             let result = JSON.parse(data.result)
             that.setCharts(result)
@@ -373,9 +374,9 @@ export default {
   mounted () {
     this.initCharts()
     // 建立webSocket连接
-    this.initWSocket()
+    // this.initWSocket()
     // 暂时使用默认数据
-    // this.setCharts(this.tmpData)
+    this.setCharts(this.tmpData)
     let that = this
     window.onresize = function () {
       // 重置容器高宽

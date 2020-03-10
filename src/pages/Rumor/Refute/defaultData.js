@@ -359,7 +359,7 @@ export default
       {name: '税务', value: 7},
       {name: '报道', value: 7},
       {name: '政府', value: 7},
-      {name: '党', value: 7},
+      // {name: '党', value: 7},
       {name: '身份证', value: 7},
       {name: '教材', value: 7},
       {name: '动物园', value: 7},
