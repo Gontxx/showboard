@@ -2,18 +2,16 @@
   <div class="main-column">
     <div class='row-enterprise'>
       <div class="left-column-enterprise">
-        <div id = "type-pie" class="chart-container has-background"></div>
+        <div id = "type-pie" class="chart-container"></div>
+        <div id = "word-cloud" class="chart-container"></div>
       </div>
       <div class="right-column-enterprise">
-        <div id = "word-cloud" class="chart-container has-background"></div>
+        <div id="box-plot-repost" class="chart-container has-background"></div>
+        <div id="box-plot-comment" class="chart-container has-background"></div>
+        <div id="box-plot-attitude" class="chart-container has-background"></div>
       </div>
     </div>
     <div class='row-enterprise'>
-      <div class="btn-group switch-bar" role="group">
-        <button type="button" class="btn btn-default" :class="{'active': barType ==='转发' }" @click="barType = '转发'">转发</button>
-        <button type="button" class="btn btn-default" :class="{'active': barType ==='评论' }" @click="barType = '评论'">评论</button>
-        <button type="button" class="btn btn-default" :class="{'active': barType ==='点赞' }" @click="barType = '点赞'">点赞</button>
-      </div>
       <div id = "count-bar" class="chart-container"></div>
     </div>
   </div>
@@ -26,7 +24,7 @@ import 'echarts-wordcloud'
 import pieOption from './pieOption'
 import defaultData from './defaultData'
 import typeWordCloudOption from './typeWordCloudOption'
-import barOption from './barOption'
+import plotOrderOption from './plotOption'
 
 export default {
   name: 'Weibo',
@@ -39,15 +37,16 @@ export default {
       wordCloudChart: null,
       countBarContainer: null,
       countBarChart: null,
-      barType: '转发',
+      repostBoxContainer: null,
+      repostBoxChart: null,
+      commentBoxContainer: null,
+      commentBoxChart: null,
+      attitudeBoxContainer: null,
+      attitudeBoxChart: null,
       pieType: '财经'
     }
   },
   watch: {
-    barType () {
-      console.log('bar type change')
-      this.setCharts(this.tmpData)
-    },
     pieType () {
       console.log('pie type change')
       this.setCharts(this.tmpData)
@@ -63,6 +62,12 @@ export default {
       this.wordCloudChart = echarts.init(this.wordCloudContainer)
       this.countBarContainer = document.getElementById('count-bar')
       this.countBarChart = echarts.init(this.countBarContainer)
+      this.repostBoxContainer = document.getElementById('box-plot-repost')
+      this.repostBoxChart = echarts.init(this.repostBoxContainer)
+      this.commentBoxContainer = document.getElementById('box-plot-comment')
+      this.commentBoxChart = echarts.init(this.commentBoxContainer)
+      this.attitudeBoxContainer = document.getElementById('box-plot-attitude')
+      this.attitudeBoxChart = echarts.init(this.attitudeBoxContainer)
       this.resizeChart()
 
       let that = this
@@ -78,8 +83,12 @@ export default {
       this.typePieChart.resize()
       this.resizeContainer(this.wordCloudContainer, (ww * 0.45), (hh * 0.49))
       this.wordCloudChart.resize()
-      this.resizeContainer(this.countBarContainer, (ww * 0.92), (hh * 0.45))
-      this.countBarChart.resize()
+      this.resizeContainer(this.repostBoxContainer, (ww * 0.45), (hh * 0.32))
+      this.repostBoxChart.resize()
+      this.resizeContainer(this.commentBoxContainer, (ww * 0.45), (hh * 0.32))
+      this.commentBoxChart.resize()
+      this.resizeContainer(this.attitudeBoxContainer, (ww * 0.45), (hh * 0.32))
+      this.attitudeBoxChart.resize()
     },
 
     resizeContainer (container, width, height) {
@@ -91,9 +100,9 @@ export default {
       console.log('setCharts', data)
       this.setTypePieOption(this.typePieChart, data.typeData, '疑似谣言微博类型分布')
       this.setWordCloudOption(this.wordCloudChart, data.wordCloudData[this.pieType], '疑似' + this.pieType + '类谣言微博热点词')
-      this.setCountBarOption(this.countBarChart, data.statData.map(item => {
-        return {name: item.name, value: item.value[this.barType]}
-      }), '疑似谣言微博平均' + this.barType + '数')
+      this.setBoxPlotRateOrderOption(this.repostBoxChart, data.reposts, data.domainData, '转发')
+      this.setBoxPlotRateOrderOption(this.commentBoxChart, data.comments, data.domainData, '评论')
+      this.setBoxPlotRateOrderOption(this.attitudeBoxChart, data.attitudes, data.domainData, '点赞')
     },
 
     setTypePieOption (chart, data, title) {
@@ -113,20 +122,30 @@ export default {
       chart.setOption(typeWordCloudOption.option)
     },
 
-    setCountBarOption (chart, data, title) {
-      barOption.option.title.text = title
-      var namedata = []
-      var bardata = []
-      data.forEach(function (value, index, array) {
-        namedata.push(value.name)
-        bardata.push(value.value)
-      })
-      barOption.xAxisOption.data = namedata
-      barOption.option.yAxis.name = '平均' + this.barType + '数量'
-      barOption.seriesOption.data = bardata
-      barOption.option.xAxis = barOption.xAxisOption
-      barOption.option.series = [barOption.seriesOption]
-      this.countBarChart.setOption(barOption.option)
+    // setCountBarOption (chart, data, title) {
+    //   barOption.option.title.text = title
+    //   var namedata = []
+    //   var bardata = []
+    //   data.forEach(function (value, index, array) {
+    //     namedata.push(value.name)
+    //     bardata.push(value.value)
+    //   })
+    //   barOption.xAxisOption.data = namedata
+    //   barOption.option.yAxis.name = '平均' + this.barType + '数量'
+    //   barOption.seriesOption.data = bardata
+    //   barOption.option.xAxis = barOption.xAxisOption
+    //   barOption.option.series = [barOption.seriesOption]
+    //   this.countBarChart.setOption(barOption.option)
+    // }
+
+    setBoxPlotRateOrderOption (chart, orderdata, namedata, type) {
+      let data = echarts.dataTool.prepareBoxplotData(orderdata)
+      plotOrderOption.option.title.text = '疑似谣言微博' + type + '数量分布'
+      plotOrderOption.xAxisOption.data = namedata
+      plotOrderOption.seriesOption.data = data.boxData
+      plotOrderOption.option.xAxis = plotOrderOption.xAxisOption
+      plotOrderOption.option.series = [plotOrderOption.seriesOption]
+      chart.setOption(plotOrderOption.option)
     }
   },
   mounted () {
@@ -159,10 +178,5 @@ export default {
   .row-enterprise {
     width: 100%;
     float: left;
-  }
-  .switch-bar {
-    position: absolute;
-    left: calc(50% - 60px);
-    bottom: 0;
   }
 </style>
