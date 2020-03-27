@@ -247,7 +247,7 @@ export default {
       this.showLoading()
       let request = {}
       request.action = 'executeContract'
-      request.contractID = this.$global.contractID
+      request.contractName = this.$global.contractID
       request.requestID = new Date().getTime()
       request.arg = JSON.stringify({
         action: 'connectDBAndQuery',
@@ -257,8 +257,8 @@ export default {
           district: district
         })
       })
-      request.privKey = this.$global.privKey
       this.$store.state.wsSocket.send(JSON.stringify(request))
+      console.log(JSON.stringify(request))
     }
   },
   mounted () {

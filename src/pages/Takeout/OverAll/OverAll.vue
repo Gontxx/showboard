@@ -289,7 +289,7 @@ export default {
       this.showLoading()
       let request = {}
       request.action = 'executeContract'
-      request.contractID = this.$global.contractID
+      request.contractName = this.$global.contractID
       request.requestID = new Date().getTime()
       request.arg = JSON.stringify({
         action: 'connectDBAndQuery',
