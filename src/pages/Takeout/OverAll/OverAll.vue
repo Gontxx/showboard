@@ -85,7 +85,7 @@ export default {
     resizeChart () {
       let ww = window.innerWidth
       let hh = window.innerHeight
-      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40), (hh - 20))
+      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40), (hh * 0.95 - 20))
       this.chartBeijingMap.resize()
       this.resizeContainer(this.typePieContainer, (ww * 0.5 - 20), (hh * 0.38 - 12))
       this.typePieChart.resize()

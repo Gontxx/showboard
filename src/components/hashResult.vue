@@ -21,7 +21,7 @@ export default {
     color: white;
     position: relative;
     text-align: left;
-    word-wrap: break-word;
+    word-wrap: normal;
     left: 15px;
   }
   .top {
