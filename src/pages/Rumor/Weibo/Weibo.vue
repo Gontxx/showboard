@@ -4,6 +4,7 @@
       <div class="left-column-enterprise">
         <div id = "type-pie" class="chart-container"></div>
         <div id = "word-cloud" class="chart-container"></div>
+        <hash-result :hash="hashResult"></hash-result>
       </div>
       <div class="right-column-enterprise">
         <div id="box-plot-repost" class="chart-container has-background"></div>
@@ -25,6 +26,8 @@ import pieOption from './pieOption'
 import defaultData from './defaultData'
 import typeWordCloudOption from './typeWordCloudOption'
 import plotOrderOption from './plotOption'
+import { createWssocket } from '@/assets/createWS'
+import hashResult from '@/components/hashResult'
 
 export default {
   name: 'Weibo',
@@ -43,8 +46,12 @@ export default {
       commentBoxChart: null,
       attitudeBoxContainer: null,
       attitudeBoxChart: null,
-      pieType: '财经'
+      pieType: '财经',
+      hashResult: ''
     }
+  },
+  components: {
+    hashResult
   },
   watch: {
     pieType () {
@@ -76,6 +83,14 @@ export default {
       })
     },
 
+    showLoading () {
+      this.typePieChart.showLoading()
+      this.wordCloudChart.showLoading()
+      this.countBarChart.showLoading()
+      this.repostBoxChart.showLoading()
+      this.commentBoxChart.showLoading()
+      this.attitudeBoxChart.showLoading()
+    },
     resizeChart () {
       let ww = window.innerWidth
       let hh = window.innerHeight
@@ -111,6 +126,7 @@ export default {
       pieOption.option.title.text = title
       pieOption.option.series = [pieOption.seriesOption]
       chart.setOption(pieOption.option)
+      chart.hideLoading()
     },
 
     setWordCloudOption (chart, data, title) {
@@ -120,6 +136,7 @@ export default {
       typeWordCloudOption.option.title.text = title
       typeWordCloudOption.option.series = [typeWordCloudOption.seriesOption]
       chart.setOption(typeWordCloudOption.option)
+      chart.hideLoading()
     },
 
     // setCountBarOption (chart, data, title) {
@@ -146,11 +163,53 @@ export default {
       plotOrderOption.option.xAxis = plotOrderOption.xAxisOption
       plotOrderOption.option.series = [plotOrderOption.seriesOption]
       chart.setOption(plotOrderOption.option)
+      chart.hideLoading()
+    },
+    initWSocket () {
+      let that = this
+      let onopen = function () {
+        console.log('open')
+        that.getData()
+      }
+      let onmessage = function (event) {
+        console.log('onmessage', event)
+        let res = JSON.parse(event.data)
+        try {
+          if (res.action === 'onExecuteResult') {
+            let data = JSON.parse(res.data)
+            let result = JSON.parse(data.result)
+            that.setCharts(result)
+          } else if (res.action === 'onHashResult') {
+            that.hashResult = res.data
+          }
+        } catch (e) {
+          console.log('出现错误！', e)
+        }
+      }
+      let wssocket = createWssocket(this.$global.wsAddress, onopen, onmessage)
+      this.$store.commit('SET_WSSOCKET', wssocket)
+    },
+    getData () {
+      // console.log('district', district)
+      this.showLoading()
+      let request = {}
+      request.action = 'executeContract'
+      request.contractName = this.$global.contractID
+      request.requestID = new Date().getTime()
+      request.arg = JSON.stringify({
+        action: 'connectDBAndQueryWeibo',
+        arg: JSON.stringify({
+          type: 'takeout',
+          detail: 'overall'
+        })
+      })
+      request.privKey = this.$global.privKey
+      this.$store.state.wsSocket.send(JSON.stringify(request))
     }
   },
   mounted () {
+    this.initWSocket()
     this.initCharts()
-    this.setCharts(this.tmpData)
     let that = this
     window.onresize = function () {
       that.resizeChart()
