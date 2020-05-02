@@ -94,9 +94,9 @@ export default {
     resizeChart () {
       let ww = window.innerWidth
       let hh = window.innerHeight
-      this.resizeContainer(this.typePieContainer, (ww * 0.45), (hh * 0.49))
+      this.resizeContainer(this.typePieContainer, (ww * 0.45), (hh * 0.47))
       this.typePieChart.resize()
-      this.resizeContainer(this.wordCloudContainer, (ww * 0.45), (hh * 0.49))
+      this.resizeContainer(this.wordCloudContainer, (ww * 0.45), (hh * 0.47))
       this.wordCloudChart.resize()
       this.resizeContainer(this.repostBoxContainer, (ww * 0.45), (hh * 0.32))
       this.repostBoxChart.resize()
@@ -194,12 +194,12 @@ export default {
       this.showLoading()
       let request = {}
       request.action = 'executeContract'
-      request.contractName = this.$global.contractID
+      request.contractName = 'RumorDetector'
       request.requestID = new Date().getTime()
       request.arg = JSON.stringify({
-        action: 'connectDBAndQueryWeibo',
+        action: 'connectDBandDetectRumor',
         arg: JSON.stringify({
-          type: 'takeout',
+          type: 'overall',
           detail: 'overall'
         })
       })

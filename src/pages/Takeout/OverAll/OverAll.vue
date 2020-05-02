@@ -316,4 +316,28 @@ export default {
 </script>
 
 <style scoped>
+  .left-column {
+    width: calc(50% - 80px);
+    height: 100vh;
+    position: relative;
+    float: left;
+  }
+
+  .right-column {
+    width: 50%;
+    height: 100vh;
+    position: relative;
+    float: left;
+  }
+
+  .chart-container {
+    margin: 8px;
+    padding: 8px;
+  }
+
+  .has-background {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+  }
+
 </style>
