@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="left-column-hotel">
+    <div class="left-column">
       <div id="hotel-bar-price" class="chart-container has-background"></div>
       <div id="hotel-bar-num" class="chart-container has-background"></div>
     </div>
-    <div class="right-column-hotel">
+    <div class="right-column">
       <div id="hotel-scatter" class="chart-container has-background"></div>
       <div class="chart-container has-background chart-img">
         <p style="font-size: 16px; text-align: center; width: 100%; color: #ffffff;">酒店标签云</p>
@@ -57,7 +57,7 @@ export default {
       this.setBeijingScatterOption(defaultData.hotelData)
     },
     resizehotelBarContainer (container) {
-      container.style.width = (window.innerWidth * 0.5 - 40 - 12) + 'px'
+      container.style.width = (window.innerWidth * 0.45 - 40 - 12) + 'px'
       container.style.height = (window.innerHeight * 0.5 - 12) + 'px'
     },
     setBarOption (chart, title, nameData, lineData) {
@@ -69,7 +69,7 @@ export default {
       chart.setOption(barOption.option)
     },
     resizehotelScatterContainer () {
-      this.hotelScatterContainer.style.width = (window.innerWidth * 0.5 - 40 - 20) + 'px'
+      this.hotelScatterContainer.style.width = (window.innerWidth * 0.5 - 20) + 'px'
       this.hotelScatterContainer.style.height = (window.innerHeight * 0.5 - 12) + 'px'
     },
     setBeijingScatterOption (data) {
@@ -134,7 +134,7 @@ export default {
   },
   mounted () {
     this.initCharts()
-    this.setCharts()
+    this.setCharts(this.tmpData)
     let that = this
     window.onresize = function () {
       // 重置容器高宽

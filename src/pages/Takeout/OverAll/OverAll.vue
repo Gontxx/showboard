@@ -33,6 +33,7 @@ export default {
   name: 'Takeout',
   data () {
     return {
+      tmpData: defaultData,
       beijingMapContainer: null,
       chartBeijingMap: null,
       typePieContainer: null,
@@ -306,6 +307,7 @@ export default {
   mounted () {
     this.initCharts()
     this.initWSocket()
+    // this.setCharts(this.tmpData)
     let that = this
     window.onresize = function () {
       // 重置容器高宽

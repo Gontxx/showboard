@@ -132,7 +132,6 @@ export default {
     setWordCloudOption (chart, data, title) {
       typeWordCloudOption.seriesOption.name = title
       typeWordCloudOption.seriesOption.data = data
-      // nounWordCloudOption.seriesOption.maskImage = this.image1
       typeWordCloudOption.option.title.text = title
       typeWordCloudOption.option.series = [typeWordCloudOption.seriesOption]
       chart.setOption(typeWordCloudOption.option)
@@ -190,7 +189,6 @@ export default {
       this.$store.commit('SET_WSSOCKET', wssocket)
     },
     getData () {
-      // console.log('district', district)
       this.showLoading()
       let request = {}
       request.action = 'executeContract'
@@ -208,8 +206,9 @@ export default {
     }
   },
   mounted () {
-    this.initWSocket()
+    // this.initWSocket()
     this.initCharts()
+    this.setCharts(this.tmpData)
     let that = this
     window.onresize = function () {
       that.resizeChart()
@@ -225,12 +224,12 @@ export default {
     overflow: scroll;
   }
   .left-column-enterprise {
-    width: 50%;
+    width: 33%;
     height: 100%;
     float: left;
   }
   .right-column-enterprise {
-    width: 50%;
+    width: 33%;
     height: 100%;
     float: left;
   }

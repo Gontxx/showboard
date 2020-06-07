@@ -31,12 +31,14 @@ html, body {
 .left-column-hotel {
     width: 50%;
     height: 100vh;
+    position: relative;
     float: left;
 }
 
 .right-column-hotel {
     width: 50%;
     height: 100vh;
+    position: relative;
     float: left;
 }
 

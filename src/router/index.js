@@ -10,8 +10,8 @@ import SecondHand from '@/pages/House/SecondHand/OverAll'
 import Rent from '@/pages/House/Rent/OverAll'
 import HouseSold from '@/pages/House/SecondHandSold/OverAll'
 import Company from '@/pages/Company/OverAll/OverAll'
-import PiYao from '@/pages/Rumor/Refute/Refution'
-import Weibo from '@/pages/Rumor/Weibo/Weibo'
+import Rumor from '@/pages/PublicOpinion/Rumor/Rumor'
+import Opinion from '@/pages/PublicOpinion/Opinion/Opinion'
 
 Vue.use(Router)
 
@@ -68,14 +68,19 @@ export default new Router({
       component: Company
     },
     {
-      path: '/refute',
-      name: 'PiYao',
-      component: PiYao
+      path: '/rumor',
+      name: 'Rumor',
+      component: Rumor
     },
+    // {
+    //   path: '/weibo',
+    //   name: 'Weibo',
+    //   component: Weibo
+    // }
     {
-      path: '/weibo',
-      name: 'Weibo',
-      component: Weibo
+      path: '/opinion',
+      name: 'Opinion',
+      component: Opinion
     }
   ]
 })

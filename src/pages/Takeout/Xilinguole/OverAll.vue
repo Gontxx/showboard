@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class='left-column-hotel'>
+    <div class='left-column'>
       <div id='type-pie' class='chart-container has-background'></div>
       <div id='store-bar' class='chart-container has-background'></div>
     </div>
-    <div class='right-column-hotel'>
+    <div class='right-column'>
       <div id='scatter' class='chart-container has-background'></div>
       <div id='rating-bar' class='chart-container has-background'></div>
     </div>
@@ -74,13 +74,13 @@ export default {
     resizeChart () {
       let ww = window.innerWidth
       let hh = window.innerHeight
-      this.resizeContainer(this.typePieContainer, (ww * 0.5 - 12), (hh * 0.5 - 12))
+      this.resizeContainer(this.typePieContainer, (ww * 0.43 - 12), (hh * 0.5 - 12))
       this.typePieChart.resize()
-      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 12), (hh * 0.5 - 12))
+      this.resizeContainer(this.storeBarContainer, (ww * 0.43 - 12), (hh * 0.5 - 12))
       this.storeBarChart.resize()
-      this.resizeContainer(this.beijingScatterContainer, (ww * 0.5 - 12), (hh * 0.5 - 12))
+      this.resizeContainer(this.beijingScatterContainer, (ww * 0.45 - 12), (hh * 0.5 - 12))
       this.beijingScatterChart.resize()
-      this.resizeContainer(this.ratingBarContainer, (ww * 0.5 - 12), (hh * 0.5 - 12))
+      this.resizeContainer(this.ratingBarContainer, (ww * 0.45 - 12), (hh * 0.5 - 12))
       this.ratingBarChart.resize()
     },
     resizeContainer (container, width, height) {
@@ -205,6 +205,7 @@ export default {
   mounted () {
     this.initCharts()
     this.initWSocket()
+    // this.setCharts(this.tmpData)
     let that = this
     window.onresize = function () {
       // 重置容器高宽

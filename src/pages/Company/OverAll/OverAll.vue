@@ -12,7 +12,6 @@
         <div id='type-pie' class='chart-container has-background'></div>
         <div id='capital-cdf' class='chart-container has-background'></div>
         <div id='capital-box' class='chart-container has-background'></div>
-<!--      <div id='top-ten-bar' class='chart-container has-background'></div>-->
       </div>
     </div>
   </div>
@@ -124,13 +123,13 @@ export default {
       this.chartBeijingMap.resize()
       // this.resizeContainer(this.topTenBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
       // this.topTenBarChart.resize()
-      this.resizeContainer(this.capitalCdfContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 10))
+      this.resizeContainer(this.capitalCdfContainer, (ww * 0.5 - 40 - 20), (hh * 0.33 - 12))
       this.capitalCdfChart.resize()
-      this.resizeContainer(this.capitalBoxContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 10))
+      this.resizeContainer(this.capitalBoxContainer, (ww * 0.5 - 40 - 20), (hh * 0.33 - 12))
       this.capitalBoxChart.resize()
-      this.resizeContainer(this.typePieContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 16))
+      this.resizeContainer(this.typePieContainer, (ww * 0.5 - 40 - 20), (hh * 0.33 - 12))
       this.typePieChart.resize()
-      this.resizeContainer(this.typeDoublePieContainer, (ww * 0.5 - 40 - 20), (hh * 0.6 - 12))
+      this.resizeContainer(this.typeDoublePieContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
       this.typeDoublePieChart.resize()
     },
     resizeContainer (container, width, height) {

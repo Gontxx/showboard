@@ -124,19 +124,19 @@ export default {
     resizeChart () {
       let ww = window.innerWidth
       let hh = window.innerHeight
-      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40 - 20), (hh * 0.7 - 16))
+      this.resizeContainer(this.beijingMapContainer, (ww * 0.5 - 40 - 20), (hh * 0.48 - 16))
       this.chartBeijingMap.resize()
-      this.resizeContainer(this.lineContainer, (ww * 0.5 - 40 - 20), (hh * 0.35 - 12))
+      this.resizeContainer(this.lineContainer, (ww * 0.5 - 40 - 20), (hh * 0.24 - 12))
       this.lineChart.resize()
-      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.35 - 12))
+      this.resizeContainer(this.storeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.24 - 12))
       this.storeBarChart.resize()
-      this.resizeContainer(this.typeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
+      this.resizeContainer(this.typeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.26 - 12))
       this.typeBarChart.resize()
-      this.resizeContainer(this.sizeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
+      this.resizeContainer(this.sizeBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.26 - 12))
       this.sizeBarChart.resize()
-      this.resizeContainer(this.unitPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
+      this.resizeContainer(this.unitPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.26 - 12))
       this.unitPriceBarChart.resize()
-      this.resizeContainer(this.totalPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.4 - 12))
+      this.resizeContainer(this.totalPriceBarContainer, (ww * 0.5 - 40 - 20), (hh * 0.26 - 12))
       this.totalPriceBarChart.resize()
     },
     resizeContainer (container, width, height) {
@@ -419,9 +419,9 @@ export default {
   mounted () {
     this.initCharts()
     // 建立webSocket连接
-    this.initWSocket()
+    // this.initWSocket()
     // 暂时使用默认数据
-    // this.setCharts(this.tmpData)
+    this.setCharts(this.tmpData)
     let that = this
     window.onresize = function () {
       // 重置容器高宽

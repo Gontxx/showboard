@@ -58,10 +58,10 @@
           <span slot="title">谣言</span>
         </template>
         <el-menu-item-group>
-          <span slot="title" class="sub-title">谣言</span>
+          <span slot="title" class="sub-title">舆情</span>
           <div class="divide-bar"></div>
-          <el-menu-item index="/refute">辟谣</el-menu-item>
-          <el-menu-item index="weibo">微博</el-menu-item>
+          <el-menu-item index="rumor">谣言</el-menu-item>
+          <el-menu-item index="opinion">舆情</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
